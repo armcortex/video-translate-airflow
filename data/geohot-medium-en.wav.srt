@@ -1,0 +1,7256 @@
+1
+00:00:00,000 --> 00:00:05,040
+ Hey everyone, welcome to the LatentSpace podcast.
+
+2
+00:00:05,040 --> 00:00:10,180
+ This is Swix, writer and editor of LatentSpace, and Alessio is taking over with the intros
+
+3
+00:00:10,180 --> 00:00:12,800
+ Alessio's partner and CTO and residents at Decibel Partners.
+
+4
+00:00:12,800 --> 00:00:19,600
+ Hey everyone, today we have GeoHot on the podcast, aka George Hotz for the human name.
+
+5
+00:00:19,600 --> 00:00:21,680
+ Everybody knows George, so I'm not going to do a big intro.
+
+6
+00:00:21,680 --> 00:00:23,260
+ A couple of things that people might have missed.
+
+7
+00:00:23,260 --> 00:00:26,040
+ So you were the first to unlock the iPhone.
+
+8
+00:00:26,040 --> 00:00:31,880
+ You traded the first ever unlocked iPhone for a Nissan 350Z and three new iPhones.
+
+9
+00:00:31,880 --> 00:00:36,620
+ You were then one of the first people to break into the PS3 around arbitrary code.
+
+10
+00:00:36,620 --> 00:00:40,600
+ You got sued by Sony, you wrote a rap song to fight against that, which is still live
+
+11
+00:00:40,600 --> 00:00:44,120
+ on YouTube, which we're going to have on the show notes.
+
+12
+00:00:44,120 --> 00:00:49,440
+ Then you did not go to Tesla to build vision, and instead you started Comii, which was an
+
+13
+00:00:49,440 --> 00:00:54,960
+ amazing engineering feat in itself until you got a disease from the government to not put
+
+14
+00:00:54,960 --> 00:00:59,200
+ these things on the street, turned that into a research only project.
+
+15
+00:00:59,200 --> 00:01:00,200
+ You know they're out there.
+
+16
+00:01:00,200 --> 00:01:05,800
+ Yeah, yeah, no, no, no, they're out there, but they're not a, you market them as a research
+
+17
+00:01:05,800 --> 00:01:06,800
+ kind of like no warranty.
+
+18
+00:01:06,800 --> 00:01:09,280
+ Because I use the word dev kit, that's not about the government.
+
+19
+00:01:09,280 --> 00:01:10,640
+ It has nothing to do with the government.
+
+20
+00:01:10,640 --> 00:01:12,720
+ We offer a great one year warranty.
+
+21
+00:01:12,720 --> 00:01:17,680
+ The truth about that is it's gatekeeping.
+
+22
+00:01:17,680 --> 00:01:20,720
+ What's the difference between a dev kit and not a dev kit?
+
+23
+00:01:20,720 --> 00:01:21,720
+ Nothing.
+
+24
+00:01:21,720 --> 00:01:23,400
+ Just the question of, do you think it's for you?
+
+25
+00:01:23,400 --> 00:01:25,440
+ And if you think it's for you, buy it.
+
+26
+00:01:25,440 --> 00:01:26,480
+ It's a consumer product.
+
+27
+00:01:26,480 --> 00:01:27,520
+ We call it a dev kit.
+
+28
+00:01:27,520 --> 00:01:31,040
+ If you have a problem with that, it's not for you.
+
+29
+00:01:31,040 --> 00:01:33,200
+ That's great insight.
+
+30
+00:01:33,200 --> 00:01:35,880
+ And then I was going through your blog post to get to the day.
+
+31
+00:01:35,880 --> 00:01:40,080
+ You've heard this post about the hero's journey, and you linked this thing called the portal
+
+32
+00:01:40,080 --> 00:01:45,280
+ story, which is kind of the set of stories in movies and books about people living this
+
+33
+00:01:45,280 --> 00:01:49,440
+ arbitrary life, and then they run into this magic portals, kind of takes them into a new,
+
+34
+00:01:49,440 --> 00:01:52,040
+ very exciting life and dimension.
+
+35
+00:01:52,040 --> 00:01:55,800
+ When you've wrote that post, you talked about tiny grad, which is one of the projects you're
+
+36
+00:01:55,800 --> 00:01:56,800
+ working on today.
+
+37
+00:01:56,800 --> 00:01:59,960
+ And you mentioned this as more of a hobby, something that is not going to change the
+
+38
+00:01:59,960 --> 00:02:00,960
+ course of history.
+
+39
+00:02:00,960 --> 00:02:02,940
+ Obviously you're now going full speed into it.
+
+40
+00:02:02,940 --> 00:02:07,960
+ So we will have to learn more about what was the portal that you run into to get here.
+
+41
+00:02:07,960 --> 00:02:14,040
+ Well, what you realize is, you know what made me realize that I absolutely had to do the
+
+42
+00:02:14,040 --> 00:02:15,040
+ company?
+
+43
+00:02:15,040 --> 00:02:17,040
+ Seeing Sam Altman go in front of Congress.
+
+44
+00:02:17,040 --> 00:02:18,040
+ Why?
+
+45
+00:02:18,040 --> 00:02:21,680
+ What are the odds that they nationalize Nvidia?
+
+46
+00:02:21,680 --> 00:02:26,760
+ You know, what are the odds that large organizations in the government, but of course I repeat
+
+47
+00:02:26,760 --> 00:02:32,680
+ myself, decide to try to clamp down on accessibility of ML compute?
+
+48
+00:02:32,680 --> 00:02:37,000
+ I want to make sure that can't happen structurally.
+
+49
+00:02:37,000 --> 00:02:40,600
+ So that's why I realized that it's really important that I do this.
+
+50
+00:02:40,600 --> 00:02:44,920
+ And actually from a more practical perspective, I'm working with Nvidia and Qualcomm to buy
+
+51
+00:02:44,920 --> 00:02:45,920
+ chips.
+
+52
+00:02:45,920 --> 00:02:46,920
+ Nvidia has the best training chips.
+
+53
+00:02:46,920 --> 00:02:48,780
+ Qualcomm has the best inference chips.
+
+54
+00:02:48,780 --> 00:02:50,740
+ Working with these companies is really difficult.
+
+55
+00:02:50,740 --> 00:02:55,640
+ So I'd like to start another organization that eventually in the limit either works with
+
+56
+00:02:55,640 --> 00:03:01,840
+ people to make chips or makes chips itself and makes them available to anybody.
+
+57
+00:03:01,840 --> 00:03:04,200
+ You share kind of three core thesis to TinyCorp.
+
+58
+00:03:04,200 --> 00:03:06,060
+ Maybe we can dive into each of them.
+
+59
+00:03:06,060 --> 00:03:10,320
+ So XLA, PrimeTorch, those are the complex instruction system.
+
+60
+00:03:10,320 --> 00:03:13,480
+ TinyGrad is the restricted instruction system.
+
+61
+00:03:13,480 --> 00:03:18,480
+ So you're kind of focused on, again, TinyGrad being small, not being over complicated and
+
+62
+00:03:18,480 --> 00:03:22,500
+ trying to get as close to the DSP as possible in a way where it's at more.
+
+63
+00:03:22,500 --> 00:03:26,200
+ Well, it's a very clear analogy from how processors developed.
+
+64
+00:03:26,200 --> 00:03:31,100
+ So a lot of processors back in the day were CISC, complex instruction set, system 360
+
+65
+00:03:31,100 --> 00:03:33,140
+ and then x86.
+
+66
+00:03:33,140 --> 00:03:35,800
+ Then this isn't how things stayed.
+
+67
+00:03:35,800 --> 00:03:41,860
+ They went to now the most common processor is ARM and people are excited about RISC-V.
+
+68
+00:03:41,860 --> 00:03:42,860
+ No one's excited about...
+
+69
+00:03:42,860 --> 00:03:44,900
+ RISC-V is even less complex than ARM.
+
+70
+00:03:44,900 --> 00:03:47,360
+ No one is excited about CISC processors anymore.
+
+71
+00:03:47,360 --> 00:03:50,860
+ They're excited about RISC-V, reduced instruction set processors.
+
+72
+00:03:50,860 --> 00:03:57,060
+ So TinyGrad is, we're going to make a RISC op set for all ML models.
+
+73
+00:03:57,060 --> 00:04:03,360
+ And yeah, it can run all ML models with basically 25 instead of the 250 of XLA or PrimeTorch.
+
+74
+00:04:03,360 --> 00:04:06,060
+ So about 10X less complex.
+
+75
+00:04:06,060 --> 00:04:08,700
+ You talk a lot about existing AI chips.
+
+76
+00:04:08,700 --> 00:04:12,780
+ You said if you can write a fast ML framework for GPUs, you just cannot write one for your
+
+77
+00:04:12,780 --> 00:04:13,780
+ own chip.
+
+78
+00:04:13,780 --> 00:04:15,060
+ So that's another one of your core insights.
+
+79
+00:04:15,060 --> 00:04:17,560
+ I don't know if you want to expand on that.
+
+80
+00:04:17,560 --> 00:04:18,560
+ Yeah.
+
+81
+00:04:18,560 --> 00:04:19,560
+ I mean, your chip is worse, right?
+
+82
+00:04:19,560 --> 00:04:22,720
+ There's no way the chip that you're going to tape out, especially on the first try is
+
+83
+00:04:22,720 --> 00:04:25,780
+ going to be easier to use than an AMD GPU.
+
+84
+00:04:25,780 --> 00:04:28,440
+ And yet there's no good stack for AMD GPUs.
+
+85
+00:04:28,440 --> 00:04:31,520
+ So why do you think you can make one for your chip?
+
+86
+00:04:31,520 --> 00:04:33,100
+ You can't.
+
+87
+00:04:33,100 --> 00:04:37,600
+ The only company, there's one other company aside from Nvidia who's succeeded at all at
+
+88
+00:04:37,600 --> 00:04:38,840
+ making training chips.
+
+89
+00:04:38,840 --> 00:04:39,840
+ What company?
+
+90
+00:04:39,840 --> 00:04:40,840
+ AMD?
+
+91
+00:04:40,840 --> 00:04:41,840
+ Intel?
+
+92
+00:04:41,840 --> 00:04:44,680
+ No, no, no.
+
+93
+00:04:44,680 --> 00:04:45,680
+ I've never trained.
+
+94
+00:04:45,680 --> 00:04:48,040
+ Who's trained a model on AMD or Intel?
+
+95
+00:04:48,040 --> 00:04:49,040
+ Nobody on AMD.
+
+96
+00:04:49,040 --> 00:04:50,040
+ Cerebras.
+
+97
+00:04:50,040 --> 00:04:51,040
+ Cerebras.
+
+98
+00:04:51,040 --> 00:04:56,120
+ I'm talking about, you might know some startups who trained models on these chips.
+
+99
+00:04:56,120 --> 00:04:59,440
+ I'm surprised no one immediately gets this because there is one other chip aside from
+
+100
+00:04:59,440 --> 00:05:02,360
+ Nvidia that normal people have actually used for training.
+
+101
+00:05:02,360 --> 00:05:03,360
+ Ethnural engine?
+
+102
+00:05:03,360 --> 00:05:05,360
+ No, used for training.
+
+103
+00:05:05,360 --> 00:05:06,360
+ No.
+
+104
+00:05:06,360 --> 00:05:08,360
+ You can only buy them in the cloud.
+
+105
+00:05:08,360 --> 00:05:09,360
+ TPU.
+
+106
+00:05:09,360 --> 00:05:10,360
+ Exactly.
+
+107
+00:05:10,360 --> 00:05:11,360
+ Yeah.
+
+108
+00:05:11,360 --> 00:05:12,360
+ Right?
+
+109
+00:05:12,360 --> 00:05:14,160
+ So mid journey is trained on TPU, right?
+
+110
+00:05:14,160 --> 00:05:17,360
+ A lot of startups do actually train on TPUs.
+
+111
+00:05:17,360 --> 00:05:21,200
+ And they're the only other successful training chip aside from Nvidia.
+
+112
+00:05:21,200 --> 00:05:26,180
+ But what's unique about Google is that they also wrote their own ML framework.
+
+113
+00:05:26,180 --> 00:05:30,000
+ And if you can't write your own ML framework that is performant on Nvidia, there's no way
+
+114
+00:05:30,000 --> 00:05:32,680
+ you're going to make it performant on your...
+
+115
+00:05:32,680 --> 00:05:36,120
+ And they started from TensorFlow and then they made the chip after.
+
+116
+00:05:36,120 --> 00:05:37,120
+ Yeah, exactly.
+
+117
+00:05:37,120 --> 00:05:38,120
+ Exactly.
+
+118
+00:05:38,120 --> 00:05:39,720
+ And you have to do it in that direction.
+
+119
+00:05:39,720 --> 00:05:44,720
+ Otherwise you're going to end up...
+
+120
+00:05:44,720 --> 00:05:46,560
+ I've never seen a service.
+
+121
+00:05:46,560 --> 00:05:49,600
+ No one's ever like, "Oh, I trained my model on a service."
+
+122
+00:05:49,600 --> 00:05:52,440
+ Most people are like, "I trained my model on GPUs."
+
+123
+00:05:52,440 --> 00:05:57,060
+ Some people, 20%, are like, "I trained my model on TPUs."
+
+124
+00:05:57,060 --> 00:06:01,340
+ And then the third one, which is the one that surprised me the most is Turing completeness
+
+125
+00:06:01,340 --> 00:06:02,340
+ is harmful.
+
+126
+00:06:02,340 --> 00:06:03,900
+ It should be avoided.
+
+127
+00:06:03,900 --> 00:06:09,240
+ It made sense once I read it, but maybe tell us a bit more about how you got there.
+
+128
+00:06:09,240 --> 00:06:10,240
+ Okay.
+
+129
+00:06:10,240 --> 00:06:18,760
+ So CPUs devote tons of their silicon and power to things like reorder buffers and speculative
+
+130
+00:06:18,760 --> 00:06:21,400
+ execution and branch predictors.
+
+131
+00:06:21,400 --> 00:06:25,500
+ And the reason that you need all these things is because at compile time, you can't understand
+
+132
+00:06:25,500 --> 00:06:27,300
+ how the code's going to run.
+
+133
+00:06:27,300 --> 00:06:28,720
+ This is Rice's theorem.
+
+134
+00:06:28,720 --> 00:06:31,040
+ This is the halting problem and its limit.
+
+135
+00:06:31,040 --> 00:06:33,240
+ And this is not like, "Oh, the halting problem is theoretical."
+
+136
+00:06:33,240 --> 00:06:34,240
+ No, no, no, no.
+
+137
+00:06:34,240 --> 00:06:35,280
+ It's actually very real.
+
+138
+00:06:35,280 --> 00:06:36,800
+ Does this branch get taken or not?
+
+139
+00:06:36,800 --> 00:06:38,080
+ Well, it depends on X.
+
+140
+00:06:38,080 --> 00:06:39,240
+ Where does X come from?
+
+141
+00:06:39,240 --> 00:06:40,960
+ Ah, forget it, right?
+
+142
+00:06:40,960 --> 00:06:44,360
+ But no branches depend on X in a neural net.
+
+143
+00:06:44,360 --> 00:06:45,600
+ Every branch is a static loop.
+
+144
+00:06:45,600 --> 00:06:50,200
+ If you're doing a matrix multiply, it's a static loop over the inner dimension.
+
+145
+00:06:50,200 --> 00:06:51,920
+ And neural networks are even better.
+
+146
+00:06:51,920 --> 00:06:53,200
+ No loads even depend on X.
+
+147
+00:06:53,200 --> 00:06:57,440
+ So with a GPU shader, your load might depend on which texture you're actually loading into
+
+148
+00:06:57,440 --> 00:06:58,440
+ RAM.
+
+149
+00:06:58,440 --> 00:07:01,320
+ But with a neural network, your load is, "Well, I load that way."
+
+150
+00:07:01,320 --> 00:07:02,320
+ Why?
+
+151
+00:07:02,320 --> 00:07:04,720
+ Well, because I load that way the other million times I ran the same net.
+
+152
+00:07:04,720 --> 00:07:09,400
+ Every single time you run the net, you do the exact same set of loads, stores, and arithmetic.
+
+153
+00:07:09,400 --> 00:07:12,240
+ The only thing that changes is the data.
+
+154
+00:07:12,240 --> 00:07:18,640
+ And this gives you a very powerful ability to optimize that you can't do with CPU-style
+
+155
+00:07:18,640 --> 00:07:22,480
+ things which have branches and even GPU-style things which have loads and stores.
+
+156
+00:07:22,480 --> 00:07:23,720
+ Oh, that makes sense.
+
+157
+00:07:23,720 --> 00:07:28,040
+ Well, GPUs, if you want GPU-style stuff, you have load based on X, you now need a cache
+
+158
+00:07:28,040 --> 00:07:29,040
+ hierarchy.
+
+159
+00:07:29,040 --> 00:07:34,200
+ And not an explicit cache hierarchy, an implicit cache hierarchy with eviction policies that
+
+160
+00:07:34,200 --> 00:07:36,740
+ are hard coded into the CPU.
+
+161
+00:07:36,740 --> 00:07:41,560
+ You start doing all this stuff and you're never going to get theoretically good performance.
+
+162
+00:07:41,560 --> 00:07:43,660
+ Again, I don't think there's 100X.
+
+163
+00:07:43,660 --> 00:07:46,700
+ Some startups will talk about 100X and they'll talk about absolutely ridiculous things like
+
+164
+00:07:46,700 --> 00:07:49,040
+ clockless computing or analog computing.
+
+165
+00:07:49,040 --> 00:07:50,040
+ Okay.
+
+166
+00:07:50,040 --> 00:07:51,880
+ Here, analog computing just won't work.
+
+167
+00:07:51,880 --> 00:07:58,240
+ And clockless computing, sure, it might work in theory, but your ITA tools are ... Maybe
+
+168
+00:07:58,240 --> 00:08:02,700
+ AIs will be able to design clockless chips, but not humans.
+
+169
+00:08:02,700 --> 00:08:06,960
+ But what actually is practical is changing cache hierarchies and removing branch predictors
+
+170
+00:08:06,960 --> 00:08:08,360
+ and removing warp schedulers.
+
+171
+00:08:08,360 --> 00:08:11,880
+ GPUs spend tons of power on warp scheduling because we have to hide the latency from the
+
+172
+00:08:11,880 --> 00:08:12,880
+ memory.
+
+173
+00:08:12,880 --> 00:08:16,000
+ We'll have to hide the latency if everything's statically scheduled.
+
+174
+00:08:16,000 --> 00:08:19,880
+ Why do you think people are still hanging on to Turing Complete?
+
+175
+00:08:19,880 --> 00:08:22,560
+ Well, because it's really easy.
+
+176
+00:08:22,560 --> 00:08:24,000
+ Turing Complete is just really easy.
+
+177
+00:08:24,000 --> 00:08:29,720
+ It's really easy to just, "Oh, it would just be so nice if I could do an if statement here
+
+178
+00:08:29,720 --> 00:08:32,020
+ and actually branch the code."
+
+179
+00:08:32,020 --> 00:08:37,540
+ So it requires a lot more thought to do it without Turing completeness.
+
+180
+00:08:37,540 --> 00:08:40,000
+ And would this be qualitatively different than TPUs?
+
+181
+00:08:40,000 --> 00:08:42,080
+ So TPUs are a lot closer.
+
+182
+00:08:42,080 --> 00:08:45,960
+ TPUs are a lot closer to what I'm talking about than CUDA.
+
+183
+00:08:45,960 --> 00:08:47,960
+ Okay, so what is CUDA?
+
+184
+00:08:47,960 --> 00:08:53,720
+ Well, CUDA is a C-like language which compiles to an LLVM-like IR, which compiles to PTX,
+
+185
+00:08:53,720 --> 00:08:56,520
+ which compiles to SAS, which are all Turing Complete.
+
+186
+00:08:56,520 --> 00:08:58,880
+ TPUs are much more like this, yeah.
+
+187
+00:08:58,880 --> 00:09:01,240
+ Their memory is pretty statically managed.
+
+188
+00:09:01,240 --> 00:09:04,220
+ They have a V-- I did some reverse engineering on the TPU.
+
+189
+00:09:04,220 --> 00:09:06,140
+ It's published in TinyGrad.
+
+190
+00:09:06,140 --> 00:09:09,720
+ It has a VLIW instruction, and it runs them.
+
+191
+00:09:09,720 --> 00:09:10,720
+ So it's similar.
+
+192
+00:09:10,720 --> 00:09:12,340
+ I think the TPUs have a few problems.
+
+193
+00:09:12,340 --> 00:09:15,420
+ I think systolic arrays are the wrong choice.
+
+194
+00:09:15,420 --> 00:09:18,360
+ Systolic array, I think they have systolic arrays because that was the guy's PhD.
+
+195
+00:09:18,360 --> 00:09:19,360
+ And of course Amazon makes--
+
+196
+00:09:19,360 --> 00:09:20,860
+ Jake, could you summarize systolic arrays for this?
+
+197
+00:09:20,860 --> 00:09:25,280
+ Systolic arrays are just-- okay, so basically you have like-- this is a way to do matrix
+
+198
+00:09:25,280 --> 00:09:26,280
+ multiplication.
+
+199
+00:09:26,280 --> 00:09:30,900
+ Think of a grid of mul-ax, and then the grid can multiply and then shift, multiply then
+
+200
+00:09:30,900 --> 00:09:32,660
+ shift, multiply then shift.
+
+201
+00:09:32,660 --> 00:09:37,580
+ And they are very power efficient, but it becomes hard to schedule a lot of stuff on
+
+202
+00:09:37,580 --> 00:09:42,980
+ them if you're not doing like perfectly sized dense matrix multiplies, which you can argue,
+
+203
+00:09:42,980 --> 00:09:46,900
+ well, design your models to use perfectly sized dense matrix multiplies, sure.
+
+204
+00:09:46,900 --> 00:09:48,900
+ But it's just--
+
+205
+00:09:48,900 --> 00:09:54,900
+ No, but thanks for indulging on these explanations.
+
+206
+00:09:54,900 --> 00:09:59,840
+ I think we need to keep our audience along with us by pausing every now and then to explain
+
+207
+00:09:59,840 --> 00:10:00,840
+ key terms.
+
+208
+00:10:00,840 --> 00:10:05,780
+ You know, when I say explain a systolic array, I just immediately get a picture in my head
+
+209
+00:10:05,780 --> 00:10:07,740
+ of like tilting a matrix and shifting it.
+
+210
+00:10:07,740 --> 00:10:08,740
+ It's hard to kind of explain.
+
+211
+00:10:08,740 --> 00:10:09,740
+ Yeah.
+
+212
+00:10:09,740 --> 00:10:10,740
+ We'll do some videos so you're--
+
+213
+00:10:10,740 --> 00:10:11,740
+ We'll have show notes for the--
+
+214
+00:10:11,740 --> 00:10:13,740
+ And we edit it in visuals.
+
+215
+00:10:13,740 --> 00:10:17,140
+ Yeah, there's some great graphics that just show you, oh, so that's what a systolic array
+
+216
+00:10:17,140 --> 00:10:18,140
+ is.
+
+217
+00:10:18,140 --> 00:10:22,640
+ But it's a mul-ax shift machine that looks kind of different from the typical APU sort
+
+218
+00:10:22,640 --> 00:10:23,640
+ of machine.
+
+219
+00:10:23,640 --> 00:10:25,260
+ Sorry, ALU sort of machine.
+
+220
+00:10:25,260 --> 00:10:29,580
+ I think the right answer is something that looks more like queues that feed into ALUs.
+
+221
+00:10:29,580 --> 00:10:33,640
+ And then you can like prefetch the loads from the memory, put in a bunch of queues, and
+
+222
+00:10:33,640 --> 00:10:39,380
+ then the queues just like ch-ch-ch-ch and feeds into another queue over here.
+
+223
+00:10:39,380 --> 00:10:42,420
+ But yeah, but that's not even the main problem with TPUs.
+
+224
+00:10:42,420 --> 00:10:44,660
+ The main problem with TPUs is that they're closed source.
+
+225
+00:10:44,660 --> 00:10:49,180
+ Not only is the chip closed source, but all of-- XLA is open source, but the XLA to TPU
+
+226
+00:10:49,180 --> 00:10:54,360
+ compiler is a 32 megabyte binary blob called libtpu on Google's cloud instances.
+
+227
+00:10:54,360 --> 00:10:55,360
+ It's all closed source.
+
+228
+00:10:55,360 --> 00:10:56,940
+ It's all hidden stuff.
+
+229
+00:10:56,940 --> 00:10:59,160
+ And you know, well, there's a reason Google made it closed source.
+
+230
+00:10:59,160 --> 00:11:00,540
+ Amazon made a clone of the TPU.
+
+231
+00:11:00,540 --> 00:11:01,540
+ It's called Inferencia.
+
+232
+00:11:01,540 --> 00:11:03,540
+ Or they have some other name for it, a training--
+
+233
+00:11:03,540 --> 00:11:04,540
+ Trainium.
+
+234
+00:11:04,540 --> 00:11:05,540
+ Trainium, yeah, yeah, yeah.
+
+235
+00:11:05,540 --> 00:11:07,540
+ And you'd look, it's a clone of the TPU.
+
+236
+00:11:07,540 --> 00:11:08,940
+ Software doesn't work though.
+
+237
+00:11:08,940 --> 00:11:12,100
+ The Google software at least kind of works.
+
+238
+00:11:12,100 --> 00:11:14,340
+ So those are kind of like the three-quarter thesis.
+
+239
+00:11:14,340 --> 00:11:17,740
+ The first thing you're working on, that you've been working on, is TinyGrad.
+
+240
+00:11:17,740 --> 00:11:22,060
+ And one of your Twitch streams, you said, is the best thing you've ever written?
+
+241
+00:11:22,060 --> 00:11:23,060
+ Yeah.
+
+242
+00:11:23,060 --> 00:11:26,820
+ Tell us a bit more about that creation.
+
+243
+00:11:26,820 --> 00:11:30,760
+ For a long time, TinyGrad had a hard limit at a thousand lines of code.
+
+244
+00:11:30,760 --> 00:11:36,060
+ And what this would force you to do is really make sure you were not wasting lines.
+
+245
+00:11:36,060 --> 00:11:40,060
+ I got rid of the restriction because it became a little code-golfy at the end.
+
+246
+00:11:40,060 --> 00:11:46,080
+ But once the core framework of TinyGrad was there, in those thousand lines--
+
+247
+00:11:46,080 --> 00:11:47,360
+ It's not huge now.
+
+248
+00:11:47,360 --> 00:11:48,720
+ It's like 2,800 lines now.
+
+249
+00:11:48,720 --> 00:11:52,020
+ It's still very readable.
+
+250
+00:11:52,020 --> 00:11:56,400
+ Like the core framework, the ideas are expressed with no boilerplate.
+
+251
+00:11:56,400 --> 00:11:59,980
+ If you go read PyTorch-- you know, PyTorch I think is actually pretty good code.
+
+252
+00:11:59,980 --> 00:12:02,780
+ I think Facebook's pretty good.
+
+253
+00:12:02,780 --> 00:12:05,420
+ But there's so much boilerplate.
+
+254
+00:12:05,420 --> 00:12:10,080
+ Go in PyTorch and try to track down how an LU actually works.
+
+255
+00:12:10,080 --> 00:12:11,080
+ Just a lot of distractions.
+
+256
+00:12:11,080 --> 00:12:16,780
+ Oh, you're going to be diving down a long stack from Python to C to custom libraries
+
+257
+00:12:16,780 --> 00:12:19,700
+ to dispatchers to-- and then I don't even know how to read TensorFlow.
+
+258
+00:12:19,700 --> 00:12:22,260
+ Like I don't even know where's an LU in TensorFlow.
+
+259
+00:12:22,260 --> 00:12:24,460
+ Nobody knows.
+
+260
+00:12:24,460 --> 00:12:26,700
+ Someone at Google knows maybe.
+
+261
+00:12:26,700 --> 00:12:27,700
+ Google as an organism knows.
+
+262
+00:12:27,700 --> 00:12:31,600
+ I don't know if anyone individual at Google knows.
+
+263
+00:12:31,600 --> 00:12:37,260
+ What are the important ergonomics for a developer as you think about designing the TinyGrad API?
+
+264
+00:12:37,260 --> 00:12:40,700
+ The TinyGrad front-end looks very similar to PyTorch.
+
+265
+00:12:40,700 --> 00:12:44,780
+ There's an even higher level front-end you can use for TinyGrad, which is just ONNX.
+
+266
+00:12:44,780 --> 00:12:47,700
+ We have better support for ONNX than CoreML does.
+
+267
+00:12:47,700 --> 00:12:51,180
+ And we're going to have-- I think we're going to pass ONNX runtime soon too.
+
+268
+00:12:51,180 --> 00:12:52,940
+ People think ONNX runtime, that's the gold standard for ONNX.
+
+269
+00:12:52,940 --> 00:12:53,940
+ No, you can do better.
+
+270
+00:12:53,940 --> 00:12:54,940
+ You can test them in what specifically?
+
+271
+00:12:54,940 --> 00:12:57,340
+ Test, compliance tests.
+
+272
+00:12:57,340 --> 00:13:01,820
+ So ONNX has a big set of compliance tests that you can check out.
+
+273
+00:13:01,820 --> 00:13:04,820
+ And we have the running in TinyGrad and there's some failures.
+
+274
+00:13:04,820 --> 00:13:08,020
+ We're below ONNX runtime, but we're beyond CoreML.
+
+275
+00:13:08,020 --> 00:13:09,780
+ So that's where we are in ONNX support now.
+
+276
+00:13:09,780 --> 00:13:14,360
+ But we will pass ONNX runtime soon because it becomes very easy to add ops because of
+
+277
+00:13:14,360 --> 00:13:17,060
+ how you don't need to do anything at the lower levels.
+
+278
+00:13:17,060 --> 00:13:20,940
+ You just do it at this very high level and TinyGrad compiles it to something that's fast
+
+279
+00:13:20,940 --> 00:13:23,140
+ using these minimal ops.
+
+280
+00:13:23,140 --> 00:13:28,780
+ You can write-- most concretely what TinyGrad can do that PyTorch can't really do is if
+
+281
+00:13:28,780 --> 00:13:33,920
+ you have something like A times B plus C, if you write that in NaivePyTorch, what it's
+
+282
+00:13:33,920 --> 00:13:40,540
+ going to do on the GPU is read A, read B in a kernel, and then store A times B in memory,
+
+283
+00:13:40,540 --> 00:13:45,780
+ and then launch another kernel to do A times B plus C. Okay, got to do those loads from
+
+284
+00:13:45,780 --> 00:13:46,780
+ memory.
+
+285
+00:13:46,780 --> 00:13:49,660
+ And I did a whole extra round trip to memory that I just didn't have to do.
+
+286
+00:13:49,660 --> 00:13:52,460
+ And you're like, "Yeah, but you can use the torch JIT and it corrects this."
+
+287
+00:13:52,460 --> 00:13:56,700
+ Yeah, for that one example, for that one example of MULAC.
+
+288
+00:13:56,700 --> 00:14:02,020
+ But oh, now you did three multiplies, six multiplies?
+
+289
+00:14:02,020 --> 00:14:04,140
+ It doesn't-- it won't compile arbitrary code.
+
+290
+00:14:04,140 --> 00:14:09,300
+ And if you looked into the other approaches like PyTorch Lightning, to accelerate PyTorch
+
+291
+00:14:09,300 --> 00:14:10,300
+ itself.
+
+292
+00:14:10,300 --> 00:14:14,740
+ Well, PyTorch Lightning, my understanding is it's mostly a framework around PyTorch.
+
+293
+00:14:14,740 --> 00:14:18,460
+ PyTorch Lightning is not going to fix this fundamental problem of I multiply six tensors
+
+294
+00:14:18,460 --> 00:14:22,220
+ together, why is it going to memory any more than a single read from each and a single
+
+295
+00:14:22,220 --> 00:14:25,940
+ write to the output?
+
+296
+00:14:25,940 --> 00:14:30,980
+ There are lower level things in PyTorch that are-- I'm not exactly sure what Dynamo does,
+
+297
+00:14:30,980 --> 00:14:33,980
+ but I know they're generating some Triton stuff, which is going to generate the kernels
+
+298
+00:14:33,980 --> 00:14:34,980
+ on the fly.
+
+299
+00:14:34,980 --> 00:14:39,100
+ But you know, PyTorch Lightning is at a higher level of abstraction.
+
+300
+00:14:39,100 --> 00:14:41,380
+ So TinyGrid's front-end stuff looks like PyTorch.
+
+301
+00:14:41,380 --> 00:14:42,380
+ I made a few tweaks.
+
+302
+00:14:42,380 --> 00:14:43,820
+ There's a few things I don't like about PyTorch.
+
+303
+00:14:43,820 --> 00:14:45,460
+ Why is ReLU a class?
+
+304
+00:14:45,460 --> 00:14:46,460
+ No, really.
+
+305
+00:14:46,460 --> 00:14:48,980
+ Like what-- what was the state?
+
+306
+00:14:48,980 --> 00:14:50,420
+ You make a class and there's a state.
+
+307
+00:14:50,420 --> 00:14:54,140
+ Lightning should just be torch functional and ReLU, but just dot ReLU on the tensor.
+
+308
+00:14:54,140 --> 00:14:59,140
+ Also like there's things in torch where you have to do tensor dot and not a tensor dot,
+
+309
+00:14:59,140 --> 00:15:00,140
+ right?
+
+310
+00:15:00,140 --> 00:15:01,140
+ And like why?
+
+311
+00:15:01,140 --> 00:15:06,540
+ Why are these things-- like it just shows an API that's like not perfectly refined.
+
+312
+00:15:06,540 --> 00:15:09,580
+ But when you're doing stuff TinyGrid style where you don't have lines, well it has to
+
+313
+00:15:09,580 --> 00:15:10,580
+ work this way.
+
+314
+00:15:10,580 --> 00:15:16,300
+ Because even the lines to express the-- well, you can't use the where operator unless--
+
+315
+00:15:16,300 --> 00:15:17,700
+ and the where operator in PyTorch.
+
+316
+00:15:17,700 --> 00:15:22,380
+ Why is it true case, condition, false case?
+
+317
+00:15:22,380 --> 00:15:24,380
+ The worst-- that's like how Python expresses ifs.
+
+318
+00:15:24,380 --> 00:15:25,380
+ It's disgusting.
+
+319
+00:15:25,380 --> 00:15:26,380
+ Right?
+
+320
+00:15:26,380 --> 00:15:27,380
+ Turner operators are much nicer.
+
+321
+00:15:27,380 --> 00:15:33,080
+ It should be-- I can do my like a less than zero dot where a comma one, right?
+
+322
+00:15:33,080 --> 00:15:35,500
+ The very pandas like API.
+
+323
+00:15:35,500 --> 00:15:37,500
+ Yeah, yeah, yeah, yeah, yeah.
+
+324
+00:15:37,500 --> 00:15:40,140
+ It's some-- it looks like torch, NumPy pandas.
+
+325
+00:15:40,140 --> 00:15:41,540
+ They're all very similar.
+
+326
+00:15:41,540 --> 00:15:44,620
+ I tried to take like the cleanest subset of them and express them.
+
+327
+00:15:44,620 --> 00:15:47,060
+ But like I said, you can also interact with it using ONNX.
+
+328
+00:15:47,060 --> 00:15:50,300
+ But I have a rewrite of stable diffusion.
+
+329
+00:15:50,300 --> 00:15:51,300
+ I have a rewrite of llama.
+
+330
+00:15:51,300 --> 00:15:52,300
+ I have a rewrite of whisper.
+
+331
+00:15:52,300 --> 00:15:53,300
+ You can look at them.
+
+332
+00:15:53,300 --> 00:15:54,300
+ They're shorter than the torch versions and I think they're clean.
+
+333
+00:15:54,300 --> 00:15:55,940
+ And you stream them all?
+
+334
+00:15:55,940 --> 00:15:56,940
+ Yeah.
+
+335
+00:15:56,940 --> 00:15:58,940
+ Very nice.
+
+336
+00:15:58,940 --> 00:16:02,780
+ Laziness is kind of the other important concept that you're leveraging to do operation fusing.
+
+337
+00:16:02,780 --> 00:16:05,820
+ Yeah, talk a bit more about that.
+
+338
+00:16:05,820 --> 00:16:13,860
+ So yeah, you have basically like a few different like models for compute.
+
+339
+00:16:13,860 --> 00:16:14,860
+ The simplest one's eager.
+
+340
+00:16:14,860 --> 00:16:21,660
+ The simplest one is eager is as soon as the interpreter sees A times B, it actually dispatches
+
+341
+00:16:21,660 --> 00:16:23,660
+ A times B, right?
+
+342
+00:16:23,660 --> 00:16:30,300
+ Then you have graph like TensorFlow which will put A times B into a graph and it will
+
+343
+00:16:30,300 --> 00:16:36,900
+ do absolutely nothing until you actually compile the graph at the end.
+
+344
+00:16:36,900 --> 00:16:40,060
+ I like this third choice which is somewhere in the middle, laziness.
+
+345
+00:16:40,060 --> 00:16:42,740
+ Laziness is you don't know when the ops are going to dispatch and don't worry about that.
+
+346
+00:16:42,740 --> 00:16:44,520
+ You don't have to worry about this as a programmer.
+
+347
+00:16:44,520 --> 00:16:48,540
+ You just write out all your stuff and then when you actually type .numpy, it'll be ready
+
+348
+00:16:48,540 --> 00:16:51,460
+ by the time you copy the thing back to CPU.
+
+349
+00:16:51,460 --> 00:16:57,700
+ Or you can do .realize and it will actually force that tensor to be allocated in RAM.
+
+350
+00:16:57,700 --> 00:16:59,100
+ But yeah, a lot of times, right?
+
+351
+00:16:59,100 --> 00:17:03,640
+ Like if you think about it, PyTorch is kind of lazy in a way but they didn't extend the
+
+352
+00:17:03,640 --> 00:17:04,640
+ paradigm far enough, right?
+
+353
+00:17:04,640 --> 00:17:09,540
+ When I do A times B in PyTorch, it's going to launch a CUDA kernel to do A times B. But
+
+354
+00:17:09,540 --> 00:17:12,060
+ it's not going to wait for that CUDA kernel to complete.
+
+355
+00:17:12,060 --> 00:17:13,780
+ So you're getting the worst possible world.
+
+356
+00:17:13,780 --> 00:17:18,340
+ You're getting the same laziness but you also can't get fusion because PyTorch doesn't know
+
+357
+00:17:18,340 --> 00:17:21,380
+ that I'm then going to do plus C. There's no way for it to be like, "Whoa, whoa, whoa,
+
+358
+00:17:21,380 --> 00:17:22,380
+ don't launch that CUDA kernel.
+
+359
+00:17:22,380 --> 00:17:25,160
+ Whoa, just do this one too."
+
+360
+00:17:25,160 --> 00:17:31,920
+ You can kind of like, again, this stuff, PyTorch is working on this and it's a little bit harder.
+
+361
+00:17:31,920 --> 00:17:34,420
+ In comma, I felt like I was competing against a lot of idiots.
+
+362
+00:17:34,420 --> 00:17:38,300
+ Here, I'm competing against very smart people who've made...
+
+363
+00:17:38,300 --> 00:17:39,300
+ >> Compiled people.
+
+364
+00:17:39,300 --> 00:17:42,740
+ >> Yeah, who've made some, I think, different trade-offs, right?
+
+365
+00:17:42,740 --> 00:17:46,400
+ Who've made some different trade-offs whereas if you're trying to build something that is
+
+366
+00:17:46,400 --> 00:17:50,700
+ just straight up good on NVIDIA and we have a lot of people and complexity to throw at
+
+367
+00:17:50,700 --> 00:17:52,740
+ it, yeah, PyTorch made a lot of the right choices.
+
+368
+00:17:52,740 --> 00:17:56,460
+ I'm trying to build something that manages complexity.
+
+369
+00:17:56,460 --> 00:17:58,380
+ You can always make your software do more.
+
+370
+00:17:58,380 --> 00:18:04,580
+ The magic is when you can make your software do more without adding complexity.
+
+371
+00:18:04,580 --> 00:18:07,660
+ Complex things eventually collapse under their own weight.
+
+372
+00:18:07,660 --> 00:18:09,460
+ >> How does fusing actually work?
+
+373
+00:18:09,460 --> 00:18:13,100
+ >> TensorFlow actually collapsed under its own weight.
+
+374
+00:18:13,100 --> 00:18:15,420
+ That's kind of what happened, right?
+
+375
+00:18:15,420 --> 00:18:17,300
+ How does fusing actually work?
+
+376
+00:18:17,300 --> 00:18:23,880
+ So yeah, there's this thing called lazy.py and when you do like A times B, it's put into
+
+377
+00:18:23,880 --> 00:18:27,060
+ a graph but it's a very local graph.
+
+378
+00:18:27,060 --> 00:18:28,860
+ There's no global graph optimizations.
+
+379
+00:18:28,860 --> 00:18:30,380
+ And even this can change.
+
+380
+00:18:30,380 --> 00:18:34,940
+ Again, the programming model for TinyGrad does not preclude eagerness.
+
+381
+00:18:34,940 --> 00:18:37,240
+ Laziness is not guaranteed laziness.
+
+382
+00:18:37,240 --> 00:18:39,180
+ It's just going to try its best.
+
+383
+00:18:39,180 --> 00:18:41,760
+ So you put in A times B and that's a binary op, right?
+
+384
+00:18:41,760 --> 00:18:44,540
+ And then you put in A times B, like that's a node in the graph.
+
+385
+00:18:44,540 --> 00:18:46,660
+ It's a virtual node because it's not realized yet.
+
+386
+00:18:46,660 --> 00:18:50,740
+ Plus C. Okay, here's a new node which takes the C tensor in here and takes the output
+
+387
+00:18:50,740 --> 00:18:53,100
+ of A times B. It's like, whoa, wait, there's two binary ops.
+
+388
+00:18:53,100 --> 00:18:54,740
+ Okay, we'll just fuse those together.
+
+389
+00:18:54,740 --> 00:18:56,220
+ Okay, here I have a kernel.
+
+390
+00:18:56,220 --> 00:18:58,180
+ This kernel has A, B, and C as inputs.
+
+391
+00:18:58,180 --> 00:19:03,700
+ It does A times B plus C in the local registers and then outputs that to memory.
+
+392
+00:19:03,700 --> 00:19:06,860
+ And you can graph.one in TinyGrad.
+
+393
+00:19:06,860 --> 00:19:12,060
+ Another amazing thing that TinyGrad has that I've not seen in any other framework is two
+
+394
+00:19:12,060 --> 00:19:13,060
+ things.
+
+395
+00:19:13,060 --> 00:19:16,060
+ Graph.one, graph equals one, which is an environment variable.
+
+396
+00:19:16,060 --> 00:19:18,300
+ It will output a complete graph of all the operations.
+
+397
+00:19:18,300 --> 00:19:21,820
+ People are like, oh, you can use PyTorch, export it to Onyx, and use Netron.
+
+398
+00:19:21,820 --> 00:19:24,700
+ Yeah, you can, but like what?
+
+399
+00:19:24,700 --> 00:19:25,700
+ That's not what's real.
+
+400
+00:19:25,700 --> 00:19:29,860
+ All right, graph.one will show you the actual kernels that were dispatched to the GPU.
+
+401
+00:19:29,860 --> 00:19:35,420
+ You can also type debug equals two, which will print those kernels out in your command
+
+402
+00:19:35,420 --> 00:19:41,380
+ line, and it will tell you the exact number of flops and the exact number of memory accesses
+
+403
+00:19:41,380 --> 00:19:42,380
+ in each kernel.
+
+404
+00:19:42,380 --> 00:19:45,140
+ So you can immediately see, wait a second.
+
+405
+00:19:45,140 --> 00:19:47,020
+ Okay, this kernel gives this many flops.
+
+406
+00:19:47,020 --> 00:19:48,020
+ This was the gigaflops.
+
+407
+00:19:48,020 --> 00:19:51,220
+ This is how many bytes it read, and this was the gigabytes per second.
+
+408
+00:19:51,220 --> 00:19:55,580
+ And then you can profile without having to like, okay, I mean, in theory in PyTorch,
+
+409
+00:19:55,580 --> 00:19:57,780
+ sure, use the NVIDIA Insight Profiler.
+
+410
+00:19:57,780 --> 00:19:58,780
+ No one does that.
+
+411
+00:19:58,780 --> 00:20:01,540
+ No one does, of course, because it's so difficult, right?
+
+412
+00:20:01,540 --> 00:20:06,940
+ Like actually NVIDIA used to, pre, I think CUDA 9 was the last one that had it.
+
+413
+00:20:06,940 --> 00:20:11,120
+ They had a command line one, but now it's like, okay, I'm going to generate this blob,
+
+414
+00:20:11,120 --> 00:20:15,260
+ use this NVIDIA GUI tool to convert it into a Chrome trace and then loading Chrome.
+
+415
+00:20:15,260 --> 00:20:16,260
+ Yeah, no one does that, right?
+
+416
+00:20:16,260 --> 00:20:20,260
+ I'll just type debug equals two in any TinyGrad model, and it will show you all the kernels
+
+417
+00:20:20,260 --> 00:20:24,060
+ that it launches and the efficiency of each kernel, basically.
+
+418
+00:20:24,060 --> 00:20:29,300
+ Yeah, this is something that John Carmack has often commented about, is like when you
+
+419
+00:20:29,300 --> 00:20:33,940
+ code you need to build in your instrumentation or observability right into that.
+
+420
+00:20:33,940 --> 00:20:38,320
+ I wonder if whatever John is working on, he's adopting this style, and maybe we can sort
+
+421
+00:20:38,320 --> 00:20:46,620
+ of encourage it by, I don't know, naming it and coining a certain kind of debugging style.
+
+422
+00:20:46,620 --> 00:20:49,340
+ If he would like to start contributing to TinyGrad, I'd be...
+
+423
+00:20:49,340 --> 00:20:50,340
+ You should hook up with him.
+
+424
+00:20:50,340 --> 00:20:51,340
+ I'd be so happy.
+
+425
+00:20:51,340 --> 00:20:52,340
+ I've chatted with him a few times.
+
+426
+00:20:52,340 --> 00:20:54,700
+ I'm not really sure what his company's doing.
+
+427
+00:20:54,700 --> 00:20:57,960
+ I think it's all, I think it's pretty...
+
+428
+00:20:57,960 --> 00:21:02,840
+ But no, I mean, hopefully we get TinyGrad to a point where people actually want to start
+
+429
+00:21:02,840 --> 00:21:04,240
+ using it.
+
+430
+00:21:04,240 --> 00:21:10,520
+ So TinyGrad right now is uncompetitive on NVIDIA, and it's uncompetitive on x86.
+
+431
+00:21:10,520 --> 00:21:12,860
+ And specifically what do you care about when you say uncompetitive?
+
+432
+00:21:12,860 --> 00:21:13,860
+ Speed.
+
+433
+00:21:13,860 --> 00:21:14,860
+ Okay.
+
+434
+00:21:14,860 --> 00:21:15,860
+ Share of speed.
+
+435
+00:21:15,860 --> 00:21:16,860
+ It's correct.
+
+436
+00:21:16,860 --> 00:21:17,860
+ The correctness is there.
+
+437
+00:21:17,860 --> 00:21:20,880
+ The correctness for both forwards and backwards passes is there, but on NVIDIA it's about
+
+438
+00:21:20,880 --> 00:21:22,880
+ 5x lower than PyTorch right now.
+
+439
+00:21:22,880 --> 00:21:24,460
+ Like 5x, wow, this is unsurmountable.
+
+440
+00:21:24,460 --> 00:21:28,100
+ No, there's reasons it's 5x lower, and I can go through how we're going to make it faster.
+
+441
+00:21:28,100 --> 00:21:30,800
+ And it used to be 100x lower, so we're making progress.
+
+442
+00:21:30,800 --> 00:21:35,840
+ But there's one place where it actually is competitive, and that's Qualcomm GPUs.
+
+443
+00:21:35,840 --> 00:21:38,280
+ So TinyGrad is used to run the model in OpenPilot.
+
+444
+00:21:38,280 --> 00:21:41,920
+ Like right now, it's been live in production now for six months.
+
+445
+00:21:41,920 --> 00:21:47,380
+ And TinyGrad is about 2x faster on the GPU than Qualcomm's library.
+
+446
+00:21:47,380 --> 00:21:48,880
+ Why specifically Qualcomm?
+
+447
+00:21:48,880 --> 00:21:50,960
+ Well, because we have Qualcomm.
+
+448
+00:21:50,960 --> 00:21:53,440
+ We use Qualcomm in the common devices.
+
+449
+00:21:53,440 --> 00:21:57,420
+ I mean, what about Qualcomm architecture?
+
+450
+00:21:57,420 --> 00:21:58,420
+ What makes it doable?
+
+451
+00:21:58,420 --> 00:22:02,300
+ Well, because the world has spent how many millions of man-hours to make NVIDIA fast?
+
+452
+00:22:02,300 --> 00:22:04,380
+ And Qualcomm has a team of 10 Qualcomm engineers?
+
+453
+00:22:04,380 --> 00:22:06,220
+ Okay, well who can I be here?
+
+454
+00:22:06,220 --> 00:22:12,260
+ Like what I propose with TinyGrad is that developer efficiency is much higher.
+
+455
+00:22:12,260 --> 00:22:17,780
+ But even if I have 10x higher developer efficiency, I still lose on NVIDIA, right?
+
+456
+00:22:17,780 --> 00:22:20,580
+ You know, okay, I didn't put 100,000 man-hours into it, right?
+
+457
+00:22:20,580 --> 00:22:24,480
+ If they put a million, like that's what I'm saying, but that's what I'm saying we can
+
+458
+00:22:24,480 --> 00:22:25,580
+ get.
+
+459
+00:22:25,580 --> 00:22:27,720
+ And we are going to close this speed gap a lot.
+
+460
+00:22:27,720 --> 00:22:30,440
+ Like I don't support TensorCores yet.
+
+461
+00:22:30,440 --> 00:22:34,000
+ That's a big one that's just going to, okay, massively close the gap.
+
+462
+00:22:34,000 --> 00:22:36,420
+ And then AMD.
+
+463
+00:22:36,420 --> 00:22:40,040
+ I can't even get, I don't even have a benchmark for AMD because I couldn't get it compiled.
+
+464
+00:22:40,040 --> 00:22:41,040
+ Oh, and I tried.
+
+465
+00:22:41,040 --> 00:22:42,040
+ Oh, I tried.
+
+466
+00:22:42,040 --> 00:22:43,040
+ I spent a day.
+
+467
+00:22:43,040 --> 00:22:46,840
+ Like I spent actually a day trying to get PyTorch, and I got it built.
+
+468
+00:22:46,840 --> 00:22:48,960
+ I got it kind of working.
+
+469
+00:22:48,960 --> 00:22:50,660
+ I tried to run a model.
+
+470
+00:22:50,660 --> 00:22:54,820
+ There's all kinds of weird errors, and the rabbit hole is just so deep on this.
+
+471
+00:22:54,820 --> 00:22:56,920
+ So you can compare the speed.
+
+472
+00:22:56,920 --> 00:22:57,920
+ Right now you can run LAMA.
+
+473
+00:22:57,920 --> 00:22:59,220
+ You can run anything you want on AMD.
+
+474
+00:22:59,220 --> 00:23:00,360
+ It already all works.
+
+475
+00:23:00,360 --> 00:23:01,680
+ Any OpenCL backend works.
+
+476
+00:23:01,680 --> 00:23:03,160
+ And it's not terribly slow.
+
+477
+00:23:03,160 --> 00:23:05,080
+ I mean, it's a lot faster than crashing.
+
+478
+00:23:05,080 --> 00:23:08,360
+ So it's infinitely times faster than PyTorch on AMD.
+
+479
+00:23:08,360 --> 00:23:13,080
+ But pretty soon we're going to start getting close to theoretical maximums on AMD.
+
+480
+00:23:13,080 --> 00:23:18,400
+ That's really where I'm pushing, and I want to get AMD on MLperf in a couple months hopefully.
+
+481
+00:23:18,400 --> 00:23:19,960
+ Now that you bring up AMD.
+
+482
+00:23:19,960 --> 00:23:21,280
+ Yeah, let's dive into that.
+
+483
+00:23:21,280 --> 00:23:26,080
+ Because when you announced the TinyCorp Fundraise, you mentioned one of your first goals is build
+
+484
+00:23:26,080 --> 00:23:29,500
+ the framework runtime and driver for AMD.
+
+485
+00:23:29,500 --> 00:23:34,800
+ And then on June 3rd on Twitch, you weren't as excited about AMD anymore.
+
+486
+00:23:34,800 --> 00:23:37,480
+ Maybe let's talk a bit about that.
+
+487
+00:23:37,480 --> 00:23:42,560
+ You compared the quality of commit messages from the AMD kernel to the Intel work that
+
+488
+00:23:42,560 --> 00:23:43,720
+ people are doing there.
+
+489
+00:23:43,720 --> 00:23:44,760
+ What's important to know?
+
+490
+00:23:44,760 --> 00:23:48,360
+ So when I said I wanted to write a framework, I didn't never intend it on writing it.
+
+491
+00:23:48,360 --> 00:23:49,360
+ I wanted to write a kernel driver.
+
+492
+00:23:49,360 --> 00:23:56,000
+ I mean, I flirted with that idea briefly, but realistically, there's three parts to
+
+493
+00:23:56,000 --> 00:23:57,000
+ it, right?
+
+494
+00:23:57,000 --> 00:24:00,840
+ There's the ML framework, there's the driver, and then there's the user space runtime.
+
+495
+00:24:00,840 --> 00:24:02,920
+ I was even down to rewrite the user space runtime.
+
+496
+00:24:02,920 --> 00:24:06,040
+ I have a GitHub repo called CUDA IO control sniffer.
+
+497
+00:24:06,040 --> 00:24:07,040
+ It's terribly called.
+
+498
+00:24:07,040 --> 00:24:09,400
+ But you can actually launch a CUDA kernel without CUDA.
+
+499
+00:24:09,400 --> 00:24:11,520
+ So you don't need CUDA installed.
+
+500
+00:24:11,520 --> 00:24:16,520
+ Just the NVIDIA open source driver and this open source repo can launch a CUDA kernel.
+
+501
+00:24:16,520 --> 00:24:19,520
+ So rewriting the user space runtime is doable.
+
+502
+00:24:19,520 --> 00:24:20,520
+ Rewriting the kernel driver?
+
+503
+00:24:20,520 --> 00:24:21,520
+ I don't even have docs.
+
+504
+00:24:21,520 --> 00:24:23,040
+ I don't have any docs for the GPU.
+
+505
+00:24:23,040 --> 00:24:26,580
+ It would just be a massive reverse engineering project.
+
+506
+00:24:26,580 --> 00:24:31,760
+ So that is, when I saw that there, I wasn't complaining about it being slow.
+
+507
+00:24:31,760 --> 00:24:33,600
+ I wasn't complaining about PyTorch not compiling.
+
+508
+00:24:33,600 --> 00:24:35,920
+ I was complaining about the thing crashing my entire computer.
+
+509
+00:24:35,920 --> 00:24:36,920
+ It panics my kernel.
+
+510
+00:24:36,920 --> 00:24:40,000
+ And I have to wait five minutes while it reboots because it's a server motherboard and they
+
+511
+00:24:40,000 --> 00:24:41,800
+ take five minutes to reboot.
+
+512
+00:24:41,800 --> 00:24:45,720
+ So I was like, "Look, if you guys do not care enough to get me a decent kernel driver, there's
+
+513
+00:24:45,720 --> 00:24:49,280
+ no way I'm wasting my time on this, especially when I can use Intel GPUs."
+
+514
+00:24:49,280 --> 00:24:53,600
+ Intel GPUs have a stable kernel driver and they have all their hardware documented.
+
+515
+00:24:53,600 --> 00:24:56,880
+ You can go and you can find all the registered docs on Intel GPUs.
+
+516
+00:24:56,880 --> 00:24:58,960
+ So I'm like, "Why don't I just use these?"
+
+517
+00:24:58,960 --> 00:25:01,280
+ Now, there's a downside to them.
+
+518
+00:25:01,280 --> 00:25:02,280
+ Their GPU is $350.
+
+519
+00:25:02,280 --> 00:25:03,280
+ You're like, "What a deal.
+
+520
+00:25:03,280 --> 00:25:04,280
+ It's $350."
+
+521
+00:25:04,280 --> 00:25:06,280
+ You get about $350 worth of performance.
+
+522
+00:25:06,280 --> 00:25:10,000
+ And if you're paying about 400 for the PCIe slot to put it in, right, like between the
+
+523
+00:25:10,000 --> 00:25:12,820
+ power and all the other stuff, you're like, "Okay, never mind.
+
+524
+00:25:12,820 --> 00:25:16,180
+ You got to use Nvidia or AMD from that perspective."
+
+525
+00:25:16,180 --> 00:25:19,900
+ But I sent an email to Lisa Su and she responded.
+
+526
+00:25:19,900 --> 00:25:20,900
+ Nice.
+
+527
+00:25:20,900 --> 00:25:22,660
+ Oh, you can see you published that email in a Discord.
+
+528
+00:25:22,660 --> 00:25:23,660
+ I did.
+
+529
+00:25:23,660 --> 00:25:24,660
+ I did.
+
+530
+00:25:24,660 --> 00:25:25,660
+ And she responded.
+
+531
+00:25:25,660 --> 00:25:27,940
+ And I've had a few calls since.
+
+532
+00:25:27,940 --> 00:25:32,580
+ And what I did was what I tried to do...
+
+533
+00:25:32,580 --> 00:25:34,980
+ Well, first off, thank you for responding.
+
+534
+00:25:34,980 --> 00:25:39,220
+ It shows me that if you don't care about your kernel panicking, I can't.
+
+535
+00:25:39,220 --> 00:25:40,860
+ This is just a huge waste of my time.
+
+536
+00:25:40,860 --> 00:25:42,380
+ I'll find someone who will care.
+
+537
+00:25:42,380 --> 00:25:48,580
+ Like I'm not asking for your 7x7 Winograd convolution when transposed to be fast.
+
+538
+00:25:48,580 --> 00:25:49,580
+ Like I'm not asking for that.
+
+539
+00:25:49,580 --> 00:25:50,900
+ I'm asking literally for...
+
+540
+00:25:50,900 --> 00:25:51,900
+ The basics of getting...
+
+541
+00:25:51,900 --> 00:25:52,900
+ To not God.
+
+542
+00:25:52,900 --> 00:25:53,900
+ Oh, and this isn't Tinygrad.
+
+543
+00:25:53,900 --> 00:25:54,900
+ This is your demo apps.
+
+544
+00:25:54,900 --> 00:25:57,580
+ I ran their demo apps in loops and I got kernel panics.
+
+545
+00:25:57,580 --> 00:25:59,700
+ I'm like, "No.
+
+546
+00:25:59,700 --> 00:26:00,700
+ Okay.
+
+547
+00:26:00,700 --> 00:26:01,700
+ There's..."
+
+548
+00:26:01,700 --> 00:26:02,700
+ But no.
+
+549
+00:26:02,700 --> 00:26:07,260
+ Lisa Su reached out, connected with a whole bunch of different people.
+
+550
+00:26:07,260 --> 00:26:12,020
+ They sent me a pre-release version of ROKM 5.6.
+
+551
+00:26:12,020 --> 00:26:14,740
+ They told me, "You can't release it," which I'm like, "Okay.
+
+552
+00:26:14,740 --> 00:26:16,060
+ Why do you care?"
+
+553
+00:26:16,060 --> 00:26:20,100
+ But they say they're gonna release it by the end of the month and it fixed the kernel panic.
+
+554
+00:26:20,100 --> 00:26:25,340
+ The guy managed to reproduce it with the two GPUs and the computer.
+
+555
+00:26:25,340 --> 00:26:26,340
+ And yeah.
+
+556
+00:26:26,340 --> 00:26:27,940
+ Sent me a driver and it works.
+
+557
+00:26:27,940 --> 00:26:28,940
+ So yeah.
+
+558
+00:26:28,940 --> 00:26:31,860
+ I had that experience.
+
+559
+00:26:31,860 --> 00:26:36,580
+ And then I had another experience where I had two calls with AMD's communication people.
+
+560
+00:26:36,580 --> 00:26:39,140
+ I tried to explain to these people open source culture.
+
+561
+00:26:39,140 --> 00:26:43,420
+ It's not open source if you dump the source code on a GitHub repo and then forget about
+
+562
+00:26:43,420 --> 00:26:44,540
+ it until the next release.
+
+563
+00:26:44,540 --> 00:26:51,060
+ It's not open source if all your issues are from 2022.
+
+564
+00:26:51,060 --> 00:26:52,620
+ No one's gonna contribute to that project.
+
+565
+00:26:52,620 --> 00:26:53,620
+ Sure.
+
+566
+00:26:53,620 --> 00:26:55,540
+ It's open source in a very technical sense.
+
+567
+00:26:55,540 --> 00:26:56,940
+ To be fair, it's better than nothing.
+
+568
+00:26:56,940 --> 00:26:58,100
+ It's better than nothing.
+
+569
+00:26:58,100 --> 00:27:02,060
+ But I fixed a bug in Nickel.
+
+570
+00:27:02,060 --> 00:27:03,540
+ There's a fun fact, by the way.
+
+571
+00:27:03,540 --> 00:27:07,980
+ If you have a consumer AMD GPU, they don't support peer-to-peer.
+
+572
+00:27:07,980 --> 00:27:12,460
+ And their all reduced bandwidth is horrendously slow because it's using CUDA kernels to do
+
+573
+00:27:12,460 --> 00:27:13,860
+ the copy between the GPUs.
+
+574
+00:27:13,860 --> 00:27:17,260
+ And it's putting so many transactions on the PCIe bus that it's really slow.
+
+575
+00:27:17,260 --> 00:27:18,780
+ But you can use CUDA mem copy.
+
+576
+00:27:18,780 --> 00:27:21,100
+ And there's a flag to use CUDA mem copy.
+
+577
+00:27:21,100 --> 00:27:23,260
+ But that flag had a bug.
+
+578
+00:27:23,260 --> 00:27:26,940
+ So I posted the issue on Nickel.
+
+579
+00:27:26,940 --> 00:27:28,460
+ I expected nothing to happen.
+
+580
+00:27:28,460 --> 00:27:30,140
+ The NVIDIA guy replied to me within an hour.
+
+581
+00:27:30,140 --> 00:27:31,140
+ He's like, "Try this other flag."
+
+582
+00:27:31,140 --> 00:27:32,700
+ I'm like, "Okay, I tried the other flag.
+
+583
+00:27:32,700 --> 00:27:33,700
+ It still doesn't work.
+
+584
+00:27:33,700 --> 00:27:34,700
+ But here's a clean repro."
+
+585
+00:27:34,700 --> 00:27:38,820
+ And I spent like three hours writing a very clean repro.
+
+586
+00:27:38,820 --> 00:27:41,180
+ I ended up tracking the issue down myself.
+
+587
+00:27:41,180 --> 00:27:44,420
+ But just the fact that somebody responded to me within an hour and cared about fixing
+
+588
+00:27:44,420 --> 00:27:45,420
+ the issue?
+
+589
+00:27:45,420 --> 00:27:47,780
+ Okay, you've shown that it's worth my time.
+
+590
+00:27:47,780 --> 00:27:49,220
+ And I will put my time in.
+
+591
+00:27:49,220 --> 00:27:50,540
+ Because let's make this better.
+
+592
+00:27:50,540 --> 00:27:51,820
+ I'm here to help.
+
+593
+00:27:51,820 --> 00:27:54,780
+ But if you show me that you're like, "You're the kernel panics.
+
+594
+00:27:54,780 --> 00:27:55,780
+ Let's just expect it."
+
+595
+00:27:55,780 --> 00:27:56,780
+ Okay.
+
+596
+00:27:56,780 --> 00:27:59,020
+ Well, it sounds like AMD is getting the message.
+
+597
+00:27:59,020 --> 00:28:00,020
+ They are.
+
+598
+00:28:00,020 --> 00:28:04,620
+ And I don't really think they've had someone explain to them, "You can build in public."
+
+599
+00:28:04,620 --> 00:28:06,380
+ They're like, "What's an example of building in public?"
+
+600
+00:28:06,380 --> 00:28:07,380
+ I'm like, "Go look at PyTorch."
+
+601
+00:28:07,380 --> 00:28:09,380
+ "Go look at PyTorch."
+
+602
+00:28:09,380 --> 00:28:13,740
+ I have two minor things merged into PyTorch because it's very responsive.
+
+603
+00:28:13,740 --> 00:28:19,020
+ It's only minor bug fixes, but I feel like it's...
+
+604
+00:28:19,020 --> 00:28:21,300
+ So that's kind of the lowest level of the stack.
+
+605
+00:28:21,300 --> 00:28:27,820
+ And then at a slightly heavier level, obviously, there's TinyGrad, there's Mojo, there's ggml.
+
+606
+00:28:27,820 --> 00:28:32,420
+ How are you thinking about breadth versus depth and where you decided to focus early
+
+607
+00:28:32,420 --> 00:28:33,420
+ on?
+
+608
+00:28:33,420 --> 00:28:35,380
+ So ggml is very much like a...
+
+609
+00:28:35,380 --> 00:28:36,780
+ Okay, everyone has M1s.
+
+610
+00:28:36,780 --> 00:28:38,420
+ Actually, I was thinking...
+
+611
+00:28:38,420 --> 00:28:41,300
+ In the beginning, I was thinking of something more like ggml.
+
+612
+00:28:41,300 --> 00:28:42,300
+ Focus on the M1s.
+
+613
+00:28:42,300 --> 00:28:48,620
+ But ggml showed up and was just like, "We're actually just focusing on the M1s."
+
+614
+00:28:48,620 --> 00:28:52,260
+ And actually, M1 PyTorch is considerably better than AMD PyTorch.
+
+615
+00:28:52,260 --> 00:28:53,500
+ M1 PyTorch works.
+
+616
+00:28:53,500 --> 00:28:56,620
+ It only gives wrong answers sometimes and only crashes sometimes.
+
+617
+00:28:56,620 --> 00:29:00,500
+ But some models kind of run.
+
+618
+00:29:00,500 --> 00:29:06,820
+ When I was writing the Metal backend, I was comparing to MPS PyTorch, and I had a discrepancy.
+
+619
+00:29:06,820 --> 00:29:08,700
+ TinyGrad checks all its outputs compared to Torch.
+
+620
+00:29:08,700 --> 00:29:12,300
+ And I had one where it didn't match.
+
+621
+00:29:12,300 --> 00:29:14,420
+ I checked the matrix by hand.
+
+622
+00:29:14,420 --> 00:29:15,420
+ It matches TinyGrad.
+
+623
+00:29:15,420 --> 00:29:16,420
+ I don't understand.
+
+624
+00:29:16,420 --> 00:29:19,820
+ And then I switched PyTorch back to CPU, and it matched.
+
+625
+00:29:19,820 --> 00:29:21,820
+ I'm like, "Oh."
+
+626
+00:29:21,820 --> 00:29:22,820
+ Yeah.
+
+627
+00:29:22,820 --> 00:29:23,820
+ Well, there's bugs.
+
+628
+00:29:23,820 --> 00:29:27,700
+ If you transpose the matrix, because I think it has to do with multi views in PyTorch and
+
+629
+00:29:27,700 --> 00:29:30,820
+ weird under-the-hood stuff that's not exposed to you, there's bugs.
+
+630
+00:29:30,820 --> 00:29:31,820
+ Maybe they fix them.
+
+631
+00:29:31,820 --> 00:29:36,340
+ But it seems like there was a lot of momentum, again, because you're getting a huge variety.
+
+632
+00:29:36,340 --> 00:29:37,340
+ You're getting...
+
+633
+00:29:37,340 --> 00:29:39,660
+ How many engineers care about making PyTorch work on M1?
+
+634
+00:29:39,660 --> 00:29:40,660
+ Thousands.
+
+635
+00:29:40,660 --> 00:29:41,660
+ Tens of thousands.
+
+636
+00:29:41,660 --> 00:29:44,300
+ And you have an open development process, and guess what?
+
+637
+00:29:44,300 --> 00:29:45,300
+ It's going to be good.
+
+638
+00:29:45,300 --> 00:29:48,340
+ How many engineers care about AMD working, PyTorch AMD working?
+
+639
+00:29:48,340 --> 00:29:51,220
+ You got 10 guys that work for AMD.
+
+640
+00:29:51,220 --> 00:29:54,020
+ And then a couple hobbyists.
+
+641
+00:29:54,020 --> 00:29:58,620
+ You revealed an interesting detail about how you debugged, which is you hand-checked the
+
+642
+00:29:58,620 --> 00:29:59,620
+ matrix map.
+
+643
+00:29:59,620 --> 00:30:01,420
+ No, I don't hand-check it.
+
+644
+00:30:01,420 --> 00:30:06,580
+ One of the best tests in TinyGrad is a file called testops.py.
+
+645
+00:30:06,580 --> 00:30:12,700
+ And it's just 100 small examples written in TinyGrad and PyTorch, and it checks both the
+
+646
+00:30:12,700 --> 00:30:14,860
+ forwards and backwards to make sure they match.
+
+647
+00:30:14,860 --> 00:30:15,860
+ The test suite.
+
+648
+00:30:15,860 --> 00:30:16,860
+ Yeah.
+
+649
+00:30:16,860 --> 00:30:17,860
+ Very important.
+
+650
+00:30:17,860 --> 00:30:18,860
+ That's one of them.
+
+651
+00:30:18,860 --> 00:30:21,020
+ I really put a lot of effort into CI for TinyGrad.
+
+652
+00:30:21,020 --> 00:30:22,980
+ I think CI is super important.
+
+653
+00:30:22,980 --> 00:30:25,980
+ I want that green check to mean I can merge this.
+
+654
+00:30:25,980 --> 00:30:27,080
+ I don't want my tests to...
+
+655
+00:30:27,080 --> 00:30:29,980
+ And if the green check, if you somehow manage to introduce a bug and get the green check,
+
+656
+00:30:29,980 --> 00:30:31,980
+ okay, we're fixing the test.
+
+657
+00:30:31,980 --> 00:30:33,540
+ Top priority.
+
+658
+00:30:33,540 --> 00:30:35,300
+ Mojo?
+
+659
+00:30:35,300 --> 00:30:37,300
+ It's close source.
+
+660
+00:30:37,300 --> 00:30:38,300
+ I'm not that interested.
+
+661
+00:30:38,300 --> 00:30:39,300
+ You know what I mean?
+
+662
+00:30:39,300 --> 00:30:40,700
+ Look, I like Chris Latner.
+
+663
+00:30:40,700 --> 00:30:45,140
+ I think he's going to do great things, and I understand the wisdom even in keeping it
+
+664
+00:30:45,140 --> 00:30:46,140
+ close source.
+
+665
+00:30:46,140 --> 00:30:50,220
+ But I'm interested when it's open.
+
+666
+00:30:50,220 --> 00:30:54,380
+ You have an interesting design deviation from him, because he's decided to be...
+
+667
+00:30:54,380 --> 00:30:59,100
+ Well, promised to be a superset of Python, and you have decided to break with PyTorch
+
+668
+00:30:59,100 --> 00:31:00,420
+ APIs.
+
+669
+00:31:00,420 --> 00:31:06,500
+ And I think that affects learnability and transportability of code.
+
+670
+00:31:06,500 --> 00:31:17,380
+ If the PyTorch thing ends up being like a stumbling block, I could write a perfect PyTorch.
+
+671
+00:31:17,380 --> 00:31:22,860
+ Instead of import PyTorch, you type import tinyTorch as torch.
+
+672
+00:31:22,860 --> 00:31:26,820
+ And if that really becomes the stumbling block, I will do that.
+
+673
+00:31:26,820 --> 00:31:30,180
+ No, Chris Latner went much further than PyTorch.
+
+674
+00:31:30,180 --> 00:31:34,300
+ Replicating the PyTorch API is something I can do with a couple, like an engineer month
+
+675
+00:31:34,300 --> 00:31:35,300
+ or two.
+
+676
+00:31:35,300 --> 00:31:36,300
+ Like a shim.
+
+677
+00:31:36,300 --> 00:31:37,300
+ Right, like a shim, yeah.
+
+678
+00:31:37,300 --> 00:31:38,300
+ Replicating Python?
+
+679
+00:31:38,300 --> 00:31:41,900
+ There's a big graveyard of those projects.
+
+680
+00:31:41,900 --> 00:31:44,540
+ How's piston going?
+
+681
+00:31:44,540 --> 00:31:46,540
+ How's Jython?
+
+682
+00:31:46,540 --> 00:31:47,540
+ PyPy?
+
+683
+00:31:47,540 --> 00:31:51,880
+ You can go way back.
+
+684
+00:31:51,880 --> 00:31:53,780
+ So TinyGrad is one layer.
+
+685
+00:31:53,780 --> 00:31:57,260
+ You announced TinyBox recently, which is...
+
+686
+00:31:57,260 --> 00:31:58,260
+ You made it...
+
+687
+00:31:58,260 --> 00:32:01,580
+ So your core mission is commoditizing the petaflop.
+
+688
+00:32:01,580 --> 00:32:05,820
+ And then your business goal is to sell computers for more than the cost to make, which seems
+
+689
+00:32:05,820 --> 00:32:08,340
+ super reasonable.
+
+690
+00:32:08,340 --> 00:32:09,940
+ And you're gonna have three TinyBoxes?
+
+691
+00:32:09,940 --> 00:32:10,940
+ Red, green, blue?
+
+692
+00:32:10,940 --> 00:32:12,160
+ No, no, no, no, no, no, no.
+
+693
+00:32:12,160 --> 00:32:13,160
+ That was my...
+
+694
+00:32:13,160 --> 00:32:15,020
+ Look, a lot of people...
+
+695
+00:32:15,020 --> 00:32:17,980
+ I love leaning into saying I'm giving up.
+
+696
+00:32:17,980 --> 00:32:19,020
+ It's great to give up.
+
+697
+00:32:19,020 --> 00:32:20,460
+ Giving up is this wonderful thing.
+
+698
+00:32:20,460 --> 00:32:21,460
+ It's so liberating.
+
+699
+00:32:21,460 --> 00:32:24,140
+ And then you can decide afterward if you really give up or not.
+
+700
+00:32:24,140 --> 00:32:27,580
+ There's very little harm in saying you give up, except great, Twitter haters have something
+
+701
+00:32:27,580 --> 00:32:32,140
+ to talk about, and all press is good press kids.
+
+702
+00:32:32,140 --> 00:32:33,380
+ So obviously...
+
+703
+00:32:33,380 --> 00:32:34,380
+ Just red.
+
+704
+00:32:34,380 --> 00:32:35,380
+ Only red.
+
+705
+00:32:35,380 --> 00:32:36,380
+ TinyBox, red.
+
+706
+00:32:36,380 --> 00:32:37,380
+ TinyBox, red.
+
+707
+00:32:37,380 --> 00:32:41,580
+ Unless AMD upsets me again, and then we're back to other colors.
+
+708
+00:32:41,580 --> 00:32:43,420
+ We have other colors to choose from.
+
+709
+00:32:43,420 --> 00:32:47,780
+ When you think about hardware design, what are some of the numbers you look for?
+
+710
+00:32:47,780 --> 00:32:53,620
+ So teraplops per second is one, but memory bandwidth is another big limiter.
+
+711
+00:32:53,620 --> 00:32:54,620
+ How do you make those trade-offs?
+
+712
+00:32:54,620 --> 00:32:58,300
+ Well, I mean, fundamentally, I'm limited to what GPUs I can buy.
+
+713
+00:32:58,300 --> 00:33:01,740
+ But yeah, for something that I think a lot of people are going to want to reasonably
+
+714
+00:33:01,740 --> 00:33:02,740
+ do with...
+
+715
+00:33:02,740 --> 00:33:08,540
+ A coworker of mine described them as luxury AI computers.
+
+716
+00:33:08,540 --> 00:33:11,140
+ Luxury AI computers for people.
+
+717
+00:33:11,140 --> 00:33:12,140
+ And that's what we're building.
+
+718
+00:33:12,140 --> 00:33:16,980
+ I think a common thing people are going to want to do is run large llama, or large Falcon,
+
+719
+00:33:16,980 --> 00:33:17,980
+ or whatever.
+
+720
+00:33:17,980 --> 00:33:18,980
+ FP16 llama.
+
+721
+00:33:18,980 --> 00:33:19,980
+ FP16, exactly.
+
+722
+00:33:19,980 --> 00:33:20,980
+ Exactly.
+
+723
+00:33:20,980 --> 00:33:22,180
+ Int8, I think, can work.
+
+724
+00:33:22,180 --> 00:33:27,180
+ I think that what GGML is doing to go to int4, this doesn't work.
+
+725
+00:33:27,180 --> 00:33:28,180
+ Have you done...
+
+726
+00:33:28,180 --> 00:33:32,340
+ Maybe they have, but I read what it was, and I was like, "This isn't from any paper.
+
+727
+00:33:32,340 --> 00:33:33,340
+ This is just some..."
+
+728
+00:33:33,340 --> 00:33:35,380
+ Squeezing as much as possible.
+
+729
+00:33:35,380 --> 00:33:38,740
+ You made up some quantization standards to make it run fast.
+
+730
+00:33:38,740 --> 00:33:41,940
+ Maybe it works, but okay, where's the hella swag number?
+
+731
+00:33:41,940 --> 00:33:42,940
+ Where's your...
+
+732
+00:33:42,940 --> 00:33:43,940
+ Where's your...
+
+733
+00:33:43,940 --> 00:33:44,940
+ Where's your...
+
+734
+00:33:44,940 --> 00:33:45,940
+ Where's your...
+
+735
+00:33:45,940 --> 00:33:46,940
+ You know, all your...
+
+736
+00:33:46,940 --> 00:33:50,060
+ The thesis is right, that if you have hundreds of billions of parameters, that the individual
+
+737
+00:33:50,060 --> 00:33:52,140
+ quantization doesn't actually matter that much.
+
+738
+00:33:52,140 --> 00:33:55,860
+ Well, the real way to look at all of that is to just say you want to compress the weights.
+
+739
+00:33:55,860 --> 00:33:56,860
+ It's a form of weight compression.
+
+740
+00:33:56,860 --> 00:33:59,120
+ Quantization is a form of weight compression right now.
+
+741
+00:33:59,120 --> 00:34:00,120
+ This is obviously not lossless.
+
+742
+00:34:00,120 --> 00:34:01,120
+ It's not a lossless compressor.
+
+743
+00:34:01,120 --> 00:34:04,300
+ If it's a lossless compressor and you can show that it's correct, then okay, we don't
+
+744
+00:34:04,300 --> 00:34:05,300
+ have to have any other conversation.
+
+745
+00:34:05,300 --> 00:34:07,460
+ But it's a lossy compressor.
+
+746
+00:34:07,460 --> 00:34:11,740
+ And how do you know that your loss isn't actually losing the power of the model?
+
+747
+00:34:11,740 --> 00:34:17,600
+ Maybe INT4 65 B-LAMA is actually the same as FB16 7 B-LAMA.
+
+748
+00:34:17,600 --> 00:34:18,600
+ We don't know.
+
+749
+00:34:18,600 --> 00:34:21,780
+ Maybe someone has done this yet, but I looked for it when it first came out and people were
+
+750
+00:34:21,780 --> 00:34:22,780
+ talking about it.
+
+751
+00:34:22,780 --> 00:34:24,340
+ And I'm like, I just have...
+
+752
+00:34:24,340 --> 00:34:25,940
+ It's not from a paper.
+
+753
+00:34:25,940 --> 00:34:28,140
+ The int date stuff is from a paper where they...
+
+754
+00:34:28,140 --> 00:34:29,740
+ Some of the int date stuff is from a paper.
+
+755
+00:34:29,740 --> 00:34:36,980
+ There's one paper, I think it's like llm.intdate, where they actually do all the tests.
+
+756
+00:34:36,980 --> 00:34:38,700
+ And they didn't go fully int date.
+
+757
+00:34:38,700 --> 00:34:44,280
+ They made 90% of it int date and kept 10% of it in FB16 for what they called the outliers
+
+758
+00:34:44,280 --> 00:34:46,140
+ or whatever.
+
+759
+00:34:46,140 --> 00:34:47,940
+ So I think that this is not quite so easy.
+
+760
+00:34:47,940 --> 00:34:48,940
+ And I think being able...
+
+761
+00:34:48,940 --> 00:34:51,700
+ Well, so first off, if you're training, no one's gotten training to work with int date
+
+762
+00:34:51,700 --> 00:34:52,700
+ yet.
+
+763
+00:34:52,700 --> 00:34:53,700
+ There's a few papers that vaguely show it.
+
+764
+00:34:53,700 --> 00:34:58,420
+ But if you're training, you're going to need BF16 or float16.
+
+765
+00:34:58,420 --> 00:35:00,580
+ So this is why I target that.
+
+766
+00:35:00,580 --> 00:35:03,980
+ Now the thing that you're going to want to do is run these large language models out
+
+767
+00:35:03,980 --> 00:35:07,500
+ of the box on your hardware in FB16, and that's memory bandwidth.
+
+768
+00:35:07,500 --> 00:35:12,300
+ So you need large amounts of memory bandwidth too.
+
+769
+00:35:12,300 --> 00:35:17,700
+ So ask how I trade off memory bandwidth in FLOPS or what GPUs can I buy.
+
+770
+00:35:17,700 --> 00:35:19,120
+ And I saw one of your...
+
+771
+00:35:19,120 --> 00:35:23,540
+ So first of all, you have this hiring process, which is you got to solve one of the bounties
+
+772
+00:35:23,540 --> 00:35:25,100
+ that are open on TinyGrad.
+
+773
+00:35:25,100 --> 00:35:27,300
+ There's no technical interview.
+
+774
+00:35:27,300 --> 00:35:28,940
+ One of them is int date support.
+
+775
+00:35:28,940 --> 00:35:32,500
+ Do you already have some things you want to test on?
+
+776
+00:35:32,500 --> 00:35:34,120
+ We have int date support.
+
+777
+00:35:34,120 --> 00:35:39,920
+ What I'd like to see somebody do is just load the ggml int date llama into TinyGrad and
+
+778
+00:35:39,920 --> 00:35:43,240
+ then benchmark it against the FB16 one.
+
+779
+00:35:43,240 --> 00:35:44,240
+ Int date already works in TinyGrad.
+
+780
+00:35:44,240 --> 00:35:49,360
+ It doesn't actually do the math in int date, which is even a stronger...
+
+781
+00:35:49,360 --> 00:35:51,520
+ It does all the math still in FB32.
+
+782
+00:35:51,520 --> 00:35:55,200
+ So int date can mean you just have your weights in int date, or int date can mean you actually
+
+783
+00:35:55,200 --> 00:35:56,200
+ do your math in int date.
+
+784
+00:35:56,200 --> 00:36:02,040
+ And doing your math in int date, the big gain that people care about is actually having
+
+785
+00:36:02,040 --> 00:36:07,220
+ your weights in int date, because weights in int date mean less memory and less memory
+
+786
+00:36:07,220 --> 00:36:08,220
+ bandwidth.
+
+787
+00:36:08,220 --> 00:36:10,740
+ Whereas the math, keep it in FB32.
+
+788
+00:36:10,740 --> 00:36:13,440
+ With on M1s, it doesn't even matter if you're doing...
+
+789
+00:36:13,440 --> 00:36:16,940
+ It doesn't matter what data type you're doing in the GPU.
+
+790
+00:36:16,940 --> 00:36:20,060
+ I'm not even sure it can do int date, but FB16 and FB32 is the same.
+
+791
+00:36:20,060 --> 00:36:22,060
+ It's the same teraflops.
+
+792
+00:36:22,060 --> 00:36:25,600
+ So yeah, no, that's one of the bounties.
+
+793
+00:36:25,600 --> 00:36:29,980
+ One of the bounties is get int date llama running with the int date weights.
+
+794
+00:36:29,980 --> 00:36:32,260
+ And then actually, you don't even need to...
+
+795
+00:36:32,260 --> 00:36:35,660
+ What you could even do, if you really want to test this, just take the FB16 weights,
+
+796
+00:36:35,660 --> 00:36:39,680
+ convert them to int date, then convert them back to FB16, then compare the unconverted
+
+797
+00:36:39,680 --> 00:36:40,680
+ and converted.
+
+798
+00:36:40,680 --> 00:36:41,680
+ Oh, that's a nice hack.
+
+799
+00:36:41,680 --> 00:36:42,680
+ Oh yeah.
+
+800
+00:36:42,680 --> 00:36:43,680
+ Right?
+
+801
+00:36:43,680 --> 00:36:44,680
+ Like...
+
+802
+00:36:44,680 --> 00:36:45,680
+ This should be lossless in the other direction.
+
+803
+00:36:45,680 --> 00:36:46,680
+ Yeah.
+
+804
+00:36:46,680 --> 00:36:47,680
+ Well, yeah.
+
+805
+00:36:47,680 --> 00:36:51,400
+ Yeah, I think FB16, it should be lossless in the other direction.
+
+806
+00:36:51,400 --> 00:36:53,120
+ I'm actually not 100% about that.
+
+807
+00:36:53,120 --> 00:36:54,120
+ Why not?
+
+808
+00:36:54,120 --> 00:36:56,380
+ Oh, because like, you ever try to like...
+
+809
+00:36:56,380 --> 00:36:57,380
+ If you want to represent...
+
+810
+00:36:57,380 --> 00:36:59,380
+ If it was like int16, it's not lossless.
+
+811
+00:36:59,380 --> 00:37:00,380
+ Sure.
+
+812
+00:37:00,380 --> 00:37:05,440
+ I think all of int8 can be represented in FB16, but I'm not 100% about that.
+
+813
+00:37:05,440 --> 00:37:06,440
+ Okay.
+
+814
+00:37:06,440 --> 00:37:07,440
+ Actually, I think it...
+
+815
+00:37:07,440 --> 00:37:08,440
+ Just draw out the bytes.
+
+816
+00:37:08,440 --> 00:37:09,440
+ We just have to do it.
+
+817
+00:37:09,440 --> 00:37:10,440
+ Just literally do it.
+
+818
+00:37:10,440 --> 00:37:11,440
+ There's only 256 to check.
+
+819
+00:37:11,440 --> 00:37:12,440
+ But yeah, either way.
+
+820
+00:37:12,440 --> 00:37:13,440
+ I mean int4, definitely.
+
+821
+00:37:13,440 --> 00:37:21,440
+ So do your int4, convert it back, and now see, even with int4 weights and FP32 math,
+
+822
+00:37:21,440 --> 00:37:27,240
+ like, okay, how much does your performance degrade in this model?
+
+823
+00:37:27,240 --> 00:37:29,420
+ So can we...
+
+824
+00:37:29,420 --> 00:37:31,560
+ I'm about to zoom out a little bit from the details.
+
+825
+00:37:31,560 --> 00:37:33,440
+ I don't know if you had more to...
+
+826
+00:37:33,440 --> 00:37:39,420
+ I think you're planning to release the first TinyBox, ship them in like two to six, eight
+
+827
+00:37:39,420 --> 00:37:41,160
+ months, something like that.
+
+828
+00:37:41,160 --> 00:37:43,380
+ What's top of mind for you in terms of building a team?
+
+829
+00:37:43,380 --> 00:37:45,800
+ Who are you calling for?
+
+830
+00:37:45,800 --> 00:37:46,800
+ Yeah.
+
+831
+00:37:46,800 --> 00:37:49,720
+ Well, to stay on the TinyBox for one minute.
+
+832
+00:37:49,720 --> 00:37:51,520
+ Yeah, exactly.
+
+833
+00:37:51,520 --> 00:37:55,000
+ So I have the GPUs picked up, and you're like, "Well, I could make that computer with the
+
+834
+00:37:55,000 --> 00:37:56,000
+ GPUs."
+
+835
+00:37:56,000 --> 00:37:57,320
+ And the answer is, can you?
+
+836
+00:37:57,320 --> 00:38:02,600
+ Do you know how hard it is to put six GPUs in a computer?
+
+837
+00:38:02,600 --> 00:38:05,720
+ People think it's really easy, and it's really easy to put one GPU in a computer.
+
+838
+00:38:05,720 --> 00:38:08,440
+ It's really easy to put two GPUs in a computer.
+
+839
+00:38:08,440 --> 00:38:09,960
+ But now you want to put in eight.
+
+840
+00:38:09,960 --> 00:38:11,800
+ Okay, so I'll tell you a few things about these GPUs.
+
+841
+00:38:11,800 --> 00:38:14,680
+ They take up four slots.
+
+842
+00:38:14,680 --> 00:38:15,680
+ What kind of computer?
+
+843
+00:38:15,680 --> 00:38:16,840
+ You can buy the nicest Super Micro.
+
+844
+00:38:16,840 --> 00:38:18,720
+ You can't put eight of those in there.
+
+845
+00:38:18,720 --> 00:38:19,720
+ You need two slot blowers.
+
+846
+00:38:19,720 --> 00:38:23,200
+ If you want to use one of those four Super Micros, you need two slot blowers.
+
+847
+00:38:23,200 --> 00:38:24,200
+ Or water cooling.
+
+848
+00:38:24,200 --> 00:38:26,880
+ If you're trying to get the four slot cards in there, you're going to need some form of
+
+849
+00:38:26,880 --> 00:38:29,000
+ water cooling.
+
+850
+00:38:29,000 --> 00:38:32,000
+ Or you're going to need ... There are some Chinese 4090s that are blowers.
+
+851
+00:38:32,000 --> 00:38:36,080
+ You have any blowers or water cooling if you're trying to get it in those things.
+
+852
+00:38:36,080 --> 00:38:37,600
+ So are you doing water?
+
+853
+00:38:37,600 --> 00:38:41,280
+ No, I'm not using that chassis.
+
+854
+00:38:41,280 --> 00:38:45,640
+ Then the other thing that ... Okay, so now you want to get six GPUs in a computer.
+
+855
+00:38:45,640 --> 00:38:46,640
+ So that's a big challenge.
+
+856
+00:38:46,640 --> 00:38:48,480
+ You're like, "Oh, I'll just use a PCIe extender.
+
+857
+00:38:48,480 --> 00:38:49,600
+ I saw it online as Tech Tips.
+
+858
+00:38:49,600 --> 00:38:50,600
+ It works great."
+
+859
+00:38:50,600 --> 00:38:51,600
+ No, it doesn't.
+
+860
+00:38:51,600 --> 00:38:54,440
+ There are PCIe extenders that work at PCIe 4.0.
+
+861
+00:38:54,440 --> 00:38:55,840
+ And interconnect bandwidth is super important.
+
+862
+00:38:55,840 --> 00:38:56,840
+ Yes.
+
+863
+00:38:56,840 --> 00:38:58,560
+ They don't work at 3.0.
+
+864
+00:38:58,560 --> 00:39:04,380
+ No PCIe extender I've tested, and I've bought 20 of them, works at PCIe 4.0.
+
+865
+00:39:04,380 --> 00:39:06,320
+ So you're going to need PCIe redrivers.
+
+866
+00:39:06,320 --> 00:39:09,800
+ Now, okay, how much is that adding cost, right?
+
+867
+00:39:09,800 --> 00:39:11,160
+ These things all get really hard.
+
+868
+00:39:11,160 --> 00:39:14,120
+ And then TinyBox, I've even added another constraint to it.
+
+869
+00:39:14,120 --> 00:39:16,360
+ I want this thing to be silent.
+
+870
+00:39:16,360 --> 00:39:20,600
+ Not totally silent, but my limit is like 45, maybe 50 dB.
+
+871
+00:39:20,600 --> 00:39:24,280
+ But not super micro machine, 60 dB.
+
+872
+00:39:24,280 --> 00:39:26,280
+ We have a compute cluster at comma.
+
+873
+00:39:26,280 --> 00:39:28,840
+ You got to wear your protection to go in there.
+
+874
+00:39:28,840 --> 00:39:31,040
+ Yeah, see some videos where you give a tour.
+
+875
+00:39:31,040 --> 00:39:32,040
+ Oh, yeah.
+
+876
+00:39:32,040 --> 00:39:33,040
+ It's noisy.
+
+877
+00:39:33,040 --> 00:39:34,040
+ It's super loud.
+
+878
+00:39:34,040 --> 00:39:37,040
+ You got all these guys just screaming.
+
+879
+00:39:37,040 --> 00:39:39,080
+ 10,000 RPM just screaming.
+
+880
+00:39:39,080 --> 00:39:44,880
+ I want to be able to use the normal big GPU fans and make this thing so it can sit under
+
+881
+00:39:44,880 --> 00:39:48,880
+ your desk, plug into one outlet of power, right?
+
+882
+00:39:48,880 --> 00:39:50,880
+ Six GPUs.
+
+883
+00:39:50,880 --> 00:39:52,880
+ Your GPUs are 350 watts each.
+
+884
+00:39:52,880 --> 00:39:54,880
+ Can't plug that into a wall outlet.
+
+885
+00:39:54,880 --> 00:39:56,880
+ Okay, so how are you going to deal with that?
+
+886
+00:39:56,880 --> 00:39:58,880
+ Good questions, right?
+
+887
+00:39:58,880 --> 00:40:00,880
+ And you're not sharing them.
+
+888
+00:40:00,880 --> 00:40:02,880
+ Well, that one, I mean, that one is pretty obvious.
+
+889
+00:40:02,880 --> 00:40:04,880
+ You have to limit the power on the GPUs, right?
+
+890
+00:40:04,880 --> 00:40:05,880
+ You have to limit the power on the GPUs.
+
+891
+00:40:05,880 --> 00:40:08,680
+ Now, you can limit power on GPUs and still get.
+
+892
+00:40:08,680 --> 00:40:11,880
+ You can use like half the power and get 80% of the performance.
+
+893
+00:40:11,880 --> 00:40:14,880
+ This is a known fact about GPUs, but like that's one of my design constraints.
+
+894
+00:40:14,880 --> 00:40:19,380
+ So when you start to add all these design constraints, good luck building a tiny box
+
+895
+00:40:19,380 --> 00:40:20,380
+ yourself.
+
+896
+00:40:20,380 --> 00:40:24,880
+ You know, obviously it can be done, but you need something that has actually quite a bit
+
+897
+00:40:24,880 --> 00:40:26,880
+ of scale and resources to do it.
+
+898
+00:40:26,880 --> 00:40:31,880
+ Can you see like the under the desk, it's like one of the main use cases kind of like
+
+899
+00:40:31,880 --> 00:40:32,880
+ individual developer use or?
+
+900
+00:40:32,880 --> 00:40:33,880
+ Yeah.
+
+901
+00:40:33,880 --> 00:40:37,880
+ What I also see is more of a like an AI hub for your home, right?
+
+902
+00:40:37,880 --> 00:40:42,180
+ As we start to get like home robotics kind of stuff, you don't want to put the inference
+
+903
+00:40:42,180 --> 00:40:43,180
+ on the robot.
+
+904
+00:40:43,180 --> 00:40:45,180
+ But you also don't want to put the inference on the cloud.
+
+905
+00:40:45,180 --> 00:40:50,180
+ You don't want to put it on the robot because, okay, it's 1500 watts, tiny box.
+
+906
+00:40:50,180 --> 00:40:53,180
+ You put batteries, not charge them.
+
+907
+00:40:53,180 --> 00:40:54,180
+ Bad idea.
+
+908
+00:40:54,180 --> 00:40:55,180
+ And just wireless.
+
+909
+00:40:55,180 --> 00:40:56,180
+ Wireless is 0.5 milliseconds.
+
+910
+00:40:56,180 --> 00:40:57,180
+ This is super fast.
+
+911
+00:40:57,180 --> 00:41:01,180
+ You don't want to go to the cloud for two reasons.
+
+912
+00:41:01,180 --> 00:41:03,180
+ One, cloud's far away.
+
+913
+00:41:03,180 --> 00:41:04,180
+ It's not that far away.
+
+914
+00:41:04,180 --> 00:41:06,180
+ You can kind of address this.
+
+915
+00:41:06,180 --> 00:41:09,180
+ But two, cloud's also mad expensive.
+
+916
+00:41:09,180 --> 00:41:14,180
+ Like cloud GPUs are way more expensive than running that GPU at your house.
+
+917
+00:41:14,180 --> 00:41:16,180
+ At least any rates you're going to get, right?
+
+918
+00:41:16,180 --> 00:41:19,180
+ Maybe if you commit to buy, well, yeah, I'm going to buy 10,000 GPUs for three years,
+
+919
+00:41:19,180 --> 00:41:21,180
+ then maybe the cloud will give you a good rate.
+
+920
+00:41:21,180 --> 00:41:23,180
+ But like you want to buy one GPU in the cloud?
+
+921
+00:41:23,180 --> 00:41:27,180
+ I mean, okay, you can go to like vast, but like if you're going on Azure or AWS,
+
+922
+00:41:27,180 --> 00:41:28,180
+ so that's expensive.
+
+923
+00:41:28,180 --> 00:41:33,180
+ This is like a personal data center, you know, instead of a cloud data center.
+
+924
+00:41:33,180 --> 00:41:36,180
+ We like the term compute cluster so we can use NVIDIA GPUs.
+
+925
+00:41:36,180 --> 00:41:38,180
+ Data centers may be a little bit dated.
+
+926
+00:41:38,180 --> 00:41:43,180
+ It's a compute cluster, which is totally legal under the CUDA license agreement.
+
+927
+00:41:43,180 --> 00:41:45,180
+ You talk a lot about the PCIe connection.
+
+928
+00:41:45,180 --> 00:41:48,180
+ Do you think there's any fat there to trim?
+
+929
+00:41:48,180 --> 00:41:49,180
+ What do you mean?
+
+930
+00:41:49,180 --> 00:41:51,180
+ Just you're limited by bandwidth, right?
+
+931
+00:41:51,180 --> 00:41:53,180
+ Okay, for some things, yes.
+
+932
+00:41:53,180 --> 00:42:01,180
+ So the bandwidth is roughly 10x less than what you can get with NV-linked A100s.
+
+933
+00:42:01,180 --> 00:42:04,180
+ NV-linked A100s are going to have, and then you can even get like full fabric
+
+934
+00:42:04,180 --> 00:42:07,180
+ and NVIDIA really pushes on that stuff, 600 gigabytes per second.
+
+935
+00:42:07,180 --> 00:42:10,180
+ And PCIe 4, you're going to get 60.
+
+936
+00:42:10,180 --> 00:42:12,180
+ So you're getting 10x less.
+
+937
+00:42:12,180 --> 00:42:16,180
+ That said, why do you need the bandwidth?
+
+938
+00:42:16,180 --> 00:42:20,180
+ And the answer is you need it for training huge models.
+
+939
+00:42:20,180 --> 00:42:24,180
+ If you're training on a tiny box, your limit's going to be about 7 billion.
+
+940
+00:42:24,180 --> 00:42:29,180
+ If you're training on big stuff, your limit's going to be like 70 billion.
+
+941
+00:42:29,180 --> 00:42:30,180
+ Okay, you can hack it to get a bit higher.
+
+942
+00:42:30,180 --> 00:42:32,180
+ You can hack it, like GBT hacked it to get a bit higher.
+
+943
+00:42:32,180 --> 00:42:36,180
+ But like that 65 billion in llama, like there's a reason they chose 65 billion.
+
+944
+00:42:36,180 --> 00:42:40,180
+ And that's what can reasonably fit model parallel on 8 GPUs, right?
+
+945
+00:42:40,180 --> 00:42:45,180
+ So yes, you are going to end up training models.
+
+946
+00:42:45,180 --> 00:42:46,180
+ The cap's going to be like 7 billion.
+
+947
+00:42:46,180 --> 00:42:48,180
+ I actually heard this on your podcast.
+
+948
+00:42:48,180 --> 00:42:51,180
+ I don't think that the best chatbot models are going to be the big ones.
+
+949
+00:42:51,180 --> 00:42:53,180
+ I think the best chatbot models are going to be the ones
+
+950
+00:42:53,180 --> 00:42:56,180
+ where you had 1,000 training runs instead of one.
+
+951
+00:42:56,180 --> 00:43:00,180
+ And I don't think that the interconnect bandwidth is going to matter that much.
+
+952
+00:43:00,180 --> 00:43:04,180
+ So what are we optimizing for instead of compute optimal?
+
+953
+00:43:04,180 --> 00:43:05,180
+ What do you mean compute optimal?
+
+954
+00:43:05,180 --> 00:43:11,180
+ So you're talking about the llama-style models where you train for like 200--
+
+955
+00:43:11,180 --> 00:43:12,180
+ You train longer, yeah.
+
+956
+00:43:12,180 --> 00:43:13,180
+ Yeah, yeah, yeah.
+
+957
+00:43:13,180 --> 00:43:16,180
+ So okay, you can always make your model better by doing one of two things.
+
+958
+00:43:16,180 --> 00:43:18,180
+ And at Comma, we just have a strict limit on it.
+
+959
+00:43:18,180 --> 00:43:20,180
+ You can always make your model better by training longer,
+
+960
+00:43:20,180 --> 00:43:23,180
+ and you can always make your model better by making it bigger.
+
+961
+00:43:23,180 --> 00:43:25,180
+ But these aren't the interesting ones, right?
+
+962
+00:43:25,180 --> 00:43:27,180
+ Particularly the making it bigger.
+
+963
+00:43:27,180 --> 00:43:28,180
+ Because training it longer, fine.
+
+964
+00:43:28,180 --> 00:43:29,180
+ You're getting a better set of weights.
+
+965
+00:43:29,180 --> 00:43:30,180
+ The inference is the same.
+
+966
+00:43:30,180 --> 00:43:33,180
+ The inference is the same whether I trained it for a day or a week.
+
+967
+00:43:33,180 --> 00:43:37,180
+ But the-- okay, if I-- it's 1 billion versus 10 billion,
+
+968
+00:43:37,180 --> 00:43:39,180
+ well, I 10x my inference too, right?
+
+969
+00:43:39,180 --> 00:43:41,180
+ So I think that these big models are kind of--
+
+970
+00:43:41,180 --> 00:43:43,180
+ Sure, they're great if you're research labs
+
+971
+00:43:43,180 --> 00:43:45,180
+ and you're trying to max out this hypothetical thing.
+
+972
+00:43:45,180 --> 00:43:47,180
+ Which you can talk about later.
+
+973
+00:43:47,180 --> 00:43:48,180
+ Yeah, yeah, yeah.
+
+974
+00:43:48,180 --> 00:43:51,180
+ But if you're a startup or you're an individual
+
+975
+00:43:51,180 --> 00:43:54,180
+ or you're trying to deploy this to the edge anywhere,
+
+976
+00:43:54,180 --> 00:43:56,180
+ you don't need that many weights.
+
+977
+00:43:56,180 --> 00:43:58,180
+ You actually don't want that many weights.
+
+978
+00:43:58,180 --> 00:44:01,180
+ Optimizing for inference rather than capabilities doing benchmarks.
+
+979
+00:44:01,180 --> 00:44:02,180
+ Yes, yes.
+
+980
+00:44:02,180 --> 00:44:04,180
+ And I think the inference thing, right?
+
+981
+00:44:04,180 --> 00:44:06,180
+ There's going to be so much more.
+
+982
+00:44:06,180 --> 00:44:09,180
+ Right now the ratio between training and inference on clouds,
+
+983
+00:44:09,180 --> 00:44:11,180
+ I think it's only still like-- it's like 2 or 3x, right?
+
+984
+00:44:11,180 --> 00:44:13,180
+ It's 2 or 3x more inference, which doesn't make any sense.
+
+985
+00:44:13,180 --> 00:44:15,180
+ There should be way more inference.
+
+986
+00:44:15,180 --> 00:44:19,180
+ There should be 10 to 100x more inference in the world than training.
+
+987
+00:44:19,180 --> 00:44:22,180
+ But then also, what is training, right?
+
+988
+00:44:22,180 --> 00:44:24,180
+ You start to see these things like Laura.
+
+989
+00:44:24,180 --> 00:44:27,180
+ You're getting kind of-- it's kind of blurring the lines
+
+990
+00:44:27,180 --> 00:44:28,180
+ between inference and training.
+
+991
+00:44:28,180 --> 00:44:30,180
+ And I think that that blurred line is actually really good.
+
+992
+00:44:30,180 --> 00:44:33,180
+ I'd like to see much more on-device training
+
+993
+00:44:33,180 --> 00:44:35,180
+ or on-device fine-tuning of the final layer.
+
+994
+00:44:35,180 --> 00:44:37,180
+ We're pushing toward this stuff at Kama, right?
+
+995
+00:44:37,180 --> 00:44:39,180
+ Why am I shipping a fixed model?
+
+996
+00:44:39,180 --> 00:44:44,180
+ I totally want this model to fine-tune based on how your left tire is flat, right?
+
+997
+00:44:44,180 --> 00:44:48,180
+ Every time you cut the same turn because your left tire is flat?
+
+998
+00:44:48,180 --> 00:44:50,180
+ Well, I should learn that.
+
+999
+00:44:50,180 --> 00:44:53,180
+ So would Kama pursue parameter-efficient fine-tuning?
+
+1000
+00:44:53,180 --> 00:44:55,180
+ Yeah, yeah, yeah.
+
+1001
+00:44:55,180 --> 00:44:56,180
+ Seems like a--
+
+1002
+00:44:56,180 --> 00:44:57,180
+ We're looking into stuff like that.
+
+1003
+00:44:57,180 --> 00:44:59,180
+ I mean, Kama's already very parameter-efficient
+
+1004
+00:44:59,180 --> 00:45:01,180
+ because we have to run this thing in a car,
+
+1005
+00:45:01,180 --> 00:45:03,180
+ and you have to cool it and power it.
+
+1006
+00:45:03,180 --> 00:45:04,180
+ Yeah.
+
+1007
+00:45:04,180 --> 00:45:08,180
+ And so this kind of intelligence cluster you have in your home,
+
+1008
+00:45:08,180 --> 00:45:11,180
+ you see when the person is using third-party model,
+
+1009
+00:45:11,180 --> 00:45:15,180
+ they load them locally and do the final fine-tuning.
+
+1010
+00:45:15,180 --> 00:45:17,180
+ It kind of stays within the box.
+
+1011
+00:45:17,180 --> 00:45:19,180
+ I think that that's one thing.
+
+1012
+00:45:19,180 --> 00:45:21,180
+ That's one version of it for the privacy conscious.
+
+1013
+00:45:21,180 --> 00:45:27,180
+ I also see a world where you can have your tiny box in its down cycles.
+
+1014
+00:45:27,180 --> 00:45:29,180
+ Mine, Flopcoin, right?
+
+1015
+00:45:29,180 --> 00:45:31,180
+ Turns out not all crypto is a scam.
+
+1016
+00:45:31,180 --> 00:45:33,180
+ There's one way to tell if crypto is a scam.
+
+1017
+00:45:33,180 --> 00:45:36,180
+ If they're selling the coin before they make the product, it's a scam.
+
+1018
+00:45:36,180 --> 00:45:39,180
+ If they have the product and then they sell the coin, it's maybe not a scam, right?
+
+1019
+00:45:39,180 --> 00:45:43,180
+ So, yeah, my thought is each tiny box would have a private key on it,
+
+1020
+00:45:43,180 --> 00:45:45,180
+ and you have to do it this way.
+
+1021
+00:45:45,180 --> 00:45:47,180
+ You can't just let anyone join because of civil attacks, right?
+
+1022
+00:45:47,180 --> 00:45:50,180
+ There's a real problem of how do I ensure your data is correct?
+
+1023
+00:45:50,180 --> 00:45:52,180
+ And the way that I ensure your data is correct on the tiny net
+
+1024
+00:45:52,180 --> 00:45:56,180
+ is if you ever send wrong data, you're banned from the net for life.
+
+1025
+00:45:56,180 --> 00:46:00,180
+ Your $15,000 hardware box is banned, so don't cheat.
+
+1026
+00:46:00,180 --> 00:46:04,180
+ Obviously, if it messes up, we'll forgive you, but I'm saying--
+
+1027
+00:46:04,180 --> 00:46:06,180
+ Somebody's going to try to jailbreak your devices.
+
+1028
+00:46:06,180 --> 00:46:08,180
+ There's no jailbreak.
+
+1029
+00:46:08,180 --> 00:46:10,180
+ There's just a different network.
+
+1030
+00:46:10,180 --> 00:46:12,180
+ There's just a private key on each device.
+
+1031
+00:46:12,180 --> 00:46:14,180
+ If you buy a tiny box from the tiny corp, I give you a private key.
+
+1032
+00:46:14,180 --> 00:46:16,180
+ It's in my back-end server. You want to hack my server, that's illegal.
+
+1033
+00:46:16,180 --> 00:46:18,180
+ Anything you want to do on the device, the device is yours.
+
+1034
+00:46:18,180 --> 00:46:20,180
+ My server's mine.
+
+1035
+00:46:20,180 --> 00:46:22,180
+ Yeah, yeah.
+
+1036
+00:46:22,180 --> 00:46:25,180
+ Have you looked into federated training at all?
+
+1037
+00:46:25,180 --> 00:46:27,180
+ Yeah, so, I mean, okay.
+
+1038
+00:46:27,180 --> 00:46:29,180
+ There's orders of magnitude.
+
+1039
+00:46:29,180 --> 00:46:32,180
+ Federated training, you mean like over the cloud and stuff?
+
+1040
+00:46:32,180 --> 00:46:33,180
+ Over the internet?
+
+1041
+00:46:33,180 --> 00:46:36,180
+ Over the internet, but also distributed on a bunch of devices, right?
+
+1042
+00:46:36,180 --> 00:46:38,180
+ Yeah.
+
+1043
+00:46:38,180 --> 00:46:41,180
+ I'm very bearish on this stuff because of your interconnect bandwidth, right?
+
+1044
+00:46:41,180 --> 00:46:44,180
+ So, okay. At the high end, you have your interconnect bandwidth of NVLink,
+
+1045
+00:46:44,180 --> 00:46:46,180
+ which is 600 gigabytes per second, right?
+
+1046
+00:46:46,180 --> 00:46:49,180
+ The tiny box has 60 gigabytes per second,
+
+1047
+00:46:49,180 --> 00:46:54,180
+ and then your internet has 125 megabytes per second, right?
+
+1048
+00:46:54,180 --> 00:46:57,180
+ Not gigabits, 125 megabytes, right?
+
+1049
+00:46:57,180 --> 00:46:59,180
+ So, okay, that's...
+
+1050
+00:46:59,180 --> 00:47:01,180
+ Orders of magnitude.
+
+1051
+00:47:01,180 --> 00:47:03,180
+ That's how many orders of magnitude we're talking here?
+
+1052
+00:47:03,180 --> 00:47:05,180
+ Like from 60 down to 125?
+
+1053
+00:47:05,180 --> 00:47:08,180
+ Like, all right, that's over 100X. That's 400X, right?
+
+1054
+00:47:08,180 --> 00:47:10,180
+ So, like, no.
+
+1055
+00:47:10,180 --> 00:47:12,180
+ But what you can do is inference, right?
+
+1056
+00:47:12,180 --> 00:47:14,180
+ Like, for inference, you don't care.
+
+1057
+00:47:14,180 --> 00:47:17,180
+ For inference, there's so little bandwidth at the top and the bottom of the model
+
+1058
+00:47:17,180 --> 00:47:21,180
+ that, like, yeah, you can do federated inference, right?
+
+1059
+00:47:21,180 --> 00:47:23,180
+ And that's kind of what I'm talking about.
+
+1060
+00:47:23,180 --> 00:47:26,180
+ There's also interesting things to push into, like, you're like,
+
+1061
+00:47:26,180 --> 00:47:28,180
+ "But, okay, what if you want to run closed source models?"
+
+1062
+00:47:28,180 --> 00:47:32,180
+ This stuff gets kind of interesting, like, using TPMs on the boxes and stuff.
+
+1063
+00:47:32,180 --> 00:47:37,180
+ But then someone might jailbreak my device, so, you know, maybe we don't try to do that.
+
+1064
+00:47:37,180 --> 00:47:39,180
+ Yeah, what's, like, the enterprise use case?
+
+1065
+00:47:39,180 --> 00:47:42,180
+ Do you see companies buying a bunch of these and, like, stacking them together?
+
+1066
+00:47:42,180 --> 00:47:46,180
+ So, the tiny box is, like, the first version of what we're building,
+
+1067
+00:47:46,180 --> 00:47:52,180
+ but what I really want to do is be on the absolute edge of flops per dollar and flops per watt.
+
+1068
+00:47:52,180 --> 00:47:54,180
+ These are the two numbers that matter.
+
+1069
+00:47:54,180 --> 00:47:57,180
+ So, the enterprise use case is you want to train, like, comma.
+
+1070
+00:47:57,180 --> 00:47:59,180
+ So, comma just built out a new compute cluster.
+
+1071
+00:47:59,180 --> 00:48:02,180
+ It's about a person and a half.
+
+1072
+00:48:02,180 --> 00:48:05,180
+ So, you know, it's decent size. A person and a half.
+
+1073
+00:48:05,180 --> 00:48:06,180
+ A person being 20 petaflops.
+
+1074
+00:48:06,180 --> 00:48:09,180
+ A person is 20 petaflops. It's about 30 petaflops.
+
+1075
+00:48:09,180 --> 00:48:16,180
+ We built out a little compute cluster, and, you know, we paid double what you theoretically could per flop.
+
+1076
+00:48:16,180 --> 00:48:21,180
+ You theoretically could pay half per flop if you designed a bunch of custom stuff.
+
+1077
+00:48:21,180 --> 00:48:24,180
+ And, yeah, I mean, I could see that being, you know, tiny core.
+
+1078
+00:48:24,180 --> 00:48:27,180
+ Comma's going to be the first customer. I'm going to build a box for comma,
+
+1079
+00:48:27,180 --> 00:48:32,180
+ and then I'm going to show off the box I built for comma and be, like, okay, like, do you want to build --
+
+1080
+00:48:32,180 --> 00:48:34,180
+ I sell $250,000 training computers.
+
+1081
+00:48:34,180 --> 00:48:36,180
+ Or how much is one H100 box?
+
+1082
+00:48:36,180 --> 00:48:38,180
+ It's 400 grand? Okay.
+
+1083
+00:48:38,180 --> 00:48:42,180
+ I'll build you a 400 grand training computer, and it'll be 10x better than that H100 box.
+
+1084
+00:48:42,180 --> 00:48:45,180
+ For, again, not for every use case.
+
+1085
+00:48:45,180 --> 00:48:50,180
+ For some, you need the interconnect bandwidth, but for 90% of most companies' model training use cases,
+
+1086
+00:48:50,180 --> 00:48:53,180
+ the tiny box will be 5x faster for the same price.
+
+1087
+00:48:53,180 --> 00:48:57,180
+ Awesome. You mentioned the person of compute.
+
+1088
+00:48:57,180 --> 00:49:00,180
+ How do we build a human for $20 million?
+
+1089
+00:49:00,180 --> 00:49:02,180
+ It's a lot cheaper now. It's a lot cheaper now.
+
+1090
+00:49:02,180 --> 00:49:10,180
+ So, like I said, Comma spent about half a million on our person and a half.
+
+1091
+00:49:10,180 --> 00:49:15,180
+ What are some of the numbers people should think of when they compare compute to, like, people?
+
+1092
+00:49:15,180 --> 00:49:21,180
+ Well, GPD4 was 100 person years of training. That's more like on the time scale.
+
+1093
+00:49:21,180 --> 00:49:23,180
+ 20 petaflops is one person.
+
+1094
+00:49:23,180 --> 00:49:28,180
+ I think you -- right now the math was that for the price of the most expensive thing we build,
+
+1095
+00:49:28,180 --> 00:49:34,180
+ which is the International Space Station, we could build one Tampa of compute.
+
+1096
+00:49:34,180 --> 00:49:36,180
+ Yeah, one Tampa of compute.
+
+1097
+00:49:36,180 --> 00:49:38,180
+ It's the ultimate currency of measurement.
+
+1098
+00:49:38,180 --> 00:49:39,180
+ Yeah, yeah, we could build.
+
+1099
+00:49:39,180 --> 00:49:43,180
+ So, like, the biggest training clusters today, I know less about how GPD4 was trained.
+
+1100
+00:49:43,180 --> 00:49:46,180
+ We have some rough numbers on the weights and stuff, but LAMA --
+
+1101
+00:49:46,180 --> 00:49:48,180
+ A trillion? The parameters?
+
+1102
+00:49:48,180 --> 00:49:53,180
+ Well, okay, so GPD4 is $220 billion in each head, and then it's an eight-way mixture model.
+
+1103
+00:49:53,180 --> 00:49:56,180
+ So mixture models are what you do when you're out of ideas.
+
+1104
+00:49:56,180 --> 00:49:58,180
+ So, you know, it's a mixture model.
+
+1105
+00:49:58,180 --> 00:50:01,180
+ They just train the same model eight times, and then they have some little trick.
+
+1106
+00:50:01,180 --> 00:50:04,180
+ They actually do 16 inferences, but no, it's not like --
+
+1107
+00:50:04,180 --> 00:50:08,180
+ So the multimodality is just a vision model kind of glommed on?
+
+1108
+00:50:08,180 --> 00:50:11,180
+ I mean, the multimodality is, like, obvious what it is, too.
+
+1109
+00:50:11,180 --> 00:50:14,180
+ You put the vision model in the same token space as your language model.
+
+1110
+00:50:14,180 --> 00:50:15,180
+ Oh, people think it was something else?
+
+1111
+00:50:15,180 --> 00:50:18,180
+ No, no, the mixture has nothing to do with the vision or language aspect of it.
+
+1112
+00:50:18,180 --> 00:50:23,180
+ It just has to do with, well, okay, we can't really make models bigger than 220 billion parameters.
+
+1113
+00:50:23,180 --> 00:50:26,180
+ We want it to be better. Well, how can we make it better?
+
+1114
+00:50:26,180 --> 00:50:31,180
+ Well, we can train it longer, and, okay, we've actually already maxed that out.
+
+1115
+00:50:31,180 --> 00:50:33,180
+ We're getting diminishing returns there.
+
+1116
+00:50:33,180 --> 00:50:34,180
+ Mixture of experts.
+
+1117
+00:50:34,180 --> 00:50:36,180
+ Yeah, mixture of experts. We'll train eight of them, right?
+
+1118
+00:50:36,180 --> 00:50:37,180
+ All right.
+
+1119
+00:50:37,180 --> 00:50:42,180
+ So, you know, the real truth is whenever a start -- whenever a company is secretive, with the exception of Apple --
+
+1120
+00:50:42,180 --> 00:50:47,180
+ Apple is the only exception -- whenever a company is secretive, it's because they're hiding something that's not that cool.
+
+1121
+00:50:47,180 --> 00:50:52,180
+ And people have this wrong idea over and over again that they think they're hiding it because it's really cool.
+
+1122
+00:50:52,180 --> 00:50:54,180
+ It must be amazing. It's a trillion parameters.
+
+1123
+00:50:54,180 --> 00:50:57,180
+ No, it's a little bigger than GPD3, and they did an eight-way mixture of experts.
+
+1124
+00:50:57,180 --> 00:51:00,180
+ Like, all right, dude, anyone can spend eight times the money and get that.
+
+1125
+00:51:00,180 --> 00:51:14,180
+ But, yeah, so coming back to what I think is actually going to happen is, yeah, people are going to train smaller models for longer and fine-tune them and find all these tricks.
+
+1126
+00:51:14,180 --> 00:51:27,180
+ Right? Like, you know, I think OpenAI used to publish stuff on this, you know, when they would publish stuff, about how much better the training has gotten, given the same -- holding compute constant.
+
+1127
+00:51:27,180 --> 00:51:29,180
+ And it's gotten a lot better. Right?
+
+1128
+00:51:29,180 --> 00:51:32,180
+ And compare, like, BatchNorm to NoBatchNorm.
+
+1129
+00:51:32,180 --> 00:51:33,180
+ Yeah.
+
+1130
+00:51:33,180 --> 00:51:34,180
+ Right? And now we have, like --
+
+1131
+00:51:34,180 --> 00:51:36,180
+ Because you're finding algorithms, like FlashAttention.
+
+1132
+00:51:36,180 --> 00:51:38,180
+ Yeah. Wow, FlashAttention. Yeah.
+
+1133
+00:51:38,180 --> 00:51:40,180
+ Yeah.
+
+1134
+00:51:40,180 --> 00:51:41,180
+ And FlashAttention is the same compute.
+
+1135
+00:51:41,180 --> 00:51:45,180
+ FlashAttention is an interesting fact where it's actually the identical compute. It's just a more efficient way to do the compute.
+
+1136
+00:51:45,180 --> 00:51:52,180
+ But I'm even talking about, like, look at the new embeddings people are using.
+
+1137
+00:51:52,180 --> 00:51:56,180
+ They used to use these boring old embeddings. Now, like, Llama uses that complex one, and that was, like, Alibi.
+
+1138
+00:51:56,180 --> 00:52:00,180
+ I'm not up to date on all the latest stuff, but those tricks give you so much.
+
+1139
+00:52:00,180 --> 00:52:05,180
+ There's been a whole round trip with positional embeddings. I don't know if you've seen this discussion.
+
+1140
+00:52:05,180 --> 00:52:06,180
+ I haven't followed --
+
+1141
+00:52:06,180 --> 00:52:09,180
+ Like, you need them, you need rotational, and then you don't need them.
+
+1142
+00:52:09,180 --> 00:52:17,180
+ I haven't followed exactly. I mean, you quickly run into the obvious problem with positional embeddings, which is you have to invalidate your KVCache if you run off the context.
+
+1143
+00:52:17,180 --> 00:52:25,180
+ So that's why I think these new ones, they're playing with them. But I'm not that -- I'm not that -- I'm not an expert on, like, the latest up-to-date language model stuff.
+
+1144
+00:52:25,180 --> 00:52:29,180
+ I mean, we have what we do at Kama. I don't know how that works.
+
+1145
+00:52:29,180 --> 00:52:31,180
+ But, like --
+
+1146
+00:52:31,180 --> 00:52:36,180
+ >> What are some of the things, I mean, that people are getting wrong?
+
+1147
+00:52:36,180 --> 00:52:41,180
+ So back to autonomous driving, there was, like, the whole, like, LIDAR versus vision thing.
+
+1148
+00:52:41,180 --> 00:52:47,180
+ You know, it's like people don't get into accidents because they cannot see well. They get into accidents because they get distracted and all these things.
+
+1149
+00:52:47,180 --> 00:52:50,180
+ What are -- do you see similarities today on, like, the path to AGI?
+
+1150
+00:52:50,180 --> 00:52:52,180
+ Like, are there people -- like, what are, like, the --
+
+1151
+00:52:52,180 --> 00:52:58,180
+ >> Nothing I say about this is ever going to compete with how Rich Sutton stated it. Rich Sutton is --
+
+1152
+00:52:58,180 --> 00:52:59,180
+ >> The bitter lesson.
+
+1153
+00:52:59,180 --> 00:53:04,180
+ >> The bitter lesson. Nothing I say is ever going to compete with it. The bitter lesson is way better than any way I'm going to phrase this.
+
+1154
+00:53:04,180 --> 00:53:09,180
+ Just go read that and then, like, I'm sorry it's bitter, but you actually just have to believe it.
+
+1155
+00:53:09,180 --> 00:53:14,180
+ Like, over and over again, people make this mistake. They're like, oh, we're going to hand it to you, this thing. We're going to hand -- no.
+
+1156
+00:53:14,180 --> 00:53:16,180
+ Like, stop wasting time.
+
+1157
+00:53:16,180 --> 00:53:19,180
+ >> Which is -- I mean, OpenAI is not taking the bitter lesson.
+
+1158
+00:53:19,180 --> 00:53:22,180
+ >> No. OpenAI --
+
+1159
+00:53:22,180 --> 00:53:26,180
+ >> They were leaders in deep learning for a long, long, long time.
+
+1160
+00:53:26,180 --> 00:53:27,180
+ >> OpenAI --
+
+1161
+00:53:27,180 --> 00:53:29,180
+ >> But you're telling me GPT-4 is not.
+
+1162
+00:53:29,180 --> 00:53:32,180
+ >> Well, OpenAI was the absolute leader to the thesis that compute is all you need.
+
+1163
+00:53:32,180 --> 00:53:33,180
+ >> Yes.
+
+1164
+00:53:33,180 --> 00:53:36,180
+ >> Right? And there's a question of how long this thesis is going to continue for.
+
+1165
+00:53:36,180 --> 00:53:40,180
+ It's a cool thesis and, look, I think I would be lying along with everybody else.
+
+1166
+00:53:40,180 --> 00:53:44,180
+ I was into language models, like, way back in the day for the Hunter Prize.
+
+1167
+00:53:44,180 --> 00:53:50,180
+ I got into AI through the Hunter Prize. Like, 2014, I'm trying to build compressive models of Wikipedia.
+
+1168
+00:53:50,180 --> 00:53:53,180
+ And I'm like, okay, why is this so hard? Like, what this is is a language model, right?
+
+1169
+00:53:53,180 --> 00:53:58,180
+ And I'm playing with these, like, Bayesian things and I'm just like, oh, but, like, I get it.
+
+1170
+00:53:58,180 --> 00:54:05,180
+ Like, it needs to be, like, it's like I have two data points and they're, like, almost the same, but how do I measure that almost, right?
+
+1171
+00:54:05,180 --> 00:54:08,180
+ I just, like, you know, wrap my head around -- I couldn't, like, wrap my head around this.
+
+1172
+00:54:08,180 --> 00:54:13,180
+ And this was around the time Carpathi released the first, like, RNN that generated the Shakespeare stuff.
+
+1173
+00:54:13,180 --> 00:54:18,180
+ And I'm like, okay, I get it, right? It's neural networks that are compressors.
+
+1174
+00:54:18,180 --> 00:54:23,180
+ Now, this isn't actually -- you can't actually win the Hunter Prize with these things because the Hunter Prize is MDL.
+
+1175
+00:54:23,180 --> 00:54:27,180
+ It's the model -- size of the model plus the size of the encodings, embeddings.
+
+1176
+00:54:27,180 --> 00:54:32,180
+ So, yeah, you can't -- I mean, probably now you can because it's gotten so good.
+
+1177
+00:54:32,180 --> 00:54:36,180
+ But, yeah, back in the day you kind of couldn't. So I was like, okay, cool.
+
+1178
+00:54:36,180 --> 00:54:38,180
+ Like, this is what it is. I kind of get it.
+
+1179
+00:54:38,180 --> 00:54:43,180
+ Yeah, I mean, I think I didn't expect that it would continue to work this well.
+
+1180
+00:54:43,180 --> 00:54:46,180
+ I thought there'd be real limits to how good autocomplete could get.
+
+1181
+00:54:46,180 --> 00:54:48,180
+ That's fancy autocomplete.
+
+1182
+00:54:48,180 --> 00:54:52,180
+ But, yeah, no, like, it works well.
+
+1183
+00:54:52,180 --> 00:54:56,180
+ So, like, yeah, what is OpenAI getting wrong?
+
+1184
+00:54:56,180 --> 00:54:58,180
+ Technically not that much. I don't know.
+
+1185
+00:54:58,180 --> 00:55:02,180
+ Like, if I was a researcher, why would I go work there?
+
+1186
+00:55:02,180 --> 00:55:07,180
+ Yes. So why is OpenAI like the Miami Heat?
+
+1187
+00:55:07,180 --> 00:55:11,180
+ No, look, I don't -- this is my technical stuff. I don't really want to harp on this.
+
+1188
+00:55:11,180 --> 00:55:15,180
+ But, like, why go work at OpenAI when you could go work at Facebook, right? As a researcher.
+
+1189
+00:55:15,180 --> 00:55:19,180
+ Like, OpenAI can keep ideologues who, you know, believe ideological stuff.
+
+1190
+00:55:19,180 --> 00:55:23,180
+ And Facebook can keep every researcher who's like, dude, I just want to build AI and publish it.
+
+1191
+00:55:23,180 --> 00:55:25,180
+ Yeah.
+
+1192
+00:55:25,180 --> 00:55:32,180
+ Awesome. Yeah. Any other thoughts? TinyCorp? Bounties?
+
+1193
+00:55:32,180 --> 00:55:40,180
+ Um, yeah, so we have -- you know, I've been thinking a lot about, like, what it means to hire in today's world.
+
+1194
+00:55:40,180 --> 00:55:48,180
+ What actually is the, like, core -- okay, look, I'm a believer that machines are going to replace everything in about 20 years.
+
+1195
+00:55:48,180 --> 00:55:57,180
+ So, okay. What is that -- what is that thing that people can still do that computers can't?
+
+1196
+00:55:57,180 --> 00:56:04,180
+ And this is a narrowing list. But, like, you know, back in the day, like, imagine I was starting a company in 1960, right?
+
+1197
+00:56:04,180 --> 00:56:09,180
+ Oh, and we're going to have to hire a whole bunch of calculators in the basement to do all the, you know, math to support the --
+
+1198
+00:56:09,180 --> 00:56:17,180
+ Dude, have you heard about computers? Why don't we just buy a few of those? Oh. Oh, wow, man. You're right.
+
+1199
+00:56:17,180 --> 00:56:22,180
+ So, like, I feel like that's kind of happening again. And I'm thinking about -- I will post in my Discord.
+
+1200
+00:56:22,180 --> 00:56:28,180
+ I'll be like, who wants to, like -- okay, I just changed my unary ops used to be log and exp in, like, E.
+
+1201
+00:56:28,180 --> 00:56:34,180
+ I changed them to be log2 and exp2 because hardware has log2 and exp2 accelerators.
+
+1202
+00:56:34,180 --> 00:56:37,180
+ Yeah, and of course you can just change a base. It's one multiply to get it back to E.
+
+1203
+00:56:37,180 --> 00:56:43,180
+ But, like, I made the primitives log2 and exp2, right? And this is the kind of -- I just posted in the Discord.
+
+1204
+00:56:43,180 --> 00:56:46,180
+ I'm like, did someone put this pull request up? And someone eventually did and I merged it.
+
+1205
+00:56:46,180 --> 00:56:50,180
+ But I'm like, this is almost to the level where models can do it.
+
+1206
+00:56:50,180 --> 00:56:54,180
+ We're almost to the point where I can say that to a model and the model can do it.
+
+1207
+00:56:54,180 --> 00:56:56,180
+ Have you tried?
+
+1208
+00:56:56,180 --> 00:57:06,180
+ Yeah, I'm -- I don't know. I'm -- like, I'm -- I think it went further. I think autocomplete went further than I thought it would.
+
+1209
+00:57:06,180 --> 00:57:12,180
+ But I'm also relatively unimpressed with these chatbots. With what I've seen from the language models.
+
+1210
+00:57:12,180 --> 00:57:21,180
+ Like, they're -- the problem is if your loss function is categorical cross-entropy on the Internet, your responses will always be mid.
+
+1211
+00:57:21,180 --> 00:57:24,180
+ Yes. Mode collapse is what I call it. I don't know.
+
+1212
+00:57:24,180 --> 00:57:28,180
+ Maybe -- I'm not even talking about mode collapse. You're actually trying to predict the -- like, look, I rap.
+
+1213
+00:57:28,180 --> 00:57:34,180
+ I'm a hobbyist rapper. And, like, when I try to get these things to write rap, the raps sound like the kind of raps you read in the YouTube comments.
+
+1214
+00:57:34,180 --> 00:57:35,180
+ nursery school.
+
+1215
+00:57:35,180 --> 00:57:45,180
+ Yeah. It's like, all right, great. You rhyme box with fox. Sick rhyme, bro. You know. And Drake is rhyming give it up for me with napkins and cutlery.
+
+1216
+00:57:45,180 --> 00:57:47,180
+ Right? Like, all right, come on.
+
+1217
+00:57:47,180 --> 00:57:51,180
+ It seems like this thing about orange. Orange is famous that you can't rap.
+
+1218
+00:57:51,180 --> 00:57:57,180
+ Yeah, yeah, yeah, yeah. But now, of course, four-inch screws and orange juice is in GPT's training corpus.
+
+1219
+00:57:57,180 --> 00:58:09,180
+ But, yeah, so I think it went further than, like, everyone kind of thought it would. But the thing that I really want to see is, like, somebody put ten LLMs in a room and have them discuss the answer before they give it to me.
+
+1220
+00:58:09,180 --> 00:58:13,180
+ You can actually do this, right? And I think the coding things have to be the same way.
+
+1221
+00:58:13,180 --> 00:58:22,180
+ There is no coder alive, no matter how good you are, that sits down, well, I'm going to start at cell A1 and type my program, and then I'm going to press run and it's going to work.
+
+1222
+00:58:22,180 --> 00:58:24,180
+ No one programs like that.
+
+1223
+00:58:24,180 --> 00:58:28,180
+ So why do we expect the models to, right? So there's a lot that still needs to be done.
+
+1224
+00:58:28,180 --> 00:58:34,180
+ But, you know, at the TinyCorp, I want to be on the cutting edge of this, too. I want to be, like, program generation.
+
+1225
+00:58:34,180 --> 00:58:38,180
+ I mean, what is TinyGrad? It's a compiler. It generates programs. Generate the fastest program that meets the spec, right?
+
+1226
+00:58:38,180 --> 00:58:40,180
+ Why am I not just having ML do that?
+
+1227
+00:58:40,180 --> 00:58:46,180
+ So, you know, it's kind of a, you have to exist fluidly with the machines.
+
+1228
+00:58:46,180 --> 00:58:51,180
+ And I come around on a lot of stuff. I'm like, wait, TinyGrad, TinyCorp should be a remote company.
+
+1229
+00:58:51,180 --> 00:58:53,180
+ I can't do this in person.
+
+1230
+00:58:53,180 --> 00:58:58,180
+ Yeah, like, comma makes sense to be in person. Like, comma, sure, yeah, we'll get it off in San Diego.
+
+1231
+00:58:58,180 --> 00:59:04,180
+ But that was a six-year-old company, right? And it works, and it works for a certain type of people, a certain type of culture, but what's going to be different this time?
+
+1232
+00:59:04,180 --> 00:59:06,180
+ Okay, remote. But now it's remote.
+
+1233
+00:59:06,180 --> 00:59:11,180
+ And now I'm getting these, like, people who apply, and I'm like, I literally have a thousand applications.
+
+1234
+00:59:11,180 --> 00:59:15,180
+ I'm not calling you to do a technical screen. I can't really tell anything from a technical screen.
+
+1235
+00:59:15,180 --> 00:59:22,180
+ What am I going to do? Make it code on a whiteboard? Like, bring up a shared notebook document so we can, oh, like, that's not going to work.
+
+1236
+00:59:22,180 --> 00:59:27,180
+ Okay, so then I move to the next thing. We do this in comma with good success, programming challenges.
+
+1237
+00:59:27,180 --> 00:59:30,180
+ I've also found them to be, like, completely non-predictive.
+
+1238
+00:59:30,180 --> 00:59:37,180
+ I found one thing to actually be predictive, and it's, wait a second, just write code in TinyGrad. It's open source.
+
+1239
+00:59:37,180 --> 00:59:42,180
+ Right? And, yeah, so, you know, I'm talking to a few people who've been contributing.
+
+1240
+00:59:42,180 --> 00:59:45,180
+ And, like, contributor, you know, the job's not for you.
+
+1241
+00:59:45,180 --> 00:59:47,180
+ But you can do it remote, and it's, like, it's a chill job.
+
+1242
+00:59:47,180 --> 00:59:53,180
+ You're not, you're like, oh, yeah, well, I work for the TinyCorp. Well, you're writing MIT-licensed software. Like, you see what it's doing, right?
+
+1243
+00:59:53,180 --> 00:59:56,180
+ Like, we'll just, I think, think of it as maybe more of, like, a stipend than a salary.
+
+1244
+00:59:56,180 --> 00:59:59,180
+ And then also some equity. Like, you know, I get rich, we all get rich.
+
+1245
+00:59:59,180 --> 01:00:00,180
+ Yeah.
+
+1246
+01:00:00,180 --> 01:00:02,180
+ Yeah.
+
+1247
+01:00:02,180 --> 01:00:08,180
+ How do you think about agents and kind of, like, thinking of them as people versus, like, job to be done?
+
+1248
+01:00:08,180 --> 01:00:12,180
+ Sean built this thing called Small Developer, and then...
+
+1249
+01:00:12,180 --> 01:00:18,180
+ It's the same thing. Like, the human in the loop with the language model and just iterating while you write code.
+
+1250
+01:00:18,180 --> 01:00:20,180
+ I think that's absolutely where it goes.
+
+1251
+01:00:20,180 --> 01:00:25,180
+ And there's, like, a, it's not, like, one thing. It's, like, there's small interpreter, there's, like, small debugger.
+
+1252
+01:00:25,180 --> 01:00:27,180
+ It's kind of, like, all these different jobs to be done.
+
+1253
+01:00:27,180 --> 01:00:28,180
+ It's a small world.
+
+1254
+01:00:28,180 --> 01:00:32,180
+ Yeah. I know. This is, like, the small pockets. It's, like, small AI meets TinyCorp.
+
+1255
+01:00:32,180 --> 01:00:35,180
+ So we're all in the same wavelength. How do you think about that?
+
+1256
+01:00:35,180 --> 01:00:45,180
+ I think people will have a human-like interaction with, like, oh, this is, like, the AI developer or, like, is it I'm the human being supercharged by the AI tools.
+
+1257
+01:00:45,180 --> 01:00:49,180
+ Oh, I think it's, yeah, much more like I'm the human supercharged by the AI tools.
+
+1258
+01:00:49,180 --> 01:00:52,180
+ I think that, like, coding is tool complete.
+
+1259
+01:00:52,180 --> 01:00:53,180
+ Like, driving's not tool complete.
+
+1260
+01:00:53,180 --> 01:00:54,180
+ Right?
+
+1261
+01:00:54,180 --> 01:00:57,180
+ Like, driving is just, like, like, we hire people to drive who are, like, below the API line.
+
+1262
+01:00:57,180 --> 01:00:58,180
+ There's an API line in the world.
+
+1263
+01:00:58,180 --> 01:00:59,180
+ Love that.
+
+1264
+01:00:59,180 --> 01:01:00,180
+ Yeah.
+
+1265
+01:01:00,180 --> 01:01:01,180
+ There's an API line in the world.
+
+1266
+01:01:01,180 --> 01:01:03,180
+ And, like, you can think, like, Uber's a really clear example.
+
+1267
+01:01:03,180 --> 01:01:04,180
+ Right?
+
+1268
+01:01:04,180 --> 01:01:06,180
+ Like, you can think about the people above the API line and the people above the API line.
+
+1269
+01:01:06,180 --> 01:01:10,180
+ And the way you can tell if you're below or above, by the way, is your manager a computer?
+
+1270
+01:01:10,180 --> 01:01:11,180
+ Right?
+
+1271
+01:01:11,180 --> 01:01:12,180
+ Who's the manager of the Uber driver?
+
+1272
+01:01:12,180 --> 01:01:13,180
+ What computer?
+
+1273
+01:01:13,180 --> 01:01:14,180
+ Does the machine tell you what to do or do you tell machines what to do?
+
+1274
+01:01:14,180 --> 01:01:15,180
+ Exactly. Exactly.
+
+1275
+01:01:15,180 --> 01:01:19,180
+ So coding is tool complete. Right?
+
+1276
+01:01:19,180 --> 01:01:21,180
+ Coding is tool complete. Coding is above the API line.
+
+1277
+01:01:21,180 --> 01:01:26,180
+ So it will always be tools supercharging your coding workflow.
+
+1278
+01:01:26,180 --> 01:01:35,180
+ And it will never be you performing some, like, task, like, okay, well, I can do everything except for actually starting a Docker container.
+
+1279
+01:01:35,180 --> 01:01:36,180
+ Like, it just doesn't make any sense.
+
+1280
+01:01:36,180 --> 01:01:37,180
+ Right?
+
+1281
+01:01:37,180 --> 01:01:38,180
+ Yeah.
+
+1282
+01:01:38,180 --> 01:01:39,180
+ So it will always be sort of tools.
+
+1283
+01:01:39,180 --> 01:01:44,180
+ And, you know, look, we see the same stuff with all the, like, people are like, stable diffusion's going to replace artists or whatever.
+
+1284
+01:01:44,180 --> 01:01:45,180
+ It's like, dude, like-
+
+1285
+01:01:45,180 --> 01:01:46,180
+ It's going to create new artists.
+
+1286
+01:01:46,180 --> 01:01:47,180
+ What?
+
+1287
+01:01:47,180 --> 01:01:48,180
+ Did Photoshop replace artists?
+
+1288
+01:01:48,180 --> 01:01:50,180
+ Like, what are you talking about?
+
+1289
+01:01:50,180 --> 01:01:51,180
+ Right?
+
+1290
+01:01:51,180 --> 01:01:53,180
+ Like, you know, a real artist's finger paint.
+
+1291
+01:01:53,180 --> 01:01:54,180
+ They can't use brushes.
+
+1292
+01:01:54,180 --> 01:01:58,180
+ Brushes are, you know, brushes are going to replace all the- okay.
+
+1293
+01:01:58,180 --> 01:02:00,180
+ Like, I just can't.
+
+1294
+01:02:00,180 --> 01:02:02,180
+ Like, it's all just tools and the tools are going to get better and better and better.
+
+1295
+01:02:02,180 --> 01:02:05,180
+ And then eventually, yes, the tools are going to replace us.
+
+1296
+01:02:05,180 --> 01:02:07,180
+ But, you know, that's still 20 years away.
+
+1297
+01:02:07,180 --> 01:02:09,180
+ So, you know, I've got a company around in the meantime.
+
+1298
+01:02:09,180 --> 01:02:13,180
+ So I've written about the API line before and I think that's from Venkatesh.
+
+1299
+01:02:13,180 --> 01:02:14,180
+ I don't know if you've-
+
+1300
+01:02:14,180 --> 01:02:16,180
+ I definitely took it from someone. It's definitely not mine.
+
+1301
+01:02:16,180 --> 01:02:17,180
+ It's VGR.
+
+1302
+01:02:17,180 --> 01:02:21,180
+ But I also have speculated a higher line than that, which is the Kanban board.
+
+1303
+01:02:21,180 --> 01:02:23,180
+ Like, who tells the programmers what to do?
+
+1304
+01:02:23,180 --> 01:02:24,180
+ Mm-hmm.
+
+1305
+01:02:24,180 --> 01:02:25,180
+ Right?
+
+1306
+01:02:25,180 --> 01:02:27,180
+ So are you above or below the Kanban board?
+
+1307
+01:02:27,180 --> 01:02:29,180
+ Has that evolved your management thinking?
+
+1308
+01:02:29,180 --> 01:02:30,180
+ Yeah.
+
+1309
+01:02:30,180 --> 01:02:31,180
+ Like, that's sort of what I mean.
+
+1310
+01:02:31,180 --> 01:02:36,180
+ Like, I'm just going to describe the pull request in two sentences and then, like, yeah, you know.
+
+1311
+01:02:36,180 --> 01:02:38,180
+ So you are running the Kanban board?
+
+1312
+01:02:38,180 --> 01:02:39,180
+ The bounties?
+
+1313
+01:02:39,180 --> 01:02:40,180
+ Yes.
+
+1314
+01:02:40,180 --> 01:02:41,180
+ The bounties are the Kanban board.
+
+1315
+01:02:41,180 --> 01:02:42,180
+ Exactly.
+
+1316
+01:02:42,180 --> 01:02:45,180
+ And that is kind of the high level and then, like, yeah, we'll get AIs to fill in some
+
+1317
+01:02:45,180 --> 01:02:47,180
+ and we'll get people to fill in others.
+
+1318
+01:02:47,180 --> 01:02:51,180
+ And that's also what it means to be, like, full-time at TinyCorp.
+
+1319
+01:02:51,180 --> 01:02:52,180
+ Right?
+
+1320
+01:02:52,180 --> 01:02:53,180
+ And I wrote this up pretty concretely.
+
+1321
+01:02:53,180 --> 01:02:56,180
+ I'm like, okay, step one is you do bounties for the company.
+
+1322
+01:02:56,180 --> 01:02:58,180
+ Step two is you propose bounties for the company.
+
+1323
+01:02:58,180 --> 01:02:59,180
+ Right?
+
+1324
+01:02:59,180 --> 01:03:00,180
+ You don't obviously pay them.
+
+1325
+01:03:00,180 --> 01:03:01,180
+ We pay them.
+
+1326
+01:03:01,180 --> 01:03:02,180
+ But you propose them.
+
+1327
+01:03:02,180 --> 01:03:03,180
+ And I'm like, yeah, that's a good bounty.
+
+1328
+01:03:03,180 --> 01:03:06,180
+ That, like, helps with the main workflow of the company.
+
+1329
+01:03:06,180 --> 01:03:08,180
+ And step three is you get hired full-time.
+
+1330
+01:03:08,180 --> 01:03:09,180
+ You get equity real.
+
+1331
+01:03:09,180 --> 01:03:11,180
+ You know, maybe you're rich.
+
+1332
+01:03:11,180 --> 01:03:14,180
+ What else are you designing differently about the employee experience?
+
+1333
+01:03:14,180 --> 01:03:20,180
+ I mean, I'm very much a, like, you know, some people really like to, like, keep a separation.
+
+1334
+01:03:20,180 --> 01:03:21,180
+ Right?
+
+1335
+01:03:21,180 --> 01:03:25,180
+ Some people really like to keep a separation between, like, employees and management or
+
+1336
+01:03:25,180 --> 01:03:26,180
+ customers and employees.
+
+1337
+01:03:26,180 --> 01:03:30,180
+ Like, a common, you know, the reason I do the dev kit thing, it's like, dude, you buy
+
+1338
+01:03:30,180 --> 01:03:32,180
+ a common thing, you're an employee of the company.
+
+1339
+01:03:32,180 --> 01:03:33,180
+ Like, you're just part of the company.
+
+1340
+01:03:33,180 --> 01:03:34,180
+ It's all the same thing.
+
+1341
+01:03:34,180 --> 01:03:35,180
+ There's no, like, secrets.
+
+1342
+01:03:35,180 --> 01:03:36,180
+ There's no dividing lines.
+
+1343
+01:03:36,180 --> 01:03:40,180
+ There's no, like, it's all a spectrum for, like, you know, down here at the spectrum,
+
+1344
+01:03:40,180 --> 01:03:43,180
+ like, you pay and then up here at the spectrum, you get paid.
+
+1345
+01:03:43,180 --> 01:03:45,180
+ You understand this is the same spectrum of college, right?
+
+1346
+01:03:45,180 --> 01:03:49,180
+ Like, for undergrad, you pay and then you get up here to, like, you know, doing a Ph.D.
+
+1347
+01:03:49,180 --> 01:03:50,180
+ program, you get paid.
+
+1348
+01:03:50,180 --> 01:03:51,180
+ Okay, well, cool.
+
+1349
+01:03:51,180 --> 01:03:55,180
+ Welcome to the, you know.
+
+1350
+01:03:55,180 --> 01:03:57,180
+ What about common bodies?
+
+1351
+01:03:57,180 --> 01:04:01,180
+ You know, you mentioned a lot of this stuff is clearly virtual, but then there's below
+
+1352
+01:04:01,180 --> 01:04:03,180
+ the API line you actually need.
+
+1353
+01:04:03,180 --> 01:04:06,180
+ Wait, this is a thing that's been announced?
+
+1354
+01:04:06,180 --> 01:04:07,180
+ Common bodies?
+
+1355
+01:04:07,180 --> 01:04:08,180
+ We sell them.
+
+1356
+01:04:08,180 --> 01:04:09,180
+ You can buy them.
+
+1357
+01:04:09,180 --> 01:04:10,180
+ They're a thousand bucks on our website.
+
+1358
+01:04:10,180 --> 01:04:11,180
+ Oh, okay.
+
+1359
+01:04:11,180 --> 01:04:12,180
+ No, no, no.
+
+1360
+01:04:12,180 --> 01:04:14,180
+ I'm thinking about, like, the, what Tesla announced with, like, the humanoid robot.
+
+1361
+01:04:14,180 --> 01:04:15,180
+ It's the same thing.
+
+1362
+01:04:15,180 --> 01:04:16,180
+ Yeah, yeah, yeah.
+
+1363
+01:04:16,180 --> 01:04:17,180
+ Except, of course, we made the common version of it.
+
+1364
+01:04:17,180 --> 01:04:18,180
+ Tesla uses 20 actuators.
+
+1365
+01:04:18,180 --> 01:04:19,180
+ We use two, right?
+
+1366
+01:04:19,180 --> 01:04:25,680
+ Like, how do you build the simplest possible thing that can, like, turn the robotics problem
+
+1367
+01:04:25,680 --> 01:04:26,680
+ into entirely a software problem?
+
+1368
+01:04:26,680 --> 01:04:32,180
+ So right now it is literally just a comma three on a pole with two wheels.
+
+1369
+01:04:32,180 --> 01:04:37,180
+ It balances, keeps the comma three up there, and, like, there's so much you could do with
+
+1370
+01:04:37,180 --> 01:04:38,180
+ that already, right?
+
+1371
+01:04:38,180 --> 01:04:42,180
+ Like, this should replace, how many security guards could this replace, right?
+
+1372
+01:04:42,180 --> 01:04:47,180
+ If this thing could just competently wander around a space and take pictures and, you
+
+1373
+01:04:47,180 --> 01:04:51,180
+ know, focus in on things, send you a text message when someone's trying to break into
+
+1374
+01:04:51,180 --> 01:04:56,180
+ your building, you know, like, this could already do so much, of course, but the software's
+
+1375
+01:04:56,180 --> 01:04:57,180
+ not there yet.
+
+1376
+01:04:57,180 --> 01:04:58,180
+ Right?
+
+1377
+01:04:58,180 --> 01:05:00,180
+ So how do we turn robotics into a thing where it's very clearly a software problem?
+
+1378
+01:05:00,180 --> 01:05:03,180
+ You know, that people don't accept that self-driving cars are a software problem.
+
+1379
+01:05:03,180 --> 01:05:06,180
+ I'm like, I don't know what to tell you, man.
+
+1380
+01:05:06,180 --> 01:05:10,180
+ Like, literally just watch the video yourself and then drive with a joystick, right?
+
+1381
+01:05:10,180 --> 01:05:11,180
+ Yeah.
+
+1382
+01:05:11,180 --> 01:05:12,180
+ Can you drive?
+
+1383
+01:05:12,180 --> 01:05:13,180
+ And we've actually done this test.
+
+1384
+01:05:13,180 --> 01:05:15,180
+ We've actually done this test where we've had someone, okay, you just watched this video,
+
+1385
+01:05:15,180 --> 01:05:18,180
+ and here's a joystick, and you've got to drive the car, and of course, they can drive the
+
+1386
+01:05:18,180 --> 01:05:19,180
+ car.
+
+1387
+01:05:19,180 --> 01:05:24,180
+ It takes a little bit of practice to get used to the joystick, but the problem is all the
+
+1388
+01:05:24,180 --> 01:05:25,180
+ model, right?
+
+1389
+01:05:25,180 --> 01:05:27,180
+ So it can now make the model better.
+
+1390
+01:05:27,180 --> 01:05:32,180
+ And specifically, anything in computer vision that you think, our second most popular episode
+
+1391
+01:05:32,180 --> 01:05:36,180
+ ever was about segment anything coming out of Facebook, which is, as far as I understand,
+
+1392
+01:05:36,180 --> 01:05:40,180
+ this state of the art in computer vision, what are you hoping for there that you need
+
+1393
+01:05:40,180 --> 01:05:41,180
+ for comma?
+
+1394
+01:05:41,180 --> 01:05:43,180
+ I haven't used segment anything.
+
+1395
+01:05:43,180 --> 01:05:48,180
+ I've used large YOLOs, and I'm super impressed by them.
+
+1396
+01:05:48,180 --> 01:05:49,180
+ Yeah.
+
+1397
+01:05:49,180 --> 01:05:50,180
+ You think it's solved?
+
+1398
+01:05:50,180 --> 01:05:51,180
+ I've got to check out segment anything.
+
+1399
+01:05:51,180 --> 01:05:53,180
+ I don't think it's a distinct problem, right?
+
+1400
+01:05:53,180 --> 01:05:55,180
+ Okay, here's something that I'm interested in.
+
+1401
+01:05:55,180 --> 01:06:00,180
+ All right, we have great LLMs, we have great text-to-speech models, and we have great speech-to-text
+
+1402
+01:06:00,180 --> 01:06:01,180
+ models.
+
+1403
+01:06:01,180 --> 01:06:02,180
+ Okay, so why can I not talk to an LLM?
+
+1404
+01:06:02,180 --> 01:06:04,180
+ I can have a normal conversation with it.
+
+1405
+01:06:04,180 --> 01:06:08,180
+ You can with the latency of two seconds every time.
+
+1406
+01:06:08,180 --> 01:06:09,180
+ Right?
+
+1407
+01:06:09,180 --> 01:06:11,180
+ Why isn't this ... And then it feels so unnatural.
+
+1408
+01:06:11,180 --> 01:06:14,180
+ It's this staccato ... I don't like the RLHF models.
+
+1409
+01:06:14,180 --> 01:06:16,180
+ I don't like the tuned versions of them.
+
+1410
+01:06:16,180 --> 01:06:21,180
+ I think that they become ... You take on the personality of a customer support agent.
+
+1411
+01:06:21,180 --> 01:06:23,180
+ Like, "Oh, come on."
+
+1412
+01:06:23,180 --> 01:06:26,180
+ I like Llama more than ChatChibiT.
+
+1413
+01:06:26,180 --> 01:06:29,180
+ ChatChibiT's personality is just grated on me.
+
+1414
+01:06:29,180 --> 01:06:30,180
+ With Llama, like, "Cool.
+
+1415
+01:06:30,180 --> 01:06:32,180
+ I write a little bit of pretext paragraph.
+
+1416
+01:06:32,180 --> 01:06:34,180
+ I can put you in any scenario I want."
+
+1417
+01:06:34,180 --> 01:06:35,180
+ That's interesting to me.
+
+1418
+01:06:35,180 --> 01:06:38,180
+ I don't want someone ... Yeah.
+
+1419
+01:06:38,180 --> 01:06:47,180
+ So, yeah, I think there is really no distinction between computer vision and language and any
+
+1420
+01:06:47,180 --> 01:06:49,180
+ of this stuff.
+
+1421
+01:06:49,180 --> 01:06:53,180
+ It's all eventually going to be fused into one massive ... So to say computer vision
+
+1422
+01:06:53,180 --> 01:06:56,180
+ is solved, well, it doesn't make any sense, because what's the output of a computer vision
+
+1423
+01:06:56,180 --> 01:06:57,180
+ model?
+
+1424
+01:06:57,180 --> 01:06:58,180
+ Segmentation?
+
+1425
+01:06:58,180 --> 01:06:59,180
+ What a weird task.
+
+1426
+01:06:59,180 --> 01:07:00,180
+ Right?
+
+1427
+01:07:00,180 --> 01:07:01,180
+ Who cares?
+
+1428
+01:07:01,180 --> 01:07:02,180
+ OCR.
+
+1429
+01:07:02,180 --> 01:07:03,180
+ Who cares?
+
+1430
+01:07:03,180 --> 01:07:04,180
+ I don't care if you can segment which pixels make up that laptop.
+
+1431
+01:07:04,180 --> 01:07:06,180
+ I care if you can pick it up.
+
+1432
+01:07:06,180 --> 01:07:09,180
+ Yeah, you interact with the real world.
+
+1433
+01:07:09,180 --> 01:07:10,180
+ Yeah.
+
+1434
+01:07:10,180 --> 01:07:11,180
+ And you're going to have the local cluster.
+
+1435
+01:07:11,180 --> 01:07:13,180
+ You're going to have the body.
+
+1436
+01:07:13,180 --> 01:07:14,180
+ Yeah.
+
+1437
+01:07:14,180 --> 01:07:15,180
+ Yeah, yeah.
+
+1438
+01:07:15,180 --> 01:07:17,180
+ I think that's kind of where that goes.
+
+1439
+01:07:17,180 --> 01:07:23,180
+ So maybe we can paint the future of, like, the year is 2050.
+
+1440
+01:07:23,180 --> 01:07:25,180
+ You've achieved all you wanted at TinyCorp.
+
+1441
+01:07:25,180 --> 01:07:28,180
+ What is the AI-enabled future like?
+
+1442
+01:07:28,180 --> 01:07:30,180
+ Well, TinyCorp's the second company.
+
+1443
+01:07:30,180 --> 01:07:31,180
+ Kama was the first.
+
+1444
+01:07:31,180 --> 01:07:33,180
+ Kama builds the hardware infrastructure.
+
+1445
+01:07:33,180 --> 01:07:35,180
+ TinyCorp builds the software infrastructure.
+
+1446
+01:07:35,180 --> 01:07:39,180
+ The third company is the first one that's going to build a real product, and that product
+
+1447
+01:07:39,180 --> 01:07:41,180
+ is AI Girlfriend.
+
+1448
+01:07:41,180 --> 01:07:43,180
+ No, I'm dead serious.
+
+1449
+01:07:43,180 --> 01:07:45,180
+ This is the dream product.
+
+1450
+01:07:45,180 --> 01:07:47,180
+ This is the absolute dream product.
+
+1451
+01:07:47,180 --> 01:07:49,180
+ Girlfriend is just the, like, stand-in.
+
+1452
+01:07:49,180 --> 01:07:51,180
+ Well, no, it's not a stand-in.
+
+1453
+01:07:51,180 --> 01:07:52,180
+ No, no, no, no.
+
+1454
+01:07:52,180 --> 01:07:53,180
+ I actually mean it.
+
+1455
+01:07:53,180 --> 01:07:56,180
+ So I've been wanting to merge with a machine ever since I was, like, mad little.
+
+1456
+01:07:56,180 --> 01:07:59,180
+ Like, you know, how do I merge with a machine?
+
+1457
+01:07:59,180 --> 01:08:03,180
+ And you can look at, like, maybe the Elon style way of thinking about it is Neuralink.
+
+1458
+01:08:03,180 --> 01:08:06,180
+ I'm like, I don't think we need any of this, right?
+
+1459
+01:08:06,180 --> 01:08:10,180
+ You have some of your friends, maybe, they get into relationships, and you start thinking
+
+1460
+01:08:10,180 --> 01:08:12,180
+ of them and their partner as the same person.
+
+1461
+01:08:12,180 --> 01:08:15,180
+ You start thinking of them as, like, one person.
+
+1462
+01:08:15,180 --> 01:08:17,180
+ I mean, they are kind of, like, merged, right?
+
+1463
+01:08:17,180 --> 01:08:19,180
+ Like, humans can just kind of do this.
+
+1464
+01:08:19,180 --> 01:08:20,180
+ It's so cool.
+
+1465
+01:08:20,180 --> 01:08:22,180
+ It's this ability that we already have.
+
+1466
+01:08:22,180 --> 01:08:27,180
+ It's only to put, you know, electrodes in my brain to merge with a machine.
+
+1467
+01:08:27,180 --> 01:08:29,180
+ I need an AI girlfriend, right?
+
+1468
+01:08:29,180 --> 01:08:30,180
+ So that's what I mean.
+
+1469
+01:08:30,180 --> 01:08:34,180
+ Like, this is the third product, and this is the third company.
+
+1470
+01:08:34,180 --> 01:08:38,180
+ And, yeah, in 2050, I mean, like, it's so hard.
+
+1471
+01:08:38,180 --> 01:08:41,180
+ Maybe I can imagine, like, 2035.
+
+1472
+01:08:41,180 --> 01:08:42,180
+ I don't even know 2050.
+
+1473
+01:08:42,180 --> 01:08:45,180
+ But, like, yeah, 2035, like, yeah, that'd be really great.
+
+1474
+01:08:45,180 --> 01:08:48,180
+ Like, I have this, like, kind of, you know.
+
+1475
+01:08:48,180 --> 01:08:52,180
+ >> So in terms of merging, like, isn't it, shouldn't you work on brain upload rather
+
+1476
+01:08:52,180 --> 01:08:53,180
+ than AI girlfriend?
+
+1477
+01:08:53,180 --> 01:08:55,180
+ >> But I don't need brain upload, right?
+
+1478
+01:08:55,180 --> 01:08:56,180
+ I don't need brain upload either.
+
+1479
+01:08:56,180 --> 01:08:59,180
+ Like, there's thousands of hours of me on YouTube, right?
+
+1480
+01:08:59,180 --> 01:09:00,180
+ >> Yes.
+
+1481
+01:09:00,180 --> 01:09:02,180
+ >> How much of my brain's already uploaded?
+
+1482
+01:09:02,180 --> 01:09:04,180
+ >> That's only the stuff that you voice.
+
+1483
+01:09:04,180 --> 01:09:06,180
+ >> Yeah, it's not that different.
+
+1484
+01:09:06,180 --> 01:09:07,180
+ It's not that different, right?
+
+1485
+01:09:07,180 --> 01:09:12,180
+ You really think a powerful, you really think a model with, you know, an exa-flop of compute
+
+1486
+01:09:12,180 --> 01:09:15,180
+ couldn't extract everything that's really going on in my brain?
+
+1487
+01:09:15,180 --> 01:09:16,180
+ I'm a pretty open person, right?
+
+1488
+01:09:16,180 --> 01:09:17,180
+ Like, I'm not running a complex filter.
+
+1489
+01:09:17,180 --> 01:09:19,180
+ Humans can't run that complex of a filter.
+
+1490
+01:09:19,180 --> 01:09:20,180
+ >> Yeah.
+
+1491
+01:09:20,180 --> 01:09:21,180
+ >> Like, humans just can't.
+
+1492
+01:09:21,180 --> 01:09:23,180
+ Like, this is actually a cool quirk of biology.
+
+1493
+01:09:23,180 --> 01:09:26,180
+ It's like, well, humans, like, can't lie that well.
+
+1494
+01:09:26,180 --> 01:09:27,180
+ >> Yeah.
+
+1495
+01:09:27,180 --> 01:09:28,180
+ Yeah.
+
+1496
+01:09:28,180 --> 01:09:32,180
+ >> Is it good or bad to put all of your stream of consciousness out there?
+
+1497
+01:09:32,180 --> 01:09:35,180
+ >> I mean, I think it's good.
+
+1498
+01:09:35,180 --> 01:09:36,180
+ >> Yeah.
+
+1499
+01:09:36,180 --> 01:09:37,180
+ I mean, streaming every day.
+
+1500
+01:09:37,180 --> 01:09:39,180
+ >> I want to live forever.
+
+1501
+01:09:39,180 --> 01:09:40,180
+ >> Yeah.
+
+1502
+01:09:40,180 --> 01:09:43,180
+ We said off mic that we may be the first immortals, right?
+
+1503
+01:09:43,180 --> 01:09:44,180
+ >> Yeah.
+
+1504
+01:09:44,180 --> 01:09:45,180
+ Yeah.
+
+1505
+01:09:45,180 --> 01:09:46,180
+ Like, this is how you live forever.
+
+1506
+01:09:46,180 --> 01:09:50,180
+ It's a question of, okay, how many weights do I have?
+
+1507
+01:09:50,180 --> 01:09:51,180
+ Right?
+
+1508
+01:09:51,180 --> 01:09:52,180
+ Okay, let's say I have a trillion weights.
+
+1509
+01:09:52,180 --> 01:09:53,180
+ All right, so talking about terabytes, 100 terabytes here.
+
+1510
+01:09:53,180 --> 01:09:55,180
+ I mean, it's not really 100 terabytes, right?
+
+1511
+01:09:55,180 --> 01:09:56,180
+ Because it's a call to graph complexity.
+
+1512
+01:09:56,180 --> 01:09:57,180
+ How much redundancy is there in those weights?
+
+1513
+01:09:57,180 --> 01:10:03,180
+ So, like, maximally compressed, how big is the weight file for my brain?
+
+1514
+01:10:03,180 --> 01:10:05,180
+ Quantize it whatever you want.
+
+1515
+01:10:05,180 --> 01:10:07,180
+ Quantization is a poor man's compression.
+
+1516
+01:10:07,180 --> 01:10:13,180
+ I think we're only talking really here about, like, maybe a couple gigabytes.
+
+1517
+01:10:13,180 --> 01:10:14,180
+ Right?
+
+1518
+01:10:14,180 --> 01:10:18,180
+ And then if you have, like, a couple gigabytes of true information of yourself up there,
+
+1519
+01:10:18,180 --> 01:10:22,180
+ cool, man, like, what does it mean for me to live forever?
+
+1520
+01:10:22,180 --> 01:10:23,180
+ Like, that's me.
+
+1521
+01:10:23,180 --> 01:10:24,180
+ >> Yeah.
+
+1522
+01:10:24,180 --> 01:10:25,180
+ >> No, I think that's good.
+
+1523
+01:10:25,180 --> 01:10:30,180
+ I think there's a bit of, like, a professionalization of social media.
+
+1524
+01:10:30,180 --> 01:10:34,000
+ A lot of people only have what's like PC out there, you know?
+
+1525
+01:10:34,000 --> 01:10:37,260
+ And I feel like you're going to get -- going back to the chat GPT thing, right?
+
+1526
+01:10:37,260 --> 01:10:40,740
+ You're going to train a model on everything that's public about a lot of people.
+
+1527
+01:10:40,740 --> 01:10:41,740
+ And it's like --
+
+1528
+01:10:41,740 --> 01:10:44,740
+ >> And no one's going to run their model and they're going to die.
+
+1529
+01:10:44,740 --> 01:10:45,740
+ >> I know.
+
+1530
+01:10:45,740 --> 01:10:48,420
+ >> Don't have the PC on social media.
+
+1531
+01:10:48,420 --> 01:10:51,660
+ Your life could depend on it.
+
+1532
+01:10:51,660 --> 01:10:56,380
+ We have a segment -- so we're moving on to what would normally be called the lightning
+
+1533
+01:10:56,380 --> 01:10:59,900
+ round, but just general takes because you're a generally interesting person with many other
+
+1534
+01:10:59,900 --> 01:11:00,900
+ interests.
+
+1535
+01:11:00,900 --> 01:11:01,900
+ >> Sure.
+
+1536
+01:11:01,900 --> 01:11:05,060
+ >> What does the goddess of everything else mean to you?
+
+1537
+01:11:05,060 --> 01:11:09,660
+ >> Oh, it means that AI's not really going to kill us.
+
+1538
+01:11:09,660 --> 01:11:10,660
+ >> Really?
+
+1539
+01:11:10,660 --> 01:11:11,660
+ >> Of course.
+
+1540
+01:11:11,660 --> 01:11:13,660
+ >> Tell us more.
+
+1541
+01:11:13,660 --> 01:11:19,140
+ >> Look, Lex asked me this, like, is AI going to kill us all?
+
+1542
+01:11:19,140 --> 01:11:21,980
+ And I was quick to say yes, but I don't actually really believe it.
+
+1543
+01:11:21,980 --> 01:11:27,540
+ I think there's a decent chance that AI kills 95% of us.
+
+1544
+01:11:27,540 --> 01:11:28,820
+ Okay.
+
+1545
+01:11:28,820 --> 01:11:32,220
+ >> But they saw on your Twitch streams that you're with them, so they're not going to --
+
+1546
+01:11:32,220 --> 01:11:35,100
+ >> No, I don't think -- I actually -- I don't also think it's AI.
+
+1547
+01:11:35,100 --> 01:11:38,520
+ Like, I think the AI alignment problem is so misstated, I think it's actually not a
+
+1548
+01:11:38,520 --> 01:11:42,420
+ question of whether the computer is aligned with the company who owns the computer.
+
+1549
+01:11:42,420 --> 01:11:44,900
+ It's a question of whether that company is aligned with you or that government is aligned
+
+1550
+01:11:44,900 --> 01:11:47,340
+ with you, and the answer is no, and that's how you end up dead.
+
+1551
+01:11:47,340 --> 01:11:54,740
+ So what the goddess of everything else means to me is, like, the complexity will continue.
+
+1552
+01:11:54,740 --> 01:11:55,740
+ Paperclippers don't exist.
+
+1553
+01:11:55,740 --> 01:11:58,580
+ You know, there are forces -- the paperclipper is cancer, right?
+
+1554
+01:11:58,580 --> 01:12:02,500
+ The paperclipper is really just a perfect form of cancer, and the goddess of everything
+
+1555
+01:12:02,500 --> 01:12:06,340
+ else says, yeah, but cancer doesn't win, you know?
+
+1556
+01:12:06,340 --> 01:12:07,340
+ >> Yeah.
+
+1557
+01:12:07,340 --> 01:12:09,180
+ It's a beautiful story for those who haven't heard it.
+
+1558
+01:12:09,180 --> 01:12:11,180
+ And you read it out, and I'm into it.
+
+1559
+01:12:11,180 --> 01:12:12,180
+ >> I did.
+
+1560
+01:12:12,180 --> 01:12:13,180
+ >> Yeah, good.
+
+1561
+01:12:13,180 --> 01:12:14,180
+ >> What else do we have here?
+
+1562
+01:12:14,180 --> 01:12:15,180
+ >> Take a question.
+
+1563
+01:12:15,180 --> 01:12:16,180
+ So many.
+
+1564
+01:12:16,180 --> 01:12:17,180
+ >> Yeah.
+
+1565
+01:12:17,180 --> 01:12:18,180
+ >> What's happening today?
+
+1566
+01:12:18,180 --> 01:12:19,180
+ >> Oh, man.
+
+1567
+01:12:19,180 --> 01:12:25,780
+ I mean, it's all just like -- I haven't -- I haven't thought about this stuff forever.
+
+1568
+01:12:25,780 --> 01:12:28,640
+ Like that it's actually, like, happening.
+
+1569
+01:12:28,640 --> 01:12:30,500
+ And it's happening in an accessible way too.
+
+1570
+01:12:30,500 --> 01:12:32,500
+ I guess that's what I'm really grateful for.
+
+1571
+01:12:32,500 --> 01:12:38,220
+ It's not like -- like AI is not some Manhattan Project style, you don't know anything about
+
+1572
+01:12:38,220 --> 01:12:39,220
+ it.
+
+1573
+01:12:39,220 --> 01:12:40,220
+ >> Closed doors.
+
+1574
+01:12:40,220 --> 01:12:41,220
+ >> Closed doors.
+
+1575
+01:12:41,220 --> 01:12:42,220
+ I'll fight really hard to keep it that way.
+
+1576
+01:12:42,220 --> 01:12:48,140
+ But, you know, that's -- I'm grateful for just how much is released out there and how
+
+1577
+01:12:48,140 --> 01:12:50,900
+ much I can just learn and stay up to date.
+
+1578
+01:12:50,900 --> 01:12:55,660
+ And I guess I'm grateful to the true fabric of reality that, you know, I didn't need differential
+
+1579
+01:12:55,660 --> 01:12:56,940
+ equations to understand it.
+
+1580
+01:12:56,940 --> 01:13:00,780
+ Like I don't need -- you don't need -- you don't need some, like -- like there's -- there's
+
+1581
+01:13:00,780 --> 01:13:04,100
+ -- I've tried to do -- there's a limit to my math abilities.
+
+1582
+01:13:04,100 --> 01:13:06,980
+ I can do most undergrad math, but I took some grad math classes.
+
+1583
+01:13:06,980 --> 01:13:09,420
+ And, okay, now we're getting to the end of what I can do.
+
+1584
+01:13:09,420 --> 01:13:12,460
+ And it's just the actual, like, end of what I can do.
+
+1585
+01:13:12,460 --> 01:13:13,820
+ Like I'm limited by my brain.
+
+1586
+01:13:13,820 --> 01:13:17,860
+ But, you know, ML stuff, you need high school math.
+
+1587
+01:13:17,860 --> 01:13:18,860
+ >> Yeah.
+
+1588
+01:13:18,860 --> 01:13:20,780
+ >> Like I could do all -- nothing like -- you know what I mean?
+
+1589
+01:13:20,780 --> 01:13:23,460
+ When I went to met -- apply a major, seventh grade, like it's all easy.
+
+1590
+01:13:23,460 --> 01:13:26,340
+ >> You need more electrical engineering than you need high school math, really.
+
+1591
+01:13:26,340 --> 01:13:27,340
+ >> Yeah.
+
+1592
+01:13:27,340 --> 01:13:29,500
+ Well, you need electrical engineering to like build the machines.
+
+1593
+01:13:29,500 --> 01:13:33,860
+ But even that, like these machines are simpler than the machines that have existed before.
+
+1594
+01:13:33,860 --> 01:13:35,660
+ The compute stack looks really nice.
+
+1595
+01:13:35,660 --> 01:13:36,660
+ So, you know, yeah.
+
+1596
+01:13:36,660 --> 01:13:40,860
+ I just -- I'm grateful that it's all happening and I get to understand it and be here.
+
+1597
+01:13:40,860 --> 01:13:41,860
+ >> Yeah.
+
+1598
+01:13:41,860 --> 01:13:42,860
+ Yeah.
+
+1599
+01:13:42,860 --> 01:13:45,220
+ John Carmack mentioned there's about six insights we have left.
+
+1600
+01:13:45,220 --> 01:13:48,860
+ Do you have an intuition for what some of the paths people should be taking?
+
+1601
+01:13:48,860 --> 01:13:51,100
+ Obviously, you're working on one.
+
+1602
+01:13:51,100 --> 01:13:54,620
+ What are some of the other branches of the tree that people should go under?
+
+1603
+01:13:54,620 --> 01:13:56,660
+ >> I don't think I'm working on one of the six insights.
+
+1604
+01:13:56,660 --> 01:13:59,860
+ I don't think Tiny Grad is any one of the six insights.
+
+1605
+01:13:59,860 --> 01:14:03,940
+ Something I really like that Elon does and I try to take it from -- I try to be inspired
+
+1606
+01:14:03,940 --> 01:14:12,580
+ by it is look at the boring tunnel machine and ask how you can build a 10x cheaper one.
+
+1607
+01:14:12,580 --> 01:14:13,580
+ Look at the rocket.
+
+1608
+01:14:13,580 --> 01:14:14,580
+ How can I build a 10x cheaper one?
+
+1609
+01:14:14,580 --> 01:14:20,060
+ Look at the electric car and say how can I build a 10x cheaper or can go further or whatever,
+
+1610
+01:14:20,060 --> 01:14:21,060
+ whatever, whatever.
+
+1611
+01:14:21,060 --> 01:14:22,060
+ You just do the straight up physics math.
+
+1612
+01:14:22,060 --> 01:14:26,420
+ I'm trying to do the same thing with ML frameworks.
+
+1613
+01:14:26,420 --> 01:14:31,460
+ And in doing so, making sure that this stuff remains accessible.
+
+1614
+01:14:31,460 --> 01:14:36,780
+ You could imagine a world where if Google TPUs were actually the ultimate, if Google
+
+1615
+01:14:36,780 --> 01:14:38,580
+ TPUs were actually the best training things.
+
+1616
+01:14:38,580 --> 01:14:40,900
+ Actually I'm grateful for video.
+
+1617
+01:14:40,900 --> 01:14:43,740
+ Because if Google TPUs were the ultimate, now you have this huge closed source compiler
+
+1618
+01:14:43,740 --> 01:14:48,540
+ in between XLA and the hardware.
+
+1619
+01:14:48,540 --> 01:14:50,580
+ That's just a really bad thing.
+
+1620
+01:14:50,580 --> 01:14:54,020
+ Something that is somewhat upsetting about the Tiny Grad is that it is trying to prevent
+
+1621
+01:14:54,020 --> 01:14:55,740
+ downside.
+
+1622
+01:14:55,740 --> 01:14:57,420
+ It's not all trying to prevent downside.
+
+1623
+01:14:57,420 --> 01:14:58,420
+ We're also building computers.
+
+1624
+01:14:58,420 --> 01:15:03,060
+ We're going to build some awesome, powerful, cheap computers along the way.
+
+1625
+01:15:03,060 --> 01:15:05,780
+ So no, I'm not really working directly on any of the six tricks.
+
+1626
+01:15:05,780 --> 01:15:08,260
+ I also think the six tricks are kind of going to be like luck.
+
+1627
+01:15:08,260 --> 01:15:12,860
+ I think it's just going to be like, please tell me more about what covariate shift is
+
+1628
+01:15:12,860 --> 01:15:15,700
+ and how that inspired you to come up with batch normalization.
+
+1629
+01:15:15,700 --> 01:15:19,780
+ Please tell me more about why it's a transformer and it has a query, a key, and a value.
+
+1630
+01:15:19,780 --> 01:15:24,540
+ Like Schmidt-Huber described it better in Fast Weights.
+
+1631
+01:15:24,540 --> 01:15:28,080
+ My theory about why transformers work have nothing to do with this attention mechanism
+
+1632
+01:15:28,080 --> 01:15:31,140
+ and just the fact that it's semi-weight sharing.
+
+1633
+01:15:31,140 --> 01:15:36,860
+ Because the weight matrix is being generated on the fly, you can compress the weight matrix.
+
+1634
+01:15:36,860 --> 01:15:43,500
+ This is what that ... There's an operation in the transformer which ... By the way, Qualcomm's
+
+1635
+01:15:43,500 --> 01:15:45,980
+ SMPE can't run transformers for this reason.
+
+1636
+01:15:45,980 --> 01:15:50,940
+ So most matrix multipliers in neural networks are weight times values.
+
+1637
+01:15:50,940 --> 01:15:56,100
+ Whereas when you get to the outer product in transformers, well, it's weight times weight.
+
+1638
+01:15:56,100 --> 01:15:57,100
+ It's values times values.
+
+1639
+01:15:57,100 --> 01:15:58,100
+ SMPE doesn't even support that operation.
+
+1640
+01:15:58,100 --> 01:16:05,320
+ So it's like that operation that gives the transformer its power, it has nothing to do
+
+1641
+01:16:05,320 --> 01:16:07,320
+ with the fact that it's attention.
+
+1642
+01:16:07,320 --> 01:16:10,720
+ This is a funny ... But that is one of the six tricks, right?
+
+1643
+01:16:10,720 --> 01:16:13,120
+ Batch, like these norms are a trick.
+
+1644
+01:16:13,120 --> 01:16:14,120
+ Transformers are a trick.
+
+1645
+01:16:14,120 --> 01:16:15,120
+ Okay?
+
+1646
+01:16:15,120 --> 01:16:16,920
+ Six more.
+
+1647
+01:16:16,920 --> 01:16:24,880
+ Is there a reason why ... So you talk about attention as weight compression.
+
+1648
+01:16:24,880 --> 01:16:26,000
+ Compression is not exactly the right word.
+
+1649
+01:16:26,000 --> 01:16:28,720
+ What I mean is that the weights can change dynamically based on the context.
+
+1650
+01:16:28,720 --> 01:16:29,720
+ Dynamic.
+
+1651
+01:16:29,720 --> 01:16:32,640
+ So it was this thing in PAC-8 in the Hunter Prize that I absolutely loved.
+
+1652
+01:16:32,640 --> 01:16:35,280
+ And I've never seen it again in neural networks and it's a really good trick.
+
+1653
+01:16:35,280 --> 01:16:36,280
+ Okay.
+
+1654
+01:16:36,280 --> 01:16:39,420
+ Imagine you have 256 weight sets for a layer, right?
+
+1655
+01:16:39,420 --> 01:16:43,940
+ And then you choose which of the weight sets you're loading in based on some context.
+
+1656
+01:16:43,940 --> 01:16:45,760
+ And that context can come from another neural net, right?
+
+1657
+01:16:45,760 --> 01:16:51,600
+ So I have another neural net which projects 256 wide, one hot, do a softmax, predict it.
+
+1658
+01:16:51,600 --> 01:16:52,920
+ And then I actually load the weights in.
+
+1659
+01:16:52,920 --> 01:16:54,960
+ And I can do this operation at both test time and train time.
+
+1660
+01:16:54,960 --> 01:16:58,480
+ I can do this operation at both training and inference and I load in the weights given
+
+1661
+01:16:58,480 --> 01:16:59,480
+ the context.
+
+1662
+01:16:59,480 --> 01:17:00,480
+ Right?
+
+1663
+01:17:00,480 --> 01:17:02,840
+ Like that is what transformers do.
+
+1664
+01:17:02,840 --> 01:17:08,560
+ But transformers, instead of having 256 discrete ones, it's actually just that but continuous.
+
+1665
+01:17:08,560 --> 01:17:12,200
+ Which is funny that that was in language models and I just like, when I understood that about
+
+1666
+01:17:12,200 --> 01:17:15,800
+ transformers, I'm like, "Oh, this is a real trick and why are they using the word attention?"
+
+1667
+01:17:15,800 --> 01:17:19,400
+ And today is actually the anniversary of attention is all you need.
+
+1668
+01:17:19,400 --> 01:17:20,400
+ What?
+
+1669
+01:17:20,400 --> 01:17:21,400
+ Oh, that's so cool.
+
+1670
+01:17:21,400 --> 01:17:22,400
+ Today is six years ago.
+
+1671
+01:17:22,400 --> 01:17:23,400
+ Six years.
+
+1672
+01:17:23,400 --> 01:17:24,400
+ Six years.
+
+1673
+01:17:24,400 --> 01:17:25,400
+ Wow.
+
+1674
+01:17:25,400 --> 01:17:26,400
+ Well, there's one of your envelope tricks, right?
+
+1675
+01:17:26,400 --> 01:17:28,520
+ And you can easily write it on an envelope.
+
+1676
+01:17:28,520 --> 01:17:32,240
+ Think about how many times you've written that because it's not in any libraries because
+
+1677
+01:17:32,240 --> 01:17:34,440
+ it's all used a little differently each time.
+
+1678
+01:17:34,440 --> 01:17:39,880
+ You just write out that exact same...
+
+1679
+01:17:39,880 --> 01:17:42,440
+ You've name checked Elon a few times.
+
+1680
+01:17:42,440 --> 01:17:45,480
+ I think about both of you as systems thinkers.
+
+1681
+01:17:45,480 --> 01:17:49,680
+ Input, output, think something in between.
+
+1682
+01:17:49,680 --> 01:17:52,960
+ What's different about your style versus his?
+
+1683
+01:17:52,960 --> 01:17:57,560
+ Elon's fundamental science for the world is physics, mine is information theory.
+
+1684
+01:17:57,560 --> 01:17:59,040
+ But you do a lot of physics as well.
+
+1685
+01:17:59,040 --> 01:18:00,200
+ I mean, you base it on it.
+
+1686
+01:18:00,200 --> 01:18:02,660
+ And Elon does a lot of information theory as well too.
+
+1687
+01:18:02,660 --> 01:18:07,360
+ But the question is fundamentally, the difference maybe is expressed in what your ambitions
+
+1688
+01:18:07,360 --> 01:18:08,360
+ are.
+
+1689
+01:18:08,360 --> 01:18:12,360
+ Elon's ambitions may be like- Go to Mars.
+
+1690
+01:18:12,360 --> 01:18:13,360
+ Go to Mars.
+
+1691
+01:18:13,360 --> 01:18:17,600
+ Go to Mars is the ultimate modernist physics ambition.
+
+1692
+01:18:17,600 --> 01:18:19,640
+ It's a physics problem getting to Mars.
+
+1693
+01:18:19,640 --> 01:18:20,640
+ What are electric cars?
+
+1694
+01:18:20,640 --> 01:18:21,640
+ It's a physics problem.
+
+1695
+01:18:21,640 --> 01:18:22,640
+ Right?
+
+1696
+01:18:22,640 --> 01:18:26,760
+ So Elon's like pushing on the autonomy stuff and you push a little on information theory.
+
+1697
+01:18:26,760 --> 01:18:29,760
+ But fundamentally his dreams are physics based dreams.
+
+1698
+01:18:29,760 --> 01:18:31,040
+ My dreams are information based dreams.
+
+1699
+01:18:31,040 --> 01:18:34,520
+ I want to live forever in virtual reality with my AI girlfriend.
+
+1700
+01:18:34,520 --> 01:18:38,680
+ Those are the aspirations of someone who accepts information theory as a core science.
+
+1701
+01:18:38,680 --> 01:18:40,680
+ So I think that's the main difference between me and him.
+
+1702
+01:18:40,680 --> 01:18:43,840
+ He has physics based aspirations and I have information based aspirations.
+
+1703
+01:18:43,840 --> 01:18:46,080
+ Very, very neat.
+
+1704
+01:18:46,080 --> 01:18:48,160
+ Mark Andreessen, he is a...
+
+1705
+01:18:48,160 --> 01:18:51,840
+ Hi Mark, he's a listener.
+
+1706
+01:18:51,840 --> 01:18:54,280
+ He's a big proponent of effective accelerationism.
+
+1707
+01:18:54,280 --> 01:18:55,960
+ You've been a bit more critical.
+
+1708
+01:18:55,960 --> 01:18:59,800
+ Why do you say that IAC is not taken seriously by its adherence?
+
+1709
+01:18:59,800 --> 01:19:05,560
+ Oh, well, only the left takes ideology seriously.
+
+1710
+01:19:05,560 --> 01:19:07,080
+ Why is that?
+
+1711
+01:19:07,080 --> 01:19:08,720
+ Well, just as a fact.
+
+1712
+01:19:08,720 --> 01:19:10,000
+ It's just like a fact.
+
+1713
+01:19:10,000 --> 01:19:11,000
+ Is the right more cynical?
+
+1714
+01:19:11,000 --> 01:19:12,000
+ Is that what it is?
+
+1715
+01:19:12,000 --> 01:19:13,560
+ I don't know.
+
+1716
+01:19:13,560 --> 01:19:18,920
+ It's like the left actually manages to get energy around the ideologies.
+
+1717
+01:19:18,920 --> 01:19:23,600
+ There's a lot more... look here you have two effective altruists named Sam going in front
+
+1718
+01:19:23,600 --> 01:19:24,600
+ of Congress.
+
+1719
+01:19:24,600 --> 01:19:26,400
+ Only one of them is in jail.
+
+1720
+01:19:26,400 --> 01:19:27,400
+ It's interesting.
+
+1721
+01:19:27,400 --> 01:19:29,680
+ They're both calling for regulation in their respective spaces.
+
+1722
+01:19:29,680 --> 01:19:33,480
+ So SPF is definitely like kind of a wolf in sheep's clothing kind of.
+
+1723
+01:19:33,480 --> 01:19:37,560
+ He only adopted IAC or EA.
+
+1724
+01:19:37,560 --> 01:19:41,720
+ Sam Altman is a genuinely good guy who is not interested in power seeking for himself.
+
+1725
+01:19:41,720 --> 01:19:42,720
+ All right.
+
+1726
+01:19:42,720 --> 01:19:43,720
+ We don't have to go.
+
+1727
+01:19:43,720 --> 01:19:44,720
+ Fair enough.
+
+1728
+01:19:44,720 --> 01:19:45,720
+ Fair enough.
+
+1729
+01:19:45,720 --> 01:19:50,040
+ But no, IAC is not like... you are not serious.
+
+1730
+01:19:50,040 --> 01:19:53,520
+ You are not actually a serious ideology.
+
+1731
+01:19:53,520 --> 01:19:58,500
+ You know, Marc Andreessen, I like Marc Andreessen, but I think that some of his Twitter things
+
+1732
+01:19:58,500 --> 01:20:00,760
+ are like, "Dude, you just..."
+
+1733
+01:20:00,760 --> 01:20:06,560
+ It's like someone who's in 2019 whose eyes were opened about the political world being
+
+1734
+01:20:06,560 --> 01:20:07,560
+ not exactly...
+
+1735
+01:20:07,560 --> 01:20:09,760
+ "You mean all the people on the news were lying to me?"
+
+1736
+01:20:09,760 --> 01:20:11,840
+ "Yeah, bro, they were lying to you."
+
+1737
+01:20:11,840 --> 01:20:14,040
+ "Okay, we all figured this out five years ago.
+
+1738
+01:20:14,040 --> 01:20:15,040
+ Now what are you going to do about it?"
+
+1739
+01:20:15,040 --> 01:20:16,800
+ "I'm going to complain about it on Twitter."
+
+1740
+01:20:16,800 --> 01:20:17,800
+ "Great."
+
+1741
+01:20:17,800 --> 01:20:18,800
+ And that's what IAC is.
+
+1742
+01:20:18,800 --> 01:20:24,880
+ Last and maybe most important, why was Avatar 2 bad?
+
+1743
+01:20:24,880 --> 01:20:28,880
+ Oh, I have a whole... you can go on my blog.
+
+1744
+01:20:28,880 --> 01:20:30,840
+ I rewrote the script of Avatar 2.
+
+1745
+01:20:30,840 --> 01:20:34,400
+ I wrote a script that actually might make you feel something for the characters.
+
+1746
+01:20:34,400 --> 01:20:37,080
+ I killed Jake Sully in the first scene like you had to.
+
+1747
+01:20:37,080 --> 01:20:40,560
+ Do you really think his second story arc topped his first one?
+
+1748
+01:20:40,560 --> 01:20:41,560
+ No, of course not.
+
+1749
+01:20:41,560 --> 01:20:44,000
+ You had to kill the guy and make the movie about the brothers.
+
+1750
+01:20:44,000 --> 01:20:45,000
+ Right?
+
+1751
+01:20:45,000 --> 01:20:46,840
+ You're not alone in realizing that.
+
+1752
+01:20:46,840 --> 01:20:48,800
+ You could have kept the Titanic scene.
+
+1753
+01:20:48,800 --> 01:20:49,800
+ I didn't even take it out.
+
+1754
+01:20:49,800 --> 01:20:55,400
+ I left your Titanic scene, James Cameron, but I wrote you a story.
+
+1755
+01:20:55,400 --> 01:20:58,520
+ He needs ships to sink in water.
+
+1756
+01:20:58,520 --> 01:21:02,440
+ It's a great scene, but the movie was just like...
+
+1757
+01:21:02,440 --> 01:21:04,920
+ Great CGI let down meta-writing maybe.
+
+1758
+01:21:04,920 --> 01:21:10,800
+ Yeah, no, but the CGI... it's a beautiful world and that's why I care so much.
+
+1759
+01:21:10,800 --> 01:21:14,120
+ You don't hear me ranting about Pirates of the Caribbean 2 being a terrible story because
+
+1760
+01:21:14,120 --> 01:21:15,680
+ come on, what do you expect, man?
+
+1761
+01:21:15,680 --> 01:21:18,440
+ Johnny Depp's like, "Wow, I had a movie that made me rich.
+
+1762
+01:21:18,440 --> 01:21:19,440
+ I love this."
+
+1763
+01:21:19,440 --> 01:21:22,520
+ But this goes back to the midpoint.
+
+1764
+01:21:22,520 --> 01:21:26,360
+ I think it feels like Chat GBT wrote the movie.
+
+1765
+01:21:26,360 --> 01:21:27,680
+ That's my worry a little bit.
+
+1766
+01:21:27,680 --> 01:21:29,840
+ It's kind of converging towards that.
+
+1767
+01:21:29,840 --> 01:21:31,920
+ Oh, Moloch wrote the movie.
+
+1768
+01:21:31,920 --> 01:21:35,640
+ Sorry, I didn't want to interrupt you.
+
+1769
+01:21:35,640 --> 01:21:38,320
+ I closed a pull request two days ago.
+
+1770
+01:21:38,320 --> 01:21:39,800
+ Was this written by Chat GBT?
+
+1771
+01:21:39,800 --> 01:21:40,800
+ And I just closed it.
+
+1772
+01:21:40,800 --> 01:21:44,960
+ You know what, I honestly feel bad if you were a human who wrote this.
+
+1773
+01:21:44,960 --> 01:21:48,400
+ You're incapable of being more perplexed.
+
+1774
+01:21:48,400 --> 01:21:55,600
+ But if I have a classifier running in my head that asks, "Is this an AI or is this a human?"
+
+1775
+01:21:55,600 --> 01:21:57,320
+ The only way to deal with all this...
+
+1776
+01:21:57,320 --> 01:22:01,120
+ Oh, God, it's the worst possible.
+
+1777
+01:22:01,120 --> 01:22:08,120
+ People are like, "How are you mad about these chatbots and you're not mad about Tesla?"
+
+1778
+01:22:08,120 --> 01:22:09,120
+ I don't want to buy a Tesla.
+
+1779
+01:22:09,120 --> 01:22:10,120
+ I want to buy a Tesla.
+
+1780
+01:22:10,120 --> 01:22:12,080
+ It won't really impact my life negatively.
+
+1781
+01:22:12,080 --> 01:22:15,360
+ But if I don't want to use a chatbot, it's still going to impact my life negatively.
+
+1782
+01:22:15,360 --> 01:22:20,080
+ The amount of personalized spam that now makes me spend more cycles on my classifier to tell
+
+1783
+01:22:20,080 --> 01:22:25,280
+ if it's spam or not, because you can now use AIs and generate this so cheaply.
+
+1784
+01:22:25,280 --> 01:22:27,240
+ We have to move to a model where everything's just a dollar.
+
+1785
+01:22:27,240 --> 01:22:28,240
+ You want to send me an email?
+
+1786
+01:22:28,240 --> 01:22:29,240
+ It's a dollar.
+
+1787
+01:22:29,240 --> 01:22:30,240
+ You guys wouldn't have cared.
+
+1788
+01:22:30,240 --> 01:22:31,240
+ None of my friends would care.
+
+1789
+01:22:31,240 --> 01:22:33,520
+ No one would care, except the spammers.
+
+1790
+01:22:33,520 --> 01:22:37,200
+ We just got to move to those sort of models.
+
+1791
+01:22:37,200 --> 01:22:38,200
+ Awesome.
+
+1792
+01:22:38,200 --> 01:22:41,720
+ One last message you want everyone to remember?
+
+1793
+01:22:41,720 --> 01:22:46,960
+ Look, go try TinyGrad.
+
+1794
+01:22:46,960 --> 01:22:51,900
+ I hope that we're a serious competitor to what's out there.
+
+1795
+01:22:51,900 --> 01:22:54,200
+ And then I want to take it all the way.
+
+1796
+01:22:54,200 --> 01:22:57,760
+ We'll start with just building something for GPUs, and then we'll start building chips,
+
+1797
+01:22:57,760 --> 01:23:01,240
+ and we'll start building fabs, and we'll start building silicon mines, and we'll have the
+
+1798
+01:23:01,240 --> 01:23:03,120
+ first self-reproducing robot using...
+
+1799
+01:23:03,120 --> 01:23:04,120
+ Yeah, okay.
+
+1800
+01:23:04,120 --> 01:23:07,680
+ All right, George, thank you so much for coming on Eager.
+
+1801
+01:23:07,680 --> 01:23:08,680
+ Thanks for having us.
+
+1802
+01:23:08,680 --> 01:23:09,680
+ Thanks for having us.
+
+1803
+01:23:09,680 --> 01:23:10,680
+ Thanks for having us.
+
+1804
+01:23:10,680 --> 01:23:11,680
+ Thank you.
+
+1805
+01:23:11,680 --> 01:23:12,680
+ Thanks.
+
+1806
+01:23:12,680 --> 01:23:13,680
+ All right.
+
+1807
+01:23:13,680 --> 01:23:14,680
+ How was that?
+
+1808
+01:23:14,680 --> 01:23:15,680
+ We...
+
+1809
+01:23:15,680 --> 01:23:17,200
+ Not quite like Friedman, but we hope to do something different.
+
+1810
+01:23:17,200 --> 01:23:18,200
+ Thanks.
+
+1811
+01:23:18,200 --> 01:23:18,200
+ Thanks.
+
+1812
+01:23:18,200 --> 01:23:19,200
+ Thanks.
+
+1813
+01:23:19,200 --> 01:23:19,200
+ Thanks.
+
+1814
+01:23:19,200 --> 01:23:44,200
+ [ Silence ]
+
