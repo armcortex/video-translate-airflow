@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 langchain = "*"
 pydantic = "==1.10.11"
+openai = "*"
+tqdm = "*"
 
 [dev-packages]
 

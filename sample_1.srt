@@ -1,0 +1,41 @@
+1
+00:00:00,000 --> 00:00:05,040
+ Hey everyone, welcome to the LatentSpace podcast.
+
+2
+00:00:05,040 --> 00:00:10,180
+ This is Swix, writer and editor of LatentSpace, and Alessio is taking over with the intros
+
+3
+00:00:10,180 --> 00:00:12,800
+ Alessio's partner and CTO and residents at Decibel Partners.
+
+4
+00:00:12,800 --> 00:00:19,600
+ Hey everyone, today we have GeoHot on the podcast, aka George Hotz for the human name.
+
+5
+00:00:19,600 --> 00:00:21,680
+ Everybody knows George, so I'm not going to do a big intro.
+
+6
+00:00:21,680 --> 00:00:23,260
+ A couple of things that people might have missed.
+
+7
+00:00:23,260 --> 00:00:26,040
+ So you were the first to unlock the iPhone.
+
+8
+00:00:26,040 --> 00:00:31,880
+ You traded the first ever unlocked iPhone for a Nissan 350Z and three new iPhones.
+
+9
+00:00:31,880 --> 00:00:36,620
+ You were then one of the first people to break into the PS3 around arbitrary code.
+
+10
+00:00:36,620 --> 00:00:40,600
+ You got sued by Sony, you wrote a rap song to fight against that, which is still live
+
+
