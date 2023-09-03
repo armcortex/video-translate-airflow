@@ -7,11 +7,11 @@ from prompt import system_prompt
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW')
 openai.api_key = OPENAI_API_KEY
-BLOCK_SIZE = 10
+BLOCK_SIZE = 1
 
 
 
-def file_line_count(fname):
+def file_line_count(fname: str) -> int:
     p = subprocess.Popen(['wc', '-l', fname], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result, err = p.communicate()
     if p.returncode != 0:
@@ -19,7 +19,7 @@ def file_line_count(fname):
     return int(result.strip().split()[0])
 
 
-def get_completion(prompt, model="gpt-3.5-turbo-0613"):
+def get_completion(prompt: str, model="gpt-3.5-turbo-0613") -> str:
     messages = [{'role': 'system', 'content': system_prompt.SYSTEM_PROMPT_6},
                 {'role': 'user', 'content': prompt}]
     response = openai.ChatCompletion.create(
@@ -35,39 +35,7 @@ def get_completion(prompt, model="gpt-3.5-turbo-0613"):
     return response.choices[0].message["content"]
 
 
-def parse_srt(chunk):
-    return [part.strip() for part in chunk.split("\n\n") if part.strip()]
-
-
-def main():
-    srt_content = """
-1
-00:00:00,000 --> 00:00:05,040
- Hey everyone, welcome to the LatentSpace podcast.
-
-2
-00:00:05,040 --> 00:00:10,180
- This is Swix, writer and editor of LatentSpace, and Alessio is taking over with the intros
-
-3
-00:00:10,180 --> 00:00:12,800
- Alessio's partner and CTO and residents at Decibel Partners.
-"""
-
-    srts = parse_srt(srt_content)
-    for srt in tqdm(srts):
-        res = get_completion(srt)
-        tqdm.write(f'Original: \n {srt}')
-        tqdm.write(f'{"-"*5} \n')
-        tqdm.write(f'Translate: \n {res}')
-        tqdm.write(f'\n\n')
-
-
-    # res = get_completion(srt_content)
-    # print(res)
-
-
-def split_chunks(file, block_size=10):
+def split_chunks(file, block_size: int=10):
     tmp = []
     block_cnt = 0
     for line in file:
@@ -84,30 +52,54 @@ def split_chunks(file, block_size=10):
     
     # Make sure no remain
     if tmp:
+        tmp.append('\n')
         yield len(tmp), ''.join(tmp)
 
 
-if __name__ == '__main__':
-    # main()
-
-    FILE_PATH = './sample_1.srt'
-    line_cnt = file_line_count(FILE_PATH)
+def convert(filename: str):
+    out_filename = filename.replace('.srt', '_out.srt')
+    line_cnt = file_line_count(filename)
     progress_bar = tqdm(total=line_cnt, desc="Processing")
 
-    with open(FILE_PATH, 'r', encoding='utf-8') as ifile, \
-            open('./sample_1_out.srt', 'w', encoding='utf-8') as ofile:
-        
+    with open(filename, 'r', encoding='utf-8') as ifile, \
+            open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            # tqdm.write(f'Chunk: \n{chunk}')
-            # tqdm.write(f'{"-"*5} \n')
-
-            res = get_completion(chunk)
-            # tqdm.write(f'Original: \n {srt}')
-            # tqdm.write(f'{"-"*5} \n')
+            res = get_completion(chunk) + '\n'
             tqdm.write(f'Translate: \n {res}')
-            tqdm.write(f'\n\n')
-
-            ofile.write(chunk)
+            # tqdm.write(f'\n\n')
+            ofile.write(res)
             progress_bar.update(cnt)
-            # time.sleep(1)
+    
+        progress_bar.close()
+
+def main():
+    FILE_PATH = './data/geohot-medium-en.wav.srt'
+    # FILE_PATH = './sample_2.srt'
+    convert(FILE_PATH)
+
+
+if __name__ == '__main__':
+    main()
+
+#     srt_content = """
+# 1
+# 00:00:00,000 --> 00:00:05,040
+#  Hey everyone, welcome to the LatentSpace podcast.
+
+# 2
+# 00:00:05,040 --> 00:00:10,180
+#  This is Swix, writer and editor of LatentSpace, and Alessio is taking over with the intros
+
+# 3
+# 00:00:10,180 --> 00:00:12,800
+#  Alessio's partner and CTO and residents at Decibel Partners.
+# """
+
+#     srts = parse_srt(srt_content)
+#     for srt in tqdm(srts):
+#         res = get_completion(srt)
+#         tqdm.write(f'Original: \n {srt}')
+#         tqdm.write(f'{"-"*5} \n')
+#         tqdm.write(f'Translate: \n {res}')
+#         tqdm.write(f'\n\n')
             
