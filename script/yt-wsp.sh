@@ -93,11 +93,11 @@ cleanup() {
     local -r clean_me="${1}";
 
     if [ -d "${clean_me}" ]; then
-      msg "Cleaning up...";
-      rm -rf "${clean_me}";
+        msg "Cleaning up...";
+        rm -rf "${clean_me}";
     else
-      msg "'${clean_me}' does not appear to be a directory!";
-      exit 1;
+        msg "'${clean_me}' does not appear to be a directory!";
+        exit 1;
     fi;
 }
 
@@ -219,8 +219,11 @@ ffmpeg -i "${temp_dir}/${title_name}.vod.mp4" \
     -i "${temp_dir}/${title_name}.vod-resampled.wav.srt" \
     -c copy \
     -c:s mov_text \
-    -y "${title_name}-res.mp4";
+    -y "${temp_dir}/${title_name}-res.mp4";
 
 # cleanup "${temp_dir}";
+
+mv ${temp_filename} "${temp_filename}.txt"
+mv ${temp_dir} ${title_name}
 
 msg "Done! Your finished file is ready: ${title_name}-res.mp4";
