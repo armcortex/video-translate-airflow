@@ -30,9 +30,7 @@ def get_completion(prompt: str, model="gpt-3.5-turbo-0613", sys_prompt=system_pr
             messages.append(content)
     else:
         raise ValueError(f'Prompt type not supported')
-    # messages = [{'role': 'system', 'content': system_prompt.SYSTEM_PROMPT_6},
-    #             {'role': 'user', 'content': prompt}]
-    
+
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
@@ -54,7 +52,6 @@ def split_chunks(file, block_size: int=10):
             tmp.append('\n')
             if block_cnt >= block_size-1:
                 block_cnt = 0
-                # yield len(tmp), ''.join(tmp)
                 yield len(tmp), tmp
                 tmp = []
             else:
@@ -65,26 +62,8 @@ def split_chunks(file, block_size: int=10):
     # Make sure no remain
     if tmp:
         tmp.append('\n')
-        # yield len(tmp), ''.join(tmp)
         yield len(tmp), tmp
 
-
-def convert(filename: str):
-    out_filename = filename.replace('.srt', '_out.srt')
-    line_cnt = file_line_count(filename)
-    progress_bar = tqdm(total=line_cnt, desc="Processing")
-
-    # Read subtitle srt file and translate via OpenAI GPT model
-    with open(filename, 'r', encoding='utf-8') as ifile, \
-            open(out_filename, 'a+', encoding='utf-8') as ofile:        
-        for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            res = get_completion(chunk) + '\n'
-            tqdm.write(f'Translate: \n {res}')
-            # tqdm.write(f'\n\n')
-            ofile.write(res)
-            progress_bar.update(cnt)
-    
-        progress_bar.close()
 
 def srt_combine(chunk: list, data: str) -> list:
     tmp = chunk[:2]
@@ -92,7 +71,7 @@ def srt_combine(chunk: list, data: str) -> list:
     tmp.extend(chunk[2:])
     return tmp
 
-def convert2(filename: str):
+def convert(filename: str):
     out_filename = filename.replace('.srt', '_out.srt')
     line_cnt = file_line_count(filename)
     progress_bar = tqdm(total=line_cnt, desc="Processing")
@@ -113,7 +92,7 @@ def convert2(filename: str):
 def main():
     # FILE_PATH = './data/geohot-medium-en.wav.srt'
     FILE_PATH = './sample_2.srt'
-    convert2(FILE_PATH)
+    convert(FILE_PATH)
 
 
 if __name__ == '__main__':
