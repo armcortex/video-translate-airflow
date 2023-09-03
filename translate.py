@@ -19,14 +19,25 @@ def file_line_count(fname: str) -> int:
     return int(result.strip().split()[0])
 
 
-def get_completion(prompt: str, model="gpt-3.5-turbo-0613") -> str:
-    messages = [{'role': 'system', 'content': system_prompt.SYSTEM_PROMPT_6},
-                {'role': 'user', 'content': prompt}]
+def get_completion(prompt: str, model="gpt-3.5-turbo-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
+    messages = [{'role': 'system', 'content': sys_prompt}]
+    if isinstance(prompt, str):
+            content = {'role': 'user', 'content': prompt}
+            messages.append(content)
+    elif isinstance(prompt, list):
+        for p in prompt:
+            content = {'role': 'user', 'content': p}
+            messages.append(content)
+    else:
+        raise ValueError(f'Prompt type not supported')
+    # messages = [{'role': 'system', 'content': system_prompt.SYSTEM_PROMPT_6},
+    #             {'role': 'user', 'content': prompt}]
+    
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
         temperature=0,
-        max_tokens=BLOCK_SIZE*100,
+        max_tokens=2048,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -43,7 +54,8 @@ def split_chunks(file, block_size: int=10):
             tmp.append('\n')
             if block_cnt >= block_size-1:
                 block_cnt = 0
-                yield len(tmp), ''.join(tmp)
+                # yield len(tmp), ''.join(tmp)
+                yield len(tmp), tmp
                 tmp = []
             else:
                 block_cnt += 1
@@ -53,7 +65,8 @@ def split_chunks(file, block_size: int=10):
     # Make sure no remain
     if tmp:
         tmp.append('\n')
-        yield len(tmp), ''.join(tmp)
+        # yield len(tmp), ''.join(tmp)
+        yield len(tmp), tmp
 
 
 def convert(filename: str):
@@ -61,6 +74,7 @@ def convert(filename: str):
     line_cnt = file_line_count(filename)
     progress_bar = tqdm(total=line_cnt, desc="Processing")
 
+    # Read subtitle srt file and translate via OpenAI GPT model
     with open(filename, 'r', encoding='utf-8') as ifile, \
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
@@ -72,34 +86,36 @@ def convert(filename: str):
     
         progress_bar.close()
 
+def srt_combine(chunk: list, data: str) -> list:
+    tmp = chunk[:2]
+    tmp.append(f' {data}')
+    tmp.extend(chunk[2:])
+    return tmp
+
+def convert2(filename: str):
+    out_filename = filename.replace('.srt', '_out.srt')
+    line_cnt = file_line_count(filename)
+    progress_bar = tqdm(total=line_cnt, desc="Processing")
+
+    # Read subtitle srt file and translate via OpenAI GPT model
+    with open(filename, 'r', encoding='utf-8') as ifile, \
+            open(out_filename, 'a+', encoding='utf-8') as ofile:        
+        for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
+            res = get_completion(chunk[2], sys_prompt=system_prompt.SYSTEM_PROMPT_8) + '\n'
+            res = srt_combine(chunk, res)
+            res = ''.join(res)
+            tqdm.write(f'Translate: \n {res}')
+            ofile.write(res)
+            progress_bar.update(cnt)
+    
+        progress_bar.close()
+
 def main():
-    FILE_PATH = './data/geohot-medium-en.wav.srt'
-    # FILE_PATH = './sample_2.srt'
-    convert(FILE_PATH)
+    # FILE_PATH = './data/geohot-medium-en.wav.srt'
+    FILE_PATH = './sample_2.srt'
+    convert2(FILE_PATH)
 
 
 if __name__ == '__main__':
     main()
 
-#     srt_content = """
-# 1
-# 00:00:00,000 --> 00:00:05,040
-#  Hey everyone, welcome to the LatentSpace podcast.
-
-# 2
-# 00:00:05,040 --> 00:00:10,180
-#  This is Swix, writer and editor of LatentSpace, and Alessio is taking over with the intros
-
-# 3
-# 00:00:10,180 --> 00:00:12,800
-#  Alessio's partner and CTO and residents at Decibel Partners.
-# """
-
-#     srts = parse_srt(srt_content)
-#     for srt in tqdm(srts):
-#         res = get_completion(srt)
-#         tqdm.write(f'Original: \n {srt}')
-#         tqdm.write(f'{"-"*5} \n')
-#         tqdm.write(f'Translate: \n {res}')
-#         tqdm.write(f'\n\n')
-            
