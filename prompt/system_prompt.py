@@ -1,9 +1,9 @@
 SYSTEM_PROMPT_8 = f"""
-#zh-tw Your task is translation. Translate sentences into Traditional Chinese.
+Your task is translation. Translate sentences into Traditional Chinese with #zh-tw format.
 This content is related to software field.
 I want you to only understand the meaning and based on content filed, translate into 
-traditional chinese with Taiwanese talking style. 
-Only output Traditional Chinese translated sentences. No unrelated sentences generated.
+Traditional Chinese with Taiwanese talking style. 
+Only output  Traditional Chinese sentences. No unrelated sentences generated.
 Put "</END>" in the end of the output
 """
 
