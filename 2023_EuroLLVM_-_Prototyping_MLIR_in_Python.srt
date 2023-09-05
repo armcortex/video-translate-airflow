@@ -1,0 +1,944 @@
+1
+00:00:00,000 --> 00:00:07,600
+ >> Hello, everyone. Today, my children are going to be presenting
+
+2
+00:00:07,600 --> 00:00:13,400
+ XTSL, a tool we've been working on with a lot of other people for
+
+3
+00:00:13,400 --> 00:00:20,400
+ prototyping MLIR in Python. So my children are PhD students at
+
+4
+00:00:20,400 --> 00:00:24,400
+ the University of Edinburgh, supervised by Tobias Grocer.
+
+5
+00:00:24,400 --> 00:00:29,600
+ And, broadly speaking, our research group does three things. The first is
+
+6
+00:00:29,600 --> 00:00:35,200
+ actually research into compiler technologies. We really like MORA,
+
+7
+00:00:35,200 --> 00:00:40,600
+ and really like doing research on MORA itself. The second thing we do is
+
+8
+00:00:40,600 --> 00:00:45,000
+ open source development with other departments and other universities for
+
+9
+00:00:45,000 --> 00:00:51,800
+ their computing needs. One of the partners that we've been working on
+
+10
+00:00:51,800 --> 00:00:58,600
+ recently is the climate modeling project in Edinburgh, which is kind of
+
+11
+00:00:58,600 --> 00:01:02,600
+ ironic because it's got the least predictable weather of any place I know
+
+12
+00:01:02,600 --> 00:01:08,000
+ of. So we try to make the predictions run faster, things like that.
+
+13
+00:01:08,000 --> 00:01:13,000
+ And we teach a compiling techniques course with about 150 undergrads every
+
+14
+00:01:13,000 --> 00:01:18,800
+ year. So ideally, because of all the MORA research and work that we do,
+
+15
+00:01:18,800 --> 00:01:24,800
+ we'd really like to teach them MLIR. It's got a ton of great ideas.
+
+16
+00:01:24,800 --> 00:01:31,000
+ And we really would like them by the end of the course to know how SSA
+
+17
+00:01:31,000 --> 00:01:37,200
+ works, to know about blocks in regions, dialects, rewrites, things like that.
+
+18
+00:01:37,200 --> 00:01:43,200
+ But in practice, a lot of the questions that we get about practical concerns
+
+19
+00:01:43,200 --> 00:01:51,000
+ about building an industry compiler, things like table gen, CMake, C++ templates.
+
+20
+00:01:51,000 --> 00:01:57,600
+ Completion times are a big problem for undergrads. And that's a problem for us,
+
+21
+00:01:57,600 --> 00:02:00,800
+ because it's not really what we'd like to teach in the course. What we'd like to
+
+22
+00:02:00,800 --> 00:02:06,700
+ teach is the core concepts themselves. And this problem actually extends to our
+
+23
+00:02:06,700 --> 00:02:12,800
+ partners as well, because they don't really want to be writing the industry
+
+24
+00:02:12,800 --> 00:02:17,200
+ and the compiler is either. They might be doing experiments. And some of these
+
+25
+00:02:17,200 --> 00:02:21,800
+ things that make us as compiler engineers, productive, get in the way of some of the
+
+26
+00:02:21,800 --> 00:02:28,800
+ other things that we do. So how do we solve this problem? We have this crazy idea.
+
+27
+00:02:28,800 --> 00:02:34,800
+ Why don't we just re-implement MLIR in Python? Can we take the same great
+
+28
+00:02:34,800 --> 00:02:40,200
+ concepts that we'd like to teach the students and leverage and have it in an
+
+29
+00:02:40,200 --> 00:02:47,200
+ environment that's more familiar for undergrads than C++ and to the researchers
+
+30
+00:02:47,200 --> 00:02:55,200
+ who use quite often Python for their experiments. That's kind of a crazy idea,
+
+31
+00:02:55,200 --> 00:03:03,200
+ right? Who implements a compiler in Python? But we did it. So it's kind of a unicorn
+
+32
+00:03:03,200 --> 00:03:12,200
+ of a compiler, Scotland's national animal here. And it actually works quite well, right?
+
+33
+00:03:12,200 --> 00:03:19,200
+ So here is a small example of something that in MLIR could be done in table gen,
+
+34
+00:03:19,200 --> 00:03:24,200
+ but here it's exactly the same environment as the rest of the compiler, right? It's Python
+
+35
+00:03:24,200 --> 00:03:32,200
+ with type annotations and some of the concepts that we've developed with the
+
+36
+00:03:32,200 --> 00:03:37,200
+ ML as well, things like constraints with some automatic verification kind of built into
+
+37
+00:03:37,200 --> 00:03:42,200
+ the API. And it's similarly extensible. You can add your own custom printing and
+
+38
+00:03:42,200 --> 00:03:49,200
+ passing syntax. You can add custom verification, nice convenience, initializes, things like that.
+
+39
+00:03:49,200 --> 00:03:56,200
+ And we found that both undergrad students and our partners find this much easier to get
+
+40
+00:03:56,200 --> 00:04:03,200
+ started with than the initial hurdle of learning the same kind of infrastructure in MLIR.
+
+41
+00:04:03,200 --> 00:04:13,200
+ Once we have that, we can actually build up MLIR using this Python API. And we found
+
+42
+00:04:13,200 --> 00:04:18,200
+ that quite successful as well for people to get started with who kind of struggle with
+
+43
+00:04:18,200 --> 00:04:25,200
+ the typos that they might introduce in the MLIR directly. Here the IDE gives you
+
+44
+00:04:25,200 --> 00:04:31,200
+ support. If you've missed something, there's auto-completion. It works quite well for our
+
+45
+00:04:31,200 --> 00:04:38,200
+ use cases. One of the things that is possible in XDSL but isn't possible yet in the Python
+
+46
+00:04:38,200 --> 00:04:46,200
+ bindings is things like rewrites. So once again, the users can write a full end-to-end
+
+47
+00:04:46,200 --> 00:04:52,200
+ compiler defining both the operations and the rewrites in the same environment and be quite
+
+48
+00:04:52,200 --> 00:04:59,200
+ productive with that. We also have the full ecosystem of Python tools available for us.
+
+49
+00:04:59,200 --> 00:05:05,200
+ So here there's a screenshot of a Jupyter notebook running fully in your browser in WebAssembly.
+
+50
+00:05:05,200 --> 00:05:11,200
+ So you can just go to a web page and compile the toy tutorial faster than you can get
+
+51
+00:05:11,200 --> 00:05:24,200
+ both the LLVM repo. And that also lowers the barrier to entry quite a lot. So for the
+
+52
+00:05:24,200 --> 00:05:31,200
+ compiling techniques course, we actually have students implement a full compiler from a
+
+53
+00:05:31,200 --> 00:05:38,200
+ small programming language to a risk five assembly that they can then emulate. So that's a full
+
+54
+00:05:38,200 --> 00:05:44,200
+ end-to-end flow without using a Maria at all. But one of the things we definitely didn't want to do
+
+55
+00:05:44,200 --> 00:05:52,200
+ is create a rift between these two frameworks. So we really want the two communities to work
+
+56
+00:05:52,200 --> 00:06:00,200
+ together to make this tool tooling better and actually have these frameworks be used
+
+57
+00:06:00,200 --> 00:06:05,200
+ alongside each other. We really see XDSL as a sort of sidekick to a Maria that lets you be
+
+58
+00:06:05,200 --> 00:06:13,200
+ productive and prototyping some small features before paying the engineering cost to implement
+
+59
+00:06:13,200 --> 00:06:20,200
+ it nicely in efficiency plus pass industrial grade sort of things. Especially for things like
+
+60
+00:06:20,200 --> 00:06:26,200
+ research ideas where you're trying out a lot of things and you really want to fail fast before
+
+61
+00:06:26,200 --> 00:06:36,200
+ committing the full kind of engineering effort. And one of the great features of a Maria is the
+
+62
+00:06:36,200 --> 00:06:43,200
+ textual format that lets us be fully interoperable with a Maria at any stage of the compilation.
+
+63
+00:06:43,200 --> 00:06:50,200
+ So the tutorial notebooks, for example, you can take the toy tutorial, give it to the
+
+64
+00:06:50,200 --> 00:06:56,200
+ MIR version and it compiles down perfectly. It's fully interoperable. And similarly you can have a
+
+65
+00:06:56,200 --> 00:07:03,200
+ flow that might go first to a Maria, then do a compiler pass in Python, transform the
+
+66
+00:07:03,200 --> 00:07:11,200
+ R, give it back to MIR and use all the optimizations that are in that stack basically for free.
+
+67
+00:07:11,200 --> 00:07:20,200
+ So one of the examples of that is a project by a student that we've worked with that uses
+
+68
+00:07:20,200 --> 00:07:27,200
+ XDSL as almost a front end to get started with, right? So you do some optimizations in the
+
+69
+00:07:27,200 --> 00:07:34,200
+ XDSL level and then compile it down to XDS to MIR and get some significant performance improvement
+
+70
+00:07:34,200 --> 00:07:43,200
+ of some existing databases. Next, MIR will tell you a bit more about how the
+
+71
+00:07:43,200 --> 00:07:48,200
+ interoperation might work in practice and into the future.
+
+72
+00:07:48,200 --> 00:07:55,200
+ >> Thank you. So as we mentioned, we kind of have all two frameworks in completely different
+
+73
+00:07:55,200 --> 00:08:01,200
+ languages, different paradigms. So how do we actually connect them together? So you might
+
+74
+00:08:01,200 --> 00:08:07,200
+ have a different, maybe it's this Python binding solution. But in all case, we are
+
+75
+00:08:07,200 --> 00:08:12,200
+ leveraging the text representation of the MIR in our compiler. So by using the exact
+
+76
+00:08:12,200 --> 00:08:18,200
+ same text representation, we can transfer things back and forth from XDSL and MIR.
+
+77
+00:08:18,200 --> 00:08:25,200
+ So you might already think, oh, yeah, we have kind of generic syntax, but still we need
+
+78
+00:08:25,200 --> 00:08:30,200
+ to understand the dialects themselves. So if we pass the single program that just
+
+79
+00:08:30,200 --> 00:08:35,200
+ we still need to understand the dialects, I have to kind of have a meaning of these
+
+80
+00:08:35,200 --> 00:08:40,200
+ things, to be able to manipulate them, for instance. So for that, we are leveraging
+
+81
+00:08:40,200 --> 00:08:46,200
+ as well IIDL, which is kind of a meta-IR to represent dialects, so we can share these
+
+82
+00:08:46,200 --> 00:08:51,200
+ programs back and forth from MIR on XDSL, which result in actually sharing the dialect
+
+83
+00:08:51,200 --> 00:08:57,200
+ definitions themselves. So this allows us by just sharing the textual syntax and one
+
+84
+00:08:57,200 --> 00:09:02,200
+ single dialect to be able to leverage all the dialects we can have in MIR, pass it to
+
+85
+00:09:02,200 --> 00:09:07,200
+ XDSL and use them directly. Similarly, we want to do the same thing from XDSL to MIR
+
+86
+00:09:07,200 --> 00:09:12,200
+ so that people in the MIR, so we can people that want to kind of prototype their things
+
+87
+00:09:12,200 --> 00:09:17,200
+ in Python and then use it in MIR once it's done, they can try to kind of port this thing
+
+88
+00:09:17,200 --> 00:09:23,200
+ a bit easier than it should. We also want to kind of do the translation from ODS as well.
+
+89
+00:09:23,200 --> 00:09:28,200
+ That's something we kind of are working on right now is going from ODS to IIDL and IIDL
+
+90
+00:09:28,200 --> 00:09:35,200
+ to ODS to allow for like kind of a better portability. So you might ask directly
+
+91
+00:09:35,200 --> 00:09:39,200
+ why not using the Python bindings again? And I kind of want to give you three reasons
+
+92
+00:09:39,200 --> 00:09:44,200
+ why we did not do that. The first one, to be honest, is just, it's faster to write it
+
+93
+00:09:44,200 --> 00:09:49,200
+ again. It's faster to rewrite your own framework in Python like it took us like.
+
+94
+00:09:49,200 --> 00:09:53,200
+ The basic starting point was just in a few days we already had something to represent
+
+95
+00:09:53,200 --> 00:09:58,200
+ programs and to do small rewrites on it and doing this with Python bindings is a bit harder
+
+96
+00:09:58,200 --> 00:10:02,200
+ because you need to interact with the kind of C++ infrastructure you have.
+
+97
+00:10:02,200 --> 00:10:06,200
+ So that's kind of one of the reason. The second reason is more an engineer is
+
+98
+00:10:06,200 --> 00:10:11,200
+ a reason. We're working with people that do not want to have a huge dependency of C++.
+
+99
+00:10:11,200 --> 00:10:15,200
+ They don't want to depend on MLIR and they let the M and all of that stuff.
+
+100
+00:10:15,200 --> 00:10:20,200
+ If MLIR was built in Java and then you had a C++ interface on it,
+
+101
+00:10:20,200 --> 00:10:24,200
+ would you have used it in the first place? Or would you think, oh, this is a Java thing,
+
+102
+00:10:24,200 --> 00:10:28,200
+ like we don't really care about this? Well, for a lot of people, this is the case.
+
+103
+00:10:28,200 --> 00:10:32,200
+ They don't really want to use this entire MLIR ecosystem thing because they don't
+
+104
+00:10:32,200 --> 00:10:37,200
+ really understand it. And lastly, the reason is that as we say, we kind of PhD students
+
+105
+00:10:37,200 --> 00:10:41,200
+ who we like to do research and one of the area of research we have is actually
+
+106
+00:10:41,200 --> 00:10:46,200
+ MLIR itself. If you have a thought about, oh, what if we add
+
+107
+00:10:46,200 --> 00:10:50,200
+ Devident types in MLIR? What if we try to reason about immutable data structures in
+
+108
+00:10:50,200 --> 00:10:56,200
+ MLIR? Well, all of these things require us to kind of modify MLIR itself.
+
+109
+00:10:56,200 --> 00:11:01,200
+ And if you ever looked at the MLIR code base and how, like, I have definitions work,
+
+110
+00:11:01,200 --> 00:11:06,200
+ well, it's really hard and it's like really a long time to understand what's going on.
+
+111
+00:11:06,200 --> 00:11:12,200
+ Whereas in all cases, in our XDSF framework, we don't really care about optimizing it.
+
+112
+00:11:12,200 --> 00:11:16,200
+ We just care about having something simple that we can easily understand so we can
+
+113
+00:11:16,200 --> 00:11:21,200
+ reason with it and modify it. So this is why also, for us, having a
+
+114
+00:11:21,200 --> 00:11:26,200
+ standalone project is nice. So how do we maintain compatibility then?
+
+115
+00:11:26,200 --> 00:11:30,200
+ Since we don't use Python bindings, we have reimplementation of things from MLIR.
+
+116
+00:11:30,200 --> 00:11:35,200
+ Well, MLIR is a project that has a lot of comments every single day.
+
+117
+00:11:35,200 --> 00:11:40,200
+ How can we just being a few PhD students, a few research assistants, how can we
+
+118
+00:11:40,200 --> 00:11:43,200
+ actually maintain this and, like, keep track with MLIR?
+
+119
+00:11:43,200 --> 00:11:48,200
+ So for that, I'm using what I like to call kind of the pyramid of needs of the
+
+120
+00:11:48,200 --> 00:11:52,200
+ MLIR compatibility. So first, you have to base the thing you need to handle.
+
+121
+00:11:52,200 --> 00:11:56,200
+ And this is the textual representation and the intermediate representation.
+
+122
+00:11:56,200 --> 00:12:00,200
+ The textual format and the intermediate representation.
+
+123
+00:12:00,200 --> 00:12:06,200
+ So this is like all the generic syntax for operations, having blocks,
+
+124
+00:12:06,200 --> 00:12:09,200
+ regions, SSA value, attribute types, et cetera.
+
+125
+00:12:09,200 --> 00:12:12,200
+ And this is something that changed really, really rarely.
+
+126
+00:12:12,200 --> 00:12:16,200
+ The last big change has been the addition of properties, but before that,
+
+127
+00:12:16,200 --> 00:12:21,200
+ over the last two years, I don't remember any major change in that direction.
+
+128
+00:12:21,200 --> 00:12:26,200
+ Then, since we want to port dialect from one framework to the other, we need to kind of
+
+129
+00:12:26,200 --> 00:12:30,200
+ have the idea dialect both in XDSL and in MLIR.
+
+130
+00:12:30,200 --> 00:12:34,200
+ This, I expected to change a lot in the next few months because we're actually
+
+131
+00:12:34,200 --> 00:12:39,200
+ actively working on it. But I expected to be stabilized at some point such that we
+
+132
+00:12:39,200 --> 00:12:42,200
+ only have kind of monthly change and not even at that point.
+
+133
+00:12:42,200 --> 00:12:46,200
+ So then we want to have those dialect definitions that we need to port from one
+
+134
+00:12:46,200 --> 00:12:50,200
+ to the other. Well, this changed a lot.
+
+135
+00:12:50,200 --> 00:12:52,200
+ This changed weekly even daily sometimes.
+
+136
+00:12:52,200 --> 00:12:56,200
+ Well, for this, we leverage the ideal dialect to be able to generate these,
+
+137
+00:12:56,200 --> 00:13:01,200
+ meaning that we don't have to pay the weekly cost of updating MLIR if we can do
+
+138
+00:13:01,200 --> 00:13:06,200
+ that kind of automatically. And then finally, there is the last thing that,
+
+139
+00:13:06,200 --> 00:13:10,200
+ in our case, we don't really care that much, is being compatible in terms of API.
+
+140
+00:13:10,200 --> 00:13:13,200
+ Having the same functions, having the same functionality.
+
+141
+00:13:13,200 --> 00:13:17,200
+ So, for instance, I include in that case the patterned provider, which we
+
+142
+00:13:17,200 --> 00:13:22,200
+ re-implemented. But then MLIR has a lot of projects, a lot of IDs, MLIR actions,
+
+143
+00:13:22,200 --> 00:13:28,200
+ we have also data flow analysis. In that case, we don't really need to have the
+
+144
+00:13:28,200 --> 00:13:33,200
+ exact same mechanism. We may want to, in that case, we will port it, but there are
+
+145
+00:13:33,200 --> 00:13:36,200
+ so many things that we don't necessarily care about all of them.
+
+146
+00:13:36,200 --> 00:13:41,200
+ So even though if they change almost daily and we have a lot of API changes,
+
+147
+00:13:41,200 --> 00:13:45,200
+ in our case, it's not really important for us.
+
+148
+00:13:45,200 --> 00:13:51,200
+ So this is why maintaining XDSL currently is more in terms of change every month,
+
+149
+00:13:51,200 --> 00:13:55,200
+ rather than a change every week or a change every day.
+
+150
+00:13:55,200 --> 00:14:00,200
+ So, if you think of this, we kind of present this ID in Python.
+
+151
+00:14:00,200 --> 00:14:04,200
+ I know, it's crazy. But some other people might have, or the language is in mind.
+
+152
+00:14:04,200 --> 00:14:08,200
+ We talk with some people that thought about doing it in C#. Why not?
+
+153
+00:14:08,200 --> 00:14:12,200
+ But then you have some people that have, they need a certain language because
+
+154
+00:14:12,200 --> 00:14:16,200
+ this language allows them to express something they cannot ignore the languages.
+
+155
+00:14:16,200 --> 00:14:21,200
+ For instance, if there's a lot of people thinking of writing frontends for MLIR,
+
+156
+00:14:21,200 --> 00:14:27,200
+ a frontend for writing their programs in a specific way, in a nice syntax, with
+
+157
+00:14:27,200 --> 00:14:32,200
+ nice macros, et cetera. Well, you can do that in a language like Racket.
+
+158
+00:14:32,200 --> 00:14:36,200
+ Right now, people are doing this with frontend in Python, not necessarily good,
+
+159
+00:14:36,200 --> 00:14:41,200
+ but if you choose the right language, Racket here, it can be done kind of.
+
+160
+00:14:41,200 --> 00:14:46,200
+ So if people write this side kick ID, like building this framework,
+
+161
+00:14:46,200 --> 00:14:49,200
+ in Racket, that would be useful for them.
+
+162
+00:14:49,200 --> 00:14:52,200
+ Similarly, some people are crazy enough to try to reason about semantics.
+
+163
+00:14:52,200 --> 00:14:57,200
+ So why not using a language that allows you to reason about semantics like clean or
+
+164
+00:14:57,200 --> 00:15:01,200
+ cock, for instance? And then some people are trying to new language,
+
+165
+00:15:01,200 --> 00:15:03,200
+ like this file module thing.
+
+166
+00:15:03,200 --> 00:15:09,200
+ So the idea you need to keep here is that these should not be separated
+
+167
+00:15:09,200 --> 00:15:14,200
+ projects. These should all be connected somehow into kind of a meta framework.
+
+168
+00:15:14,200 --> 00:15:19,200
+ We have kind of MLIR connecting with XDSL, connecting with whatever you could
+
+169
+00:15:19,200 --> 00:15:22,200
+ implement in other languages through textual IR and ideal.
+
+170
+00:15:22,200 --> 00:15:26,200
+ And please, if you do that, use these tools to allow to kind of share these
+
+171
+00:15:26,200 --> 00:15:31,200
+ abstractions between all these frameworks from this meta framework thing.
+
+172
+00:15:31,200 --> 00:15:37,200
+ So we've presented kind of ID in Python, prototyping MLIR and Python.
+
+173
+00:15:37,200 --> 00:15:41,200
+ And hopefully, like for some users, this will be actually really useful even though
+
+174
+00:15:41,200 --> 00:15:44,200
+ for most of us it sounds a bit crazy.
+
+175
+00:15:44,200 --> 00:15:49,200
+ And hopefully some people can try other stuff, can try to experiment on it,
+
+176
+00:15:49,200 --> 00:15:53,200
+ and this allows us to essentially prototype MLIR directly in a better,
+
+177
+00:15:53,200 --> 00:15:57,200
+ I mean, in a language more appropriate to prototype in.
+
+178
+00:15:57,200 --> 00:15:59,200
+ Thanks a lot.
+
+179
+00:15:59,200 --> 00:16:04,200
+ [APPLAUSE]
+
+180
+00:16:04,200 --> 00:16:09,200
+ So does anyone have any questions for Shash and Matih?
+
+181
+00:16:09,200 --> 00:16:14,200
+ You mentioned IRDL as like a solution to kind of share dialects between these two
+
+182
+00:16:14,200 --> 00:16:16,200
+ programs. But I assume that's only about the
+
+183
+00:16:16,200 --> 00:16:19,200
+ direct definitions. And if you want to have things like transformations and
+
+184
+00:16:19,200 --> 00:16:23,200
+ optimizations, then currently those are re-implemented on both sides.
+
+185
+00:16:23,200 --> 00:16:30,200
+ So for now, if we want to use a specific optimization in MLIR, you can always
+
+186
+00:16:30,200 --> 00:16:33,200
+ translate to MLIR and then get it back.
+
+187
+00:16:33,200 --> 00:16:37,200
+ However, there's some people working on PDL on the transform dialects, which are
+
+188
+00:16:37,200 --> 00:16:42,200
+ other ways to share transformation using the textual representation or using
+
+189
+00:16:42,200 --> 00:16:45,200
+ these intermediate representations.
+
+190
+00:16:45,200 --> 00:16:50,200
+ So while for now we're kind of re-implementing things, we can see in a way if we
+
+191
+00:16:50,200 --> 00:16:56,200
+ evolved to more declarative transformations, then we could see them being translated
+
+192
+00:16:56,200 --> 00:16:59,200
+ from one framework to another.
+
+193
+00:16:59,200 --> 00:17:03,200
+ So at some point we might have an MLIR dialect specifically for optimization
+
+194
+00:17:03,200 --> 00:17:09,200
+ logic. And that could be basically the IRDL version for optimizations.
+
+195
+00:17:09,200 --> 00:17:13,200
+ So we have PDL and transform.
+
+196
+00:17:13,200 --> 00:17:18,200
+ Anyone else?
+
+197
+00:17:18,200 --> 00:17:23,200
+ Great. If there's no one else, then I'll next start in 12 minutes.
+
+198
+00:17:23,200 --> 00:17:27,200
+ Oh, OK.
+
+199
+00:17:27,200 --> 00:17:31,200
+ Yes, kind of ironic. You mentioned compile times as a problem with MLIR, and then
+
+200
+00:17:31,200 --> 00:17:33,200
+ you're going to use Python to write your compiler.
+
+201
+00:17:33,200 --> 00:17:37,200
+ So do you have issues that, like, if you have a Python compiler that the
+
+202
+00:17:37,200 --> 00:17:42,200
+ compile times are bad or is just not a problem with prototyping?
+
+203
+00:17:42,200 --> 00:17:45,200
+ Yeah, it's not really been an issue for us so far.
+
+204
+00:17:45,200 --> 00:17:50,200
+ Right. It's not slower enough to be a consent.
+
+205
+00:17:50,200 --> 00:17:55,200
+ Yeah.
+
+206
+00:17:55,200 --> 00:17:59,200
+ So thanks for all this work. It's super interesting.
+
+207
+00:17:59,200 --> 00:18:03,200
+ I have a question. Let's say you're one of your students in VENTIT's
+
+208
+00:18:03,200 --> 00:18:06,200
+ superthing that we would want in MLIR.
+
+209
+00:18:06,200 --> 00:18:12,200
+ How do you envision contributing this back to MLIR?
+
+210
+00:18:12,200 --> 00:18:17,200
+ Because then they haven't been actually exposed to the MLIR open source community.
+
+211
+00:18:17,200 --> 00:18:24,200
+ So that's a good question. So first of all, I mean, we have dialects,
+
+212
+00:18:24,200 --> 00:18:28,200
+ for instance. We hope that we can translate them more easily using
+
+213
+00:18:28,200 --> 00:18:32,200
+ IDL and translation for IDL to ODS. For transformation, that's true.
+
+214
+00:18:32,200 --> 00:18:36,200
+ They would need to be kind of rewritten. But in the same time,
+
+215
+00:18:36,200 --> 00:18:41,200
+ all transformation in Python are not really meant to be as optimized as you
+
+216
+00:18:41,200 --> 00:18:45,200
+ would expect for the MLIR project itself.
+
+217
+00:18:45,200 --> 00:18:49,200
+ So in any way, there's work to be done to port it.
+
+218
+00:18:49,200 --> 00:18:53,200
+ You need to have better data structures or using a different part of the
+
+219
+00:18:53,200 --> 00:18:57,200
+ framework to encode your transformation in a better way.
+
+220
+00:18:57,200 --> 00:19:00,200
+ So for now, we have a story for the dialects, but for the transformation
+
+221
+00:19:00,200 --> 00:19:04,200
+ themselves, maybe with PDL and the transform dialect, it could be better,
+
+222
+00:19:04,200 --> 00:19:07,200
+ but we don't really have that right now.
+
+223
+00:19:07,200 --> 00:19:12,200
+ We also have examples already of people starting to upstream things
+
+224
+00:19:12,200 --> 00:19:18,200
+ that were initially prototyped in HDSL. Like, IITL is kind of an example like that.
+
+225
+00:19:18,200 --> 00:19:23,200
+ And then the immutable data structures is another PhD student in our group,
+
+226
+00:19:23,200 --> 00:19:27,200
+ who's also simply planning to, once they've kind of developed them,
+
+227
+00:19:27,200 --> 00:19:32,200
+ in Python upstream them, so everyone can use them in a MIR itself.
+
+228
+00:19:32,200 --> 00:19:37,200
+ And also, there's also thinking, right now, there's kind of no alternative in Python.
+
+229
+00:19:37,200 --> 00:19:40,200
+ There's like a lot of people that like to write compiler in Python,
+
+230
+00:19:40,200 --> 00:19:45,200
+ like, DSL in the research community, but they're currently writing it in completely
+
+231
+00:19:45,200 --> 00:19:49,200
+ different paradigms. So at least bring it to the same paradigm with the same concept,
+
+232
+00:19:49,200 --> 00:19:52,200
+ kind of make it easier for them.
+
+233
+00:19:52,200 --> 00:19:57,200
+ Anyone else?
+
+234
+00:19:57,200 --> 00:20:00,200
+ Great. So if there's no one else, thanks, Ashram, Matie.
+
+235
+00:20:00,200 --> 00:20:04,200
+ And our next talk starts in 10 minutes. Thanks.
+
+236
+00:20:04,200 --> 00:20:09,200
+ [Applause]
+
