@@ -1,4 +1,5 @@
 import multiprocessing
+from multiprocessing.pool import ThreadPool
 import subprocess
 import os
 import shutil
@@ -87,19 +88,20 @@ def srt_combine(chunk: list, data: str) -> list:
     return tmp
 
 
-def convert(filename: str, verbose: bool=False):
+def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
     openai.api_key = os.environ.get('OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW')
     curr_process = multiprocessing.current_process()
 
     out_filename = filename.replace('.srt', '_out.srt')
     line_cnt = file_line_count(filename)
-    progress_bar = tqdm(total=line_cnt, desc=f'{curr_process.name} {filename} Processing')
+    progress_bar = tqdm(total=line_cnt, nrows=cpu_cnt, 
+                        desc=f'{curr_process.name} {filename} Processing')
 
     # Read subtitle srt file and translate via OpenAI GPT model
     with open(filename, 'r', encoding='utf-8') as ifile, \
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            res = get_completion(chunk[2], sys_prompt=system_prompt.SYSTEM_PROMPT_8) + '\n'
+            res = get_completion(f'#zh-tw {chunk[2]}', sys_prompt=system_prompt.SYSTEM_PROMPT_8) + '\n'
             res = srt_combine(chunk, res)
             res = ''.join(res)
             if verbose:
@@ -121,6 +123,25 @@ def convert_test(filename: str):
             progress_bar.update(cnt)
             time.sleep(0.5)
 
+def multi_threading_running(func, queries, n=20):
+    # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
+    def wrapped_function(query, max_try=20):
+        try:
+            result = func(query)
+            return result
+        except (openai.error.RateLimitError, openai.error.APIError) as e:
+            if not isinstance(e, openai.error.RateLimitError):
+                if isinstance(e, openai.error.APIError):
+                    print("API Error")
+                else:
+                    print("found a error:", e)
+            if max_try > 0:
+                return wrapped_function(query, max_try-1)
+
+    pool = ThreadPool(n)
+    replies = pool.map(wrapped_function, queries)
+    return replies
+
 
 def convert_parallel(filename: str):
     # Check folder 
@@ -135,8 +156,8 @@ def convert_parallel(filename: str):
     # Calc Parallel needed info
     line_cnt = file_line_count(filename)
     cpu_cnt = multiprocessing.cpu_count()
-    if line_cnt % cpu_cnt != 0:
-        raise ValueError(f'Check {filename} content, it can\'t divide by {cpu_cnt}')
+    # if line_cnt % cpu_cnt != 0:
+    #     raise ValueError(f'Check {filename} content, it can\'t divide by {cpu_cnt}')
     block_size = line_cnt // cpu_cnt // 4
 
     # Split into files
@@ -161,10 +182,13 @@ def convert_parallel(filename: str):
     execute_shell_cmd(cmd)
     
 
-    # Parallel translate via OpenAI
-    results = Parallel(n_jobs=cpu_cnt, verbose=10)(
-        delayed(convert)(name, False) for name in tmp_filenames)
+    # # Parallel translate via OpenAI
+    # results = Parallel(n_jobs=cpu_cnt, verbose=10)(
+    #     delayed(convert)(name, False) for name in tmp_filenames)
     
+    replies = multi_threading_running(convert, tmp_filenames, n=cpu_cnt)
+    print(f'{replies=}')
+
     # Combine all part_*.srt files
     filename_out = f'{TMP_FOLDER}/' + filename.replace('.srt', '_out.srt')
     with open(filename_out, 'w', encoding='utf-8') as ofile:
