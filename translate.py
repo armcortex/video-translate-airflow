@@ -1,3 +1,4 @@
+import threading
 import multiprocessing
 from multiprocessing.pool import ThreadPool
 import subprocess
@@ -11,6 +12,14 @@ import backoff
 
 from prompt import system_prompt
 
+API_KEYS = ['OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW', 
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW2',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW3',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW4',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW5',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW6',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW7',
+            'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW8',]
 
 BLOCK_SIZE = 1
 TMP_FOLDER = 'tmp'
@@ -89,13 +98,14 @@ def srt_combine(chunk: list, data: str) -> list:
 
 
 def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
-    openai.api_key = os.environ.get('OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW')
+    api_key = API_KEYS.pop()
+    openai.api_key = os.environ.get(api_key)
     curr_process = multiprocessing.current_process()
 
     out_filename = filename.replace('.srt', '_out.srt')
     line_cnt = file_line_count(filename)
     progress_bar = tqdm(total=line_cnt, nrows=cpu_cnt, 
-                        desc=f'{curr_process.name} {filename} Processing')
+                        desc=f'{curr_process.name} {filename} {api_key=} Processing')
 
     # Read subtitle srt file and translate via OpenAI GPT model
     with open(filename, 'r', encoding='utf-8') as ifile, \
@@ -123,7 +133,7 @@ def convert_test(filename: str):
             progress_bar.update(cnt)
             time.sleep(0.5)
 
-def multi_threading_running(func, queries, n=20):
+def multi_threading_running(func, queries, n=4):
     # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
     def wrapped_function(query, max_try=20):
         try:
@@ -156,8 +166,6 @@ def convert_parallel(filename: str):
     # Calc Parallel needed info
     line_cnt = file_line_count(filename)
     cpu_cnt = multiprocessing.cpu_count()
-    # if line_cnt % cpu_cnt != 0:
-    #     raise ValueError(f'Check {filename} content, it can\'t divide by {cpu_cnt}')
     block_size = line_cnt // cpu_cnt // 4
 
     # Split into files
@@ -220,29 +228,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-    # import tempfile
-    # import os
-
-    # def save_to_temp_files(data_list):
-    #     # 分割列表為8等分
-    #     chunk_size = len(data_list) // 8
-    #     chunks = [data_list[i:i+chunk_size] for i in range(0, len(data_list), chunk_size)]
-
-    #     # 創建臨時資料夾
-    #     with tempfile.TemporaryDirectory() as tmpdirname:
-    #         print(f"Created temporary directory: {tmpdirname}")
-            
-    #         # 將每一份數據保存到臨時檔案中
-    #         for idx, chunk in enumerate(chunks, 1):
-    #             temp_file_path = os.path.join(tmpdirname, f"temp_file_{idx}.txt")
-    #             with open(temp_file_path, 'w') as f:
-    #                 for item in chunk:
-    #                     f.write(f"{item}\n")
-    #             print(f"Saved chunk {idx} to {temp_file_path}")
-
-    # # 測試函數
-    # data = list(range(1, 101))  # 一個範例列表，包含1到100的整數
-    # save_to_temp_files(data)
