@@ -9,6 +9,8 @@ import openai
 from tqdm import tqdm
 from joblib import Parallel, delayed
 import backoff
+import tiktoken
+
 
 from prompt import system_prompt
 
@@ -27,6 +29,19 @@ TMP_FILE = 'part_'
 RATE_LIMIT = 90000
 
 
+class CalcToken:
+    def __init__(self) -> None:
+        self.enc = tiktoken.get_encoding("cl100k_base")
+        self.enc = tiktoken.encoding_for_model("gpt-3.5-turbo")
+
+    def calc_tokens(self, s: str) -> int:
+        return len(self.enc.encode(s))
+
+calc_token = CalcToken()
+g_total_tokens = 0
+token_lock = threading.Lock()
+
+
 def execute_shell_cmd(cmds: list):
     p = subprocess.Popen(cmds, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     result, err = p.communicate()
@@ -42,6 +57,7 @@ def file_line_count(fname: str) -> int:
 
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 @backoff.on_exception(backoff.expo, openai.error.ServiceUnavailableError)
+@backoff.on_exception(backoff.expo, openai.error.Timeout)
 def get_completion(prompt: str, model="gpt-3.5-turbo-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
     messages = [{'role': 'system', 'content': sys_prompt}]
     if isinstance(prompt, str):
@@ -104,40 +120,74 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
 
     out_filename = filename.replace('.srt', '_out.srt')
     line_cnt = file_line_count(filename)
-    progress_bar = tqdm(total=line_cnt, nrows=cpu_cnt, 
-                        desc=f'{curr_process.name} {filename} {api_key=} Processing')
+    pbar = tqdm(total=line_cnt, nrows=cpu_cnt)
 
+    cnt_total = 0
+    total_tokens = 0
+    request_cnt = 0
     # Read subtitle srt file and translate via OpenAI GPT model
     with open(filename, 'r', encoding='utf-8') as ifile, \
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            res = get_completion(f'#zh-tw {chunk[2]}', sys_prompt=system_prompt.SYSTEM_PROMPT_8) + '\n'
+            pbar.set_description(f'{curr_process.name} {filename} Processing')
+
+            res = get_completion(f'```{chunk[2]}```', sys_prompt=system_prompt.SYSTEM_PROMPT_9) + '\n'
             res = srt_combine(chunk, res)
+
+            # Calc tokens
+            token_cnt = calc_token.calc_tokens(''.join(res[2:4]))
+            total_tokens += token_cnt
+
+            # Update global variable
+            global g_total_tokens
+            with token_lock:
+                g_total_tokens += token_cnt
+
+            request_cnt += 1
+
+            # Calculate items per second
+            token_per_min = (total_tokens * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
+            g_token_per_min = (g_total_tokens * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
+            request_per_min = (request_cnt * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
+
+
+            # Update progress bar with custom postfix
+            pbar.set_postfix(TPM=f"{token_per_min:.2f} token/min", 
+                                gTPM=f"{g_token_per_min:.2f} token/min",
+                                RPM=f"{request_per_min:.2f} token/min",
+                                refresh=True)
+
+
+            # print(f'{filename=}, {curr_process.name=}, '
+            #       f'{curr_process.pid=}, {cnt_total}/{line_cnt}, '
+            #       f'{(cnt_total/line_cnt):.2f}%')
             res = ''.join(res)
             if verbose:
+                # print(f'{filename=}, {curr_process.name=}, {curr_process.pid=}')
+                # print(f'Translate: \n {res}')
                 tqdm.write(f'{filename=}, {curr_process.name=}, {curr_process.pid=}')
                 tqdm.write(f'Translate: \n {res}')
             ofile.write(res)
-            progress_bar.update(cnt)
-    
-        progress_bar.close()
+            cnt_total += cnt
+            pbar.update(cnt)
+        pbar.close()
 
 
 def convert_test(filename: str):
     line_cnt = file_line_count(filename)
-    progress_bar = tqdm(total=line_cnt, desc="Processing")
+    pbar = tqdm(total=line_cnt, desc="Processing")
 
     with open(filename, 'r', encoding='utf-8') as ifile:
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
             # tqdm.write(f'Translate: \n {"".join(chunk)}')
-            progress_bar.update(cnt)
+            pbar.update(cnt)
             time.sleep(0.5)
 
 def multi_threading_running(func, queries, n=4):
     # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
     def wrapped_function(query, max_try=20):
         try:
-            result = func(query)
+            result = func(query, True)
             return result
         except (openai.error.RateLimitError, openai.error.APIError) as e:
             if not isinstance(e, openai.error.RateLimitError):
@@ -216,9 +266,10 @@ def main():
     t0 = time.perf_counter()
     # FILE_PATH = './data/geohot-medium-en.wav.srt'
     # FILE_PATH = './sample_2.srt'
-    # convert(FILE_PATH, verbose=True)
+    
     # FILE_PATH = './2023_EuroLLVM_-_Prototyping_MLIR_in_Python.srt'
     FILE_PATH = './geohot-medium-en.wav.srt'
+    # convert(FILE_PATH, verbose=True)
     convert_parallel(FILE_PATH)
     t1 = time.perf_counter()
     print(f'test2() execute time: {t1-t0:.2f} sec, {(t1-t0)/60:.2f} min')
@@ -228,3 +279,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
