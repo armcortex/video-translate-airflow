@@ -1,3 +1,13 @@
+SYSTEM_PROMPT_9 = f"""
+Your task is translation. Translate sentences into Traditional Chinese with #zh-tw format.
+This content is related to technology and software field.
+I want you to only understand the meaning and based on content filed, translate into 
+Traditional Chinese with Taiwanese talking style. 
+No unrelated sentences generated or any explanation. Delimited by triple quotes 
+extract the information and translate.
+Put "</END>" in the end of the output
+"""
+
 SYSTEM_PROMPT_8 = f"""
 Your task is translation. Translate sentences into Traditional Chinese with #zh-tw format.
 This content is related to software field.
