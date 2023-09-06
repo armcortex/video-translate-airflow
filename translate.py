@@ -58,7 +58,7 @@ def file_line_count(fname: str) -> int:
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 @backoff.on_exception(backoff.expo, openai.error.ServiceUnavailableError)
 @backoff.on_exception(backoff.expo, openai.error.Timeout)
-def get_completion(prompt: str, model="gpt-3.5-turbo-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
+def get_completion(prompt: str, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
     messages = [{'role': 'system', 'content': sys_prompt}]
     if isinstance(prompt, str):
             content = {'role': 'user', 'content': prompt}
@@ -74,7 +74,7 @@ def get_completion(prompt: str, model="gpt-3.5-turbo-0613", sys_prompt=system_pr
         model=model,
         messages=messages,
         temperature=0,
-        max_tokens=2048,
+        max_tokens=128,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -146,9 +146,10 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
             request_cnt += 1
 
             # Calculate items per second
-            token_per_min = (total_tokens * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
-            g_token_per_min = (g_total_tokens * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
-            request_per_min = (request_cnt * 60) / (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
+            unit = (pbar.format_dict['elapsed'] if pbar.format_dict['elapsed'] > 0 else 1)
+            token_per_min = (total_tokens * 60) / unit
+            g_token_per_min = (g_total_tokens * 60) / unit
+            request_per_min = (request_cnt * 60) / unit
 
 
             # Update progress bar with custom postfix
