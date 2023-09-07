@@ -3,3 +3,4 @@
 /tmp
 /del
 __pycache__
+**/del/**

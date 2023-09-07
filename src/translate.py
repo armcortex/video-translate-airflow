@@ -25,9 +25,11 @@ API_KEYS = ['OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW',
             'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW8',]
 
 BLOCK_SIZE = 1
-TMP_FOLDER = 'tmp'
-TMP_FILE = 'part_'
-RATE_LIMIT = 90000
+
+FILE_BASE = os.getcwd()
+TMP_FOLDER = FILE_BASE + '/tmp'
+TMP_FILE = '/part_'
+
 
 
 class CalcToken:
@@ -59,7 +61,7 @@ def file_line_count(fname: str) -> int:
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 @backoff.on_exception(backoff.expo, openai.error.ServiceUnavailableError)
 @backoff.on_exception(backoff.expo, openai.error.Timeout)
-def get_completion(prompt: str, maxtoken, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
+def get_completion(prompt: str, maxtoken=1024, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
     messages = [{'role': 'system', 'content': sys_prompt}]
     if isinstance(prompt, str):
             content = {'role': 'user', 'content': prompt}
@@ -141,7 +143,7 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
     with open(filename, 'r', encoding='utf-8') as ifile, \
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            pbar.set_description(f'{curr_process.name} {filename} Processing')
+            pbar.set_description(f'{curr_process.name} {filename.split("/")[-1]} Processing')
             en_token_cnt = calc_token.calc_tokens(''.join(chunk[2]))
 
             res = get_completion(f'```{chunk[2]}```', int(en_token_cnt*3.5), sys_prompt=system_prompt.SYSTEM_PROMPT_9) + '\n'
@@ -237,7 +239,7 @@ def convert_parallel(filename: str):
     tmp_filenames = []
     with open(filename, 'r', encoding='utf-8') as ifile:
         for i, (cnt, chunk) in enumerate(split_chunks(ifile, block_size)):
-            tmp_filename = TMP_FOLDER + f'/{TMP_FILE}{i}.srt'
+            tmp_filename = TMP_FOLDER + f'{TMP_FILE}{i}.srt'
             tmp_filenames.append(tmp_filename)
             with open(tmp_filename, 'w', encoding='utf-8') as ofile:
                 ofile.write(''.join(chunk))
@@ -251,7 +253,7 @@ def convert_parallel(filename: str):
             tmp_filenames.pop()
             
     # Delete the last line
-    cmd = ['sed', '-i', '', '$d', f'{os.getcwd()}/{tmp_filenames[-1]}']
+    cmd = ['sed', '-i', '', '$d', f'{tmp_filenames[-1]}']
     execute_shell_cmd(cmd)
     
 
@@ -263,7 +265,7 @@ def convert_parallel(filename: str):
     print(f'{replies=}')
 
     # Combine all part_*.srt files
-    filename_out = f'{TMP_FOLDER}/' + filename.replace('.srt', '_out.srt')
+    filename_out = f'{TMP_FOLDER}/' + filename.split('/')[-1].replace('.srt', '_out.srt')
     with open(filename_out, 'w', encoding='utf-8') as ofile:
         for tmp_filename in tmp_filenames:
             tmp_filename = tmp_filename.replace('.srt', '_out.srt')
@@ -279,17 +281,15 @@ def convert_parallel(filename: str):
 
 def main():
     t0 = time.perf_counter()
-    # FILE_PATH = './data/geohot-medium-en.wav.srt'
-    # FILE_PATH = './sample_2.srt'
+
+    # FILE_PATH = FILE_BASE + '/sample/geohot-medium-en.wav.srt'
+    FILE_PATH = FILE_BASE + '/sample/sample_1.srt'
+    # FILE_PATH = FILE_BASE + '/sample/2023_EuroLLVM_-_Prototyping_MLIR_in_Python.srt'
     
-    # FILE_PATH = './2023_EuroLLVM_-_Prototyping_MLIR_in_Python.srt'
-    FILE_PATH = './geohot-medium-en.wav.srt'
     # convert(FILE_PATH, verbose=True)
     convert_parallel(FILE_PATH)
     t1 = time.perf_counter()
     print(f'test2() execute time: {t1-t0:.2f} sec, {(t1-t0)/60:.2f} min')
-
-    # print(f'cnt: {file_line_count(FILE_PATH)}')
 
 
 if __name__ == '__main__':

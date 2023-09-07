@@ -1,8 +1,12 @@
+import openai
+import os
 import time
 from tqdm import tqdm
 from translate import get_completion, clean_str
 from prompt import system_prompt
 
+
+openai.api_key = os.environ.get('OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW')
 
 def parse_srt(chunk):
     return [part.strip() for part in chunk.split("\n\n") if part.strip()]
@@ -74,11 +78,8 @@ def test3():
     print(f'test2() execute time: {t1-t0:.2f} sec')
 
 def test4():
-    # read_path = './data/backup/20230906_geohot-medium-en.wav_out.srt'
-    # write_path = './data/backup/20230906_geohot-medium-en.wav_out_clean.srt'
-
-    read_path = './data/backup/part_4_out.srt'
-    write_path = './data/backup/part_4_out_clean.srt'
+    read_path =  './sample/del/part_4_out.srt'
+    write_path = './sample/del/part_4_out_clean.srt'
 
     with open(read_path, 'r') as ifile, open(write_path, 'w') as ofile:
         for line in ifile:
