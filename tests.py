@@ -1,6 +1,6 @@
 import time
 from tqdm import tqdm
-from translate import get_completion
+from translate import get_completion, clean_str
 from prompt import system_prompt
 
 
@@ -73,7 +73,21 @@ def test3():
     t1 = time.perf_counter()
     print(f'test2() execute time: {t1-t0:.2f} sec')
 
+def test4():
+    # read_path = './data/backup/20230906_geohot-medium-en.wav_out.srt'
+    # write_path = './data/backup/20230906_geohot-medium-en.wav_out_clean.srt'
+
+    read_path = './data/backup/part_4_out.srt'
+    write_path = './data/backup/part_4_out_clean.srt'
+
+    with open(read_path, 'r') as ifile, open(write_path, 'w') as ofile:
+        for line in ifile:
+            line = clean_str(line)
+            ofile.write(line)
+
+
 if __name__ == '__main__':
     # test1()
-    test2()
-    test3()
+    # test2()
+    # test3()
+    test4()

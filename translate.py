@@ -10,6 +10,7 @@ from tqdm import tqdm
 from joblib import Parallel, delayed
 import backoff
 import tiktoken
+import re
 
 
 from prompt import system_prompt
@@ -58,7 +59,7 @@ def file_line_count(fname: str) -> int:
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 @backoff.on_exception(backoff.expo, openai.error.ServiceUnavailableError)
 @backoff.on_exception(backoff.expo, openai.error.Timeout)
-def get_completion(prompt: str, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
+def get_completion(prompt: str, maxtoken, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
     messages = [{'role': 'system', 'content': sys_prompt}]
     if isinstance(prompt, str):
             content = {'role': 'user', 'content': prompt}
@@ -74,13 +75,24 @@ def get_completion(prompt: str, model="gpt-3.5-turbo-16k-0613", sys_prompt=syste
         model=model,
         messages=messages,
         temperature=0,
-        max_tokens=128,
+        max_tokens=maxtoken,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
         stop=["</END>"]
     )
     return response.choices[0].message["content"]
+
+def clean_str(ss: str) -> str:
+    clean_list = ['```', '"', '>>', '「', '」', '<']
+    for c in clean_list:
+        if c in ss:
+            ss = re.sub(r'<[^ ]*', '\n', ss)
+            ss = ss.replace(c, '')
+            ss = ss.replace('   ', ' ')
+            ss = ss.replace('  ', ' ')
+
+    return ss
 
 
 def split_chunks(file, block_size: int=10):
@@ -130,18 +142,19 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
         for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
             pbar.set_description(f'{curr_process.name} {filename} Processing')
+            en_token_cnt = calc_token.calc_tokens(''.join(chunk[2]))
 
-            res = get_completion(f'```{chunk[2]}```', sys_prompt=system_prompt.SYSTEM_PROMPT_9) + '\n'
+            res = get_completion(f'```{chunk[2]}```', int(en_token_cnt*3.5), sys_prompt=system_prompt.SYSTEM_PROMPT_9) + '\n'
             res = srt_combine(chunk, res)
 
             # Calc tokens
-            token_cnt = calc_token.calc_tokens(''.join(res[2:4]))
-            total_tokens += token_cnt
+            zh_tw_token_cnt = calc_token.calc_tokens(''.join(res[3]))
+            total_tokens += (en_token_cnt + zh_tw_token_cnt)
 
             # Update global variable
             global g_total_tokens
             with token_lock:
-                g_total_tokens += token_cnt
+                g_total_tokens += (en_token_cnt + zh_tw_token_cnt)
 
             request_cnt += 1
 
@@ -163,6 +176,7 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
             #       f'{curr_process.pid=}, {cnt_total}/{line_cnt}, '
             #       f'{(cnt_total/line_cnt):.2f}%')
             res = ''.join(res)
+            res = clean_str(res)
             if verbose:
                 # print(f'{filename=}, {curr_process.name=}, {curr_process.pid=}')
                 # print(f'Translate: \n {res}')
