@@ -85,6 +85,7 @@ def get_completion(prompt: str, maxtoken=1024, model="gpt-3.5-turbo-16k-0613", s
     )
     return response.choices[0].message["content"]
 
+
 def clean_str(ss: str) -> str:
     clean_list = ['```', '"', '>>', '「', '」', '<']
     for c in clean_list:
@@ -139,6 +140,7 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
     cnt_total = 0
     total_tokens = 0
     request_cnt = 0
+
     # Read subtitle srt file and translate via OpenAI GPT model
     with open(filename, 'r', encoding='utf-8') as ifile, \
             open(out_filename, 'a+', encoding='utf-8') as ofile:        
@@ -173,15 +175,10 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
                                 RPM=f"{request_per_min:.2f} token/min",
                                 refresh=True)
 
-
-            # print(f'{filename=}, {curr_process.name=}, '
-            #       f'{curr_process.pid=}, {cnt_total}/{line_cnt}, '
-            #       f'{(cnt_total/line_cnt):.2f}%')
+            # Final process format
             res = ''.join(res)
             res = clean_str(res)
             if verbose:
-                # print(f'{filename=}, {curr_process.name=}, {curr_process.pid=}')
-                # print(f'Translate: \n {res}')
                 tqdm.write(f'{filename=}, {curr_process.name=}, {curr_process.pid=}')
                 tqdm.write(f'Translate: \n {res}')
             ofile.write(res)
@@ -190,18 +187,7 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
         pbar.close()
 
 
-def convert_test(filename: str):
-    line_cnt = file_line_count(filename)
-    pbar = tqdm(total=line_cnt, desc="Processing")
-
-    with open(filename, 'r', encoding='utf-8') as ifile:
-        for cnt, chunk in split_chunks(ifile, BLOCK_SIZE):
-            # tqdm.write(f'Translate: \n {"".join(chunk)}')
-            pbar.update(cnt)
-            time.sleep(0.5)
-
 def multi_threading_running(func, queries, n=4):
-    # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
     def wrapped_function(query, max_try=20):
         try:
             result = func(query, True)
@@ -289,7 +275,7 @@ def main():
     # convert(FILE_PATH, verbose=True)
     convert_parallel(FILE_PATH)
     t1 = time.perf_counter()
-    print(f'test2() execute time: {t1-t0:.2f} sec, {(t1-t0)/60:.2f} min')
+    print(f'execute time: {t1-t0:.2f} sec, {(t1-t0)/60:.2f} min')
 
 
 if __name__ == '__main__':
