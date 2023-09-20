@@ -92,6 +92,7 @@ def clean_str(ss: str) -> str:
         if c in ss:
             ss = re.sub(r'<[^ ]*', '\n', ss)
             ss = ss.replace(c, '')
+            ss = ss.replace('#zh-tw', '')
             ss = ss.replace('   ', ' ')
             ss = ss.replace('  ', ' ')
 
