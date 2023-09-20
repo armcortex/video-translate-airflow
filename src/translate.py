@@ -87,14 +87,15 @@ def get_completion(prompt: str, maxtoken=1024, model="gpt-3.5-turbo-16k-0613", s
 
 
 def clean_str(ss: str) -> str:
+    ss = re.sub(r'<[^ ]*', '\n', ss)
+    ss = re.sub(r'#zh[^\s\n]+', '\n', ss)
+    ss = ss.replace('   ', ' ')
+    ss = ss.replace('  ', ' ')
+
     clean_list = ['```', '"', '>>', '「', '」', '<']
     for c in clean_list:
         if c in ss:
-            ss = re.sub(r'<[^ ]*', '\n', ss)
             ss = ss.replace(c, '')
-            ss = ss.replace('#zh-tw', '')
-            ss = ss.replace('   ', ' ')
-            ss = ss.replace('  ', ' ')
 
     return ss
 
