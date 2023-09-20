@@ -207,6 +207,8 @@ msg "Whisper specified at: '${WHISPER_EXECUTABLE}'";
     -l "${WHISPER_LANG}" \
     -f "${temp_dir}/${title_name}.vod-resampled.wav" \
     -t "${WHISPER_THREAD_COUNT}" \
+    -ml 80 \
+    -pp \
     -pc \
     -osrt;
     # --translate;
