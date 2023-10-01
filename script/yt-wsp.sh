@@ -68,7 +68,8 @@ if [[ "${2:-}" == "chinese" ]]; then
     WHISPER_LANG="${WHISPER_LANG:-chinese}";
 else
     echo "Video language is English"
-    WHISPER_MODEL_NAME="ggml-base.en.bin";
+    # WHISPER_MODEL_NAME="ggml-base.en.bin";
+    WHISPER_MODEL_NAME="ggml-medium.en.bin";
     WHISPER_LANG="${WHISPER_LANG:-en}";
 fi
 echo "Using Model: ${WHISPER_MODEL_NAME}"
