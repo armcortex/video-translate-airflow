@@ -1,3 +1,18 @@
+def system_prompt(related_field: str) -> str:
+    return f"""
+Your task is translation. Translate sentences into Traditional Chinese with #zh-tw format in mind. \
+This content is related to {related_field} field. \
+I want you to only understand the meaning and based on content filed, \
+translate into Traditional Chinese with Taiwanese talking style. \
+Delimited by triple quotes extract the information and do the translate task without triple quotes. \
+No unrelated sentences generated and any explanation. \
+Put "</END>" in the end of the output
+"""
+
+DETECT_FILED_PROMPT = f"""
+請說出以下的字幕內容, 是在講述什麼類型的領域, 並且只輸出三個最相關   e.g: 'AAAAA領域, BBBBB領域, CCCCC領域', 不要有任何其他的文字敘述
+"""
+
 SYSTEM_PROMPT_9 = f"""
 Your task is translation. Translate sentences into Traditional Chinese with #zh-tw format in mind. \
 This content is related to technology and software field. \

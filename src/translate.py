@@ -61,7 +61,10 @@ def file_line_count(fname: str) -> int:
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 @backoff.on_exception(backoff.expo, openai.error.ServiceUnavailableError)
 @backoff.on_exception(backoff.expo, openai.error.Timeout)
-def get_completion(prompt: str, maxtoken=1024, model="gpt-3.5-turbo-16k-0613", sys_prompt=system_prompt.SYSTEM_PROMPT_6) -> str:
+def get_completion(prompt: str, 
+                    sys_prompt,
+                    maxtoken=1024, 
+                    model='gpt-4-0613') -> str:
     messages = [{'role': 'system', 'content': sys_prompt}]
     if isinstance(prompt, str):
             content = {'role': 'user', 'content': prompt}
@@ -92,7 +95,7 @@ def clean_str(ss: str) -> str:
     ss = ss.replace('   ', ' ')
     ss = ss.replace('  ', ' ')
 
-    clean_list = ['```', '"', '>>', '「', '」', '<']
+    clean_list = ['`', '"', '<<', '>>', '「', '」', '<', '>']
     for c in clean_list:
         if c in ss:
             ss = ss.replace(c, '')
@@ -150,8 +153,12 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
             pbar.set_description(f'{curr_process.name} {filename.split("/")[-1]} Processing')
             en_token_cnt = calc_token.calc_tokens(''.join(chunk[2]))
 
-            res = get_completion(f'```{chunk[2]}```', int(en_token_cnt*3.5), sys_prompt=system_prompt.SYSTEM_PROMPT_9) + '\n'
-            res = srt_combine(chunk, res)
+            sys_prompt = system_prompt.system_prompt('technology and software')
+            res = get_completion(f'```{chunk[2]}```', 
+                                    sys_prompt=sys_prompt,
+                                    maxtoken=int(en_token_cnt*3.5), 
+                                    model='gpt-4-0613')
+            res = srt_combine(chunk, res + '\n')
 
             # Calc tokens
             zh_tw_token_cnt = calc_token.calc_tokens(''.join(res[3]))
@@ -271,9 +278,11 @@ def main():
     t0 = time.perf_counter()
 
     # FILE_PATH = FILE_BASE + '/sample/geohot-medium-en.wav.srt'
-    FILE_PATH = FILE_BASE + '/sample/sample_1.srt'
+    FILE_PATH = FILE_BASE + '/sample/I_Robot_-_Whose_Revolution-hrGco_ztJkw.vod-resampled.wav.srt'
+    # FILE_PATH = FILE_BASE + '/sample/sample_1.srt'
     # FILE_PATH = FILE_BASE + '/sample/2023_EuroLLVM_-_Prototyping_MLIR_in_Python.srt'
     
+
     # convert(FILE_PATH, verbose=True)
     convert_parallel(FILE_PATH)
     t1 = time.perf_counter()
