@@ -15,6 +15,8 @@ import re
 
 from prompt import system_prompt
 
+RELATED_FIELD = 'Firmware, hardware and reverse engineering'
+
 API_KEYS = ['OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW', 
             'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW2',
             'OPENAI_API_KEY_VIDEO_TRANSLATE_AIRFLOW3',
@@ -34,8 +36,7 @@ TMP_FILE = '/part_'
 
 class CalcToken:
     def __init__(self) -> None:
-        self.enc = tiktoken.get_encoding("cl100k_base")
-        self.enc = tiktoken.encoding_for_model("gpt-3.5-turbo")
+        self.enc = tiktoken.encoding_for_model("gpt-4")
 
     def calc_tokens(self, s: str) -> int:
         return len(self.enc.encode(s))
@@ -76,15 +77,13 @@ def get_completion(prompt: str,
     else:
         raise ValueError(f'Prompt type not supported')
 
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=0,
-        max_tokens=maxtoken,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=["</END>"]
+    response = openai.ChatCompletion.create(model=model,
+                                            messages=messages,
+                                            temperature=0,
+                                            top_p=1,
+                                            frequency_penalty=0,
+                                            presence_penalty=0,
+                                            stop=["</END>"]
     )
     return response.choices[0].message["content"]
 
@@ -95,7 +94,7 @@ def clean_str(ss: str) -> str:
     ss = ss.replace('   ', ' ')
     ss = ss.replace('  ', ' ')
 
-    clean_list = ['`', '"', '<<', '>>', '「', '」', '<', '>']
+    clean_list = ['`', '"', '<<', '>>', '「', '」', '<']
     for c in clean_list:
         if c in ss:
             ss = ss.replace(c, '')
@@ -153,7 +152,7 @@ def convert(filename: str, verbose: bool=False, cpu_cnt: int=16):
             pbar.set_description(f'{curr_process.name} {filename.split("/")[-1]} Processing')
             en_token_cnt = calc_token.calc_tokens(''.join(chunk[2]))
 
-            sys_prompt = system_prompt.system_prompt('technology and software')
+            sys_prompt = system_prompt.system_prompt(RELATED_FIELD)
             res = get_completion(f'```{chunk[2]}```', 
                                     sys_prompt=sys_prompt,
                                     maxtoken=int(en_token_cnt*3.5), 
@@ -278,7 +277,9 @@ def main():
     t0 = time.perf_counter()
 
     # FILE_PATH = FILE_BASE + '/sample/geohot-medium-en.wav.srt'
-    FILE_PATH = FILE_BASE + '/sample/I_Robot_-_Whose_Revolution-hrGco_ztJkw.vod-resampled.wav.srt'
+    # FILE_PATH = FILE_BASE + '/sample/I_Robot_-_Whose_Revolution-hrGco_ztJkw.vod-resampled.wav.srt'
+    FILE_PATH = FILE_BASE + '/sample/How_the_Apple_AirTags_were_hacked-_E0PWQvW-14.vod-resampled.wav.srt'
+
     # FILE_PATH = FILE_BASE + '/sample/sample_1.srt'
     # FILE_PATH = FILE_BASE + '/sample/2023_EuroLLVM_-_Prototyping_MLIR_in_Python.srt'
     
